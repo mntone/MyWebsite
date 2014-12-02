@@ -315,7 +315,7 @@ module.exports = function ( grunt )
 				options: {
 					hostname: "localhost",
 					port: 88,
-					base: paths.src.root,
+					base: paths.dst.debug,
 				},
 			},
 		},
