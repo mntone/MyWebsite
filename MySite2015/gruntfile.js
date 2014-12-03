@@ -208,7 +208,6 @@ module.exports = function ( grunt )
 			},
 			debug: {
 				options: {
-					noLib: false,
 					sourceMap: true,
 				},
 				files: [

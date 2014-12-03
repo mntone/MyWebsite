@@ -18,27 +18,27 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="src\assets\ejs\base\head.ejs" />
-    <None Include="src\assets\ejs\base\foot.ejs" />
-    <None Include="src\assets\ejs\base\footer.ejs" />
-    <None Include="src\assets\ejs\base\header.ejs" />
-    <None Include="src\assets\ejs\index.ejs" />
-    <Content Include="src\en_us\index.html" />
-    <Content Include="src\en_us\nicobriz\privacy.html" />
+    <Content Include="src\ejs\base\head.ejs" />
+    <Content Include="package.json" />
+    <None Include="src\ejs\base\foot.ejs" />
+    <None Include="src\ejs\base\footer.ejs" />
+    <None Include="src\ejs\base\header.ejs" />
+    <None Include="src\ejs\index.ejs" />
     <Content Include="gruntfile.js" />
-    <Content Include="src\index.html" />
-    <Content Include="src\nicobriz\privacy.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\assets\ts\app.ts" />
-    <TypeScriptCompile Include="src\assets\ts\NavigationClient.ts" />
+    <TypeScriptCompile Include="src\ts\app.ts" />
+    <TypeScriptCompile Include="src\ts\NavigationClient.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\.htaccess" />
-    <Content Include="src\assets\less\app.less" />
-    <Content Include="src\assets\resources\lang-en.json" />
-    <Content Include="src\assets\resources\lang-ja.json" />
+    <Content Include="src\less\app.less" />
+    <Content Include="src\resources\lang-en.json" />
+    <Content Include="src\resources\lang-ja.json" />
+    <Content Include="src\ejs\nicobriz\privacy.ejs" />
+    <Content Include="tsd.json" />
+    <Content Include="tslint.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -47,7 +47,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\assets\less\base\" />
+    <Folder Include="src\less\base\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
