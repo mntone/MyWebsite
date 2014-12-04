@@ -142,7 +142,8 @@ nav {
 	bottom: 0;
 	height: 88px;
 	width: 100%;
-	background: #0aa6c1;
+	border-top: 2px solid #0078d7;
+	background: #f0f0f0;
 	.user-select(none);
 
 	@media (max-width: 500px) {
@@ -154,7 +155,7 @@ nav {
 	.display-inline-flex();
 	.justify-content(center);
 	.align-items(flex-start);
-	margin: 0 auto;
+	margin: 0 auto 2px;
 	list-style: none;
 
 	a {
@@ -162,7 +163,7 @@ nav {
 		height: 88px;
 		width: 88px;
 		margin: 14px 0 13px;
-		color: #fff;
+		color: #000;
 		text-decoration: none;
 
 		.image {
@@ -170,7 +171,7 @@ nav {
 			height: 40px;
 			width: 40px;
 			margin: 0 auto 5px;
-			border: 2px solid #fff;
+			border: 2px solid #000;
 			border-radius: 50%;
 
 			@media (max-width: 500px) {
