@@ -4,12 +4,14 @@ import mns = MntoneSite;
 
 class NavgationController
 {
-	element: HTMLUListElement;
+	primaryList: HTMLUListElement;
+	secondaryList: HTMLUListElement;
 	client: mns.NavigationClient;
 
-	constructor( element: HTMLUListElement, lang: string )
+	constructor( primaryList: HTMLUListElement, secondaryList: HTMLUListElement, lang: string )
 	{
-		this.element = element;
+		this.primaryList = primaryList;
+		this.secondaryList = secondaryList;
 		this.client = new mns.NavigationClient( lang );
 	}
 
@@ -19,25 +21,41 @@ class NavgationController
 		{
 			nav.map( n =>
 			{
-				var span = <HTMLSpanElement>document.createElement( "span" );
-				span.setAttribute( "itemprop", "name" );
-				span.appendChild( document.createTextNode( n.title ) );
+				var img = <HTMLImageElement>document.createElement( "img" );
+				img.src = n.icon;
+				img.alt = n.title;
+				var icon = <HTMLSpanElement>document.createElement( "span" );
+				icon.className = "image";
+				icon.appendChild( img );
+				var text = <HTMLSpanElement>document.createElement( "span" );
+				text.className = "text";
+				text.setAttribute( "itemprop", "name" );
+				text.appendChild( document.createTextNode( n.title ) );
 				var a = <HTMLAnchorElement>document.createElement( "a" );
 				a.href = n.url;
 				a.setAttribute( "itemprop", "url" );
-				a.appendChild( span );
+				a.appendChild( icon );
+				a.appendChild( text );
 				var li = <HTMLLIElement>document.createElement( "li" );
 				li.appendChild( a );
-				this.element.appendChild( li );
+				if( n.expand )
+				{
+					this.secondaryList.appendChild( li );
+				}
+				else
+				{
+					this.primaryList.appendChild( li );
+				}
 			});
-		} );
+		});
 	}
 }
 
 window.onload = () =>
 {
 	var lang = document.documentElement.lang;
-	var navUl = <HTMLUListElement>document.getElementById( "nav-ul" );
-	var con = new NavgationController( navUl, lang );
+	var primary = <HTMLUListElement>document.getElementById( "primary-list" );
+	var secondary = <HTMLUListElement>document.getElementById( "secondary-list" );
+	var con = new NavgationController( primary, secondary, lang );
 	con.loadAsync();
 };

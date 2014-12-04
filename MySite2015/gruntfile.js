@@ -154,6 +154,14 @@ module.exports = function ( grunt )
 
 		// LESS, CSS
 		lesslint: {
+			options: {
+				csslint: {
+					ids: false,
+					"box-model": false,
+					"box-sizing": false,
+					"unique-headings": false,
+				},
+			},
 			debug: {
 				src: [paths.src.less + "**/*.less"],
 			},

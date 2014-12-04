@@ -1,10 +1,17 @@
 ﻿<% include base/head %>
 
 <article itemscope itemtype="http://schema.org/Article">
-	<h1 itemprop="headline">工事中</h1>
+	<% if( lang == "ja" ) { %>
+	<h2 itemprop="headline">工事中</h2>
 	<div itemprop="articleBody">
 		<p>リニューアル中。</p>
 	</div>
+	<% } else { %>
+	<h2 itemprop="headline">Improving…</h2>
+	<div itemprop="articleBody">
+		<p>I’m sorry, no content.</p>
+	</div>
+	<% } %>
 </article>
 
 <% include base/foot %>
