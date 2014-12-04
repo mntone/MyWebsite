@@ -29,8 +29,7 @@
         "no-unreachable": true,
         "one-line": [
             true,
-            "check-catch",
-            "check-else"
+            "check-catch"
         ],
         "quotemark": [ true, "double" ],
         "radix": true,
@@ -41,15 +40,6 @@
             "check-module",
             "check-function"
         ],
-        "variable-name": false,
-        "whitespace": [
-            true,
-            "check-branch",
-            "check-decl",
-            "check-operator",
-            "check-separator",
-            "check-type",
-            "check-typecast"
-        ]
+        "variable-name": false
     }
 }

@@ -7,9 +7,6 @@
   "installed": {
     "es6-promises/es6-promises.d.ts": {
       "commit": "30f15413703760610a3abad3d174d1ec74af9caf"
-    },
-    "es6-promise/es6-promise.d.ts": {
-      "commit": "30f15413703760610a3abad3d174d1ec74af9caf"
     }
   }
 }

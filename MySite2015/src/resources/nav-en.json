@@ -1,0 +1,30 @@
+﻿[
+    {
+        "expand": false,
+        "title": "Home",
+        "url": "/en/",
+        "icon": "/i/home.svg"
+    },
+    {
+        "expand": false,
+        "title": "Twitter",
+        "url": "https://twitter.com/mntone",
+        "icon": "/i/twitter.svg"
+    },
+    {
+        "expand": false,
+        "title": "GitHub",
+        "url": "https://github.com/mntone",
+        "icon": "/i/github.svg"
+    },
+    {
+        "expand": true,
+        "title": "Blog (Japanese)",
+        "url": "http://mntone.hateblo.jp/"
+    },
+    {
+        "expand": true,
+        "title": "nicobirz’s Privacy Policy",
+        "url": "/en/nicobriz/privacy.html"
+    }
+]

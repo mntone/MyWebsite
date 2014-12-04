@@ -214,7 +214,7 @@ module.exports = function ( grunt )
 					{
 						src: paths.src.ts + "app.ts",
 						dest: paths.dst.debug + "j/a.js",
-						filter: ff.isNewer( paths.dst.debug + "j/a.js" ),
+						filter: ff.isNewerAny( [paths.src.ts + "base/MntoneLibrary.ts", paths.src.ts + "NavigationClient.ts", paths.src.ts + "app.ts"], paths.dst.debug + "j/a.js" ),
 					},
 				],
 			},
@@ -223,7 +223,7 @@ module.exports = function ( grunt )
 					{
 						src: paths.src.ts + "app.ts",
 						dest: paths.dst.releaseObj + "j/a.js",
-						filter: ff.isNewer( paths.dst.releaseObj + "j/a.js" ),
+						filter: ff.isNewerAny( [paths.src.ts + "base/MntoneLibrary.ts", paths.src.ts + "NavigationClient.ts", paths.src.ts + "app.ts"], paths.dst.releaseObj + "j/a.js" ),
 					},
 				],
 			},
@@ -253,9 +253,19 @@ module.exports = function ( grunt )
 
 					// TypeScript
 					{
+						src: paths.src.root + "ts/base/MntoneLibrary.ts",
+						dest: paths.dst.debug + "j/base/MntoneLibrary.ts",
+						filter: ff.isNewer( paths.dst.debug + "j/base/MntoneLibrary.ts" ),
+					},
+					{
+						src: paths.src.root + "ts/NavigationClient.ts",
+						dest: paths.dst.debug + "j/NavigationClient.ts",
+						filter: ff.isNewer( paths.dst.debug + "j/NavigationClient.ts" ),
+					},
+					{
 						src: paths.src.root + "ts/app.ts",
-						dest: paths.dst.debug + "j/a.ts",
-						filter: ff.isNewer( paths.dst.debug + "j/a.ts" ),
+						dest: paths.dst.debug + "j/app.ts",
+						filter: ff.isNewer( paths.dst.debug + "j/app.ts" ),
 					},
 
 					// JavaScript
@@ -263,6 +273,18 @@ module.exports = function ( grunt )
 						src: paths.src.root + "bower_components/minified/dist/minified-src.js",
 						dest: paths.dst.debug + "j/minified.js",
 						filter: ff.isNewer( paths.dst.debug + "j/minified.js" ),
+					},
+
+					// Navigation Resource
+					{
+						src: paths.src.root + "resources/nav-ja.json",
+						dest: paths.dst.debug + "d/nav-ja.json",
+						filter: ff.isNewer( paths.dst.debug + "d/nav-ja.json" ),
+					},
+					{
+						src: paths.src.root + "resources/nav-en.json",
+						dest: paths.dst.debug + "d/nav-en.json",
+						filter: ff.isNewer( paths.dst.debug + "d/nav-en.json" ),
 					},
 
 					// .htaccess

@@ -2,29 +2,42 @@
 
 import mns = MntoneSite;
 
-class NavgationsController
+class NavgationController
 {
-    element: HTMLElement;
-    span: HTMLElement;
-    timerToken: number;
+	element: HTMLUListElement;
+	client: mns.NavigationClient;
 
-    constructor(element: HTMLElement) {
-        this.element = element;
-        this.element.innerHTML += "The time is: ";
-		this.span = document.createElement( "span" );
-        this.element.appendChild(this.span);
-		this.span.innerText = new Date().toUTCString();
-    }
+	constructor( element: HTMLUListElement, lang: string )
+	{
+		this.element = element;
+		this.client = new mns.NavigationClient( lang );
+	}
 
-    start() {
-        this.timerToken = setInterval(() => this.span.innerHTML = new Date().toUTCString(), 500);
-    }
-
-    stop() {
-        clearTimeout(this.timerToken);
-    }
-
+	loadAsync()
+	{
+		return this.client.getDataAsync().then( nav =>
+		{
+			nav.map( n =>
+			{
+				var span = <HTMLSpanElement>document.createElement( "span" );
+				span.setAttribute( "itemprop", "name" );
+				span.appendChild( document.createTextNode( n.title ) );
+				var a = <HTMLAnchorElement>document.createElement( "a" );
+				a.href = n.url;
+				a.setAttribute( "itemprop", "url" );
+				a.appendChild( span );
+				var li = <HTMLLIElement>document.createElement( "li" );
+				li.appendChild( a );
+				this.element.appendChild( li );
+			});
+		} );
+	}
 }
 
-window.onload = () => {
+window.onload = () =>
+{
+	var lang = document.documentElement.lang;
+	var navUl = <HTMLUListElement>document.getElementById( "nav-ul" );
+	var con = new NavgationController( navUl, lang );
+	con.loadAsync();
 };

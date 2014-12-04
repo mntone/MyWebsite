@@ -1,5 +1,4 @@
-﻿/// <reference path="../../typings/es6-promise/es6-promise.d.ts" />
-/// <reference path="../../typings/es6-promises/es6-promises.d.ts" />
+﻿/// <reference path="base/MntoneLibrary.ts" />
 
 module MntoneSite
 {
@@ -7,20 +6,30 @@ module MntoneSite
 
 	export class Navigation
 	{
-		url: URL;
+		expand: boolean;
 		title: string;
+		url: string;
+		icon: string;
 	}
 
 	export class NavigationClient
 	{
+		client: MntoneLib.HttpClient;
+		lang: string;
 		navigations: Array<Navigation>;
 
-		constructor()
-		{ }
-
-		getDataAsync()
+		constructor( lang: string )
 		{
-			return new Promise( () => { } );
+			this.lang = lang;
+			this.client = new MntoneLib.HttpClient();
+		}
+
+		getDataAsync(): Promise<Navigation[]>
+		{
+			return this.client.getAsJsonAsync( "/d/nav-" + this.lang + ".json" ).then( j =>
+			{
+				return <Navigation[]>j;
+			});
 		}
 	}
 }
