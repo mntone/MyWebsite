@@ -1,0 +1,1 @@
+﻿var a=document;function b(){}window.onload=function(){a.addEventListener("touchstart",b);if(typeof a.msCSSOMElementFloatMetrics!=="undefined"){a.msCSSOMElementFloatMetrics=!0}}

@@ -1,4 +1,26 @@
 ﻿{
     "lang": "ja",
-    "title": "mntoneのガラクタ置き場。(工事中)"
+    "title": "mntoneのガラクタ置き場。",
+    "navs": [
+        {
+            "title": "ホーム",
+            "url": "/",
+            "icon": "/i/home.svg"
+        },
+        {
+            "title": "Twitter",
+            "url": "https://twitter.com/mntone",
+            "icon": "/i/twitter.svg"
+        },
+        {
+            "title": "GitHub",
+            "url": "https://github.com/mntone",
+            "icon": "/i/github.svg"
+        },
+        {
+            "title": "ブログ",
+            "url": "http://mntone.hateblo.jp/",
+            "icon": "/i/pencil.svg"
+        }
+    ]
 }

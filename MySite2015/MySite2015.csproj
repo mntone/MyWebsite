@@ -25,23 +25,17 @@
     <None Include="src\ejs\base\header.ejs" />
     <None Include="src\ejs\index.ejs" />
     <Content Include="gruntfile.js" />
+    <Content Include="src\js\p.js" />
     <Content Include="web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="src\ts\app.ts" />
-    <TypeScriptCompile Include="src\ts\base\MntoneLibrary.ts" />
-    <TypeScriptCompile Include="src\ts\NavigationClient.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\.htaccess" />
     <Content Include="src\less\app.less" />
     <Content Include="src\resources\lang-en.json" />
     <Content Include="src\resources\lang-ja.json" />
-    <Content Include="src\ejs\nicobriz\privacy.ejs" />
     <Content Include="tsd.json" />
     <Content Include="tslint.json" />
-    <Content Include="src\resources\nav-ja.json" />
-    <Content Include="src\resources\nav-en.json" />
+    <Content Include="src\less\mixins.less" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -49,9 +43,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\less\base\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
@@ -64,7 +56,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55463</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

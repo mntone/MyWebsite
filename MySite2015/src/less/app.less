@@ -1,200 +1,108 @@
-﻿// snipet
-.default-font-weight() {
-	font-weight: 300;
-}
+﻿@import "mixins.less";
 
-.user-select(@value) {
-	-moz-user-select: @value;
-	-webkit-user-select: @value;
-	-ms-user-select: @value;
-	user-select: @value;
-}
+@narrowWidth: 500px;
+@maxWidth: 1000px;
+@theme500: #03a9f4;
+@accent200: #FFD740;
 
-.box-sizing(@value) {
-	-moz-box-sizing: @value;
-	-webkit-box-sizing: @value;
-	box-sizing: @value;
-}
-
-.display-flex() {
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-}
-
-.display-inline-flex() {
-	display: -ms-inline-flexbox;
-	display: -webkit-inline-box;
-	display: inline-flex;
-}
-
-._ie10-align-property(@property; flex-start) {
-	@{property}: start;
-}
-
-._ie10-align-property(@property; flex-end) {
-	@{property}: end;
-}
-
-._ie10-align-property(@property; space-between) {
-	@{property}: justify;
-}
-
-._ie10-align-property(@property; space-around) {
-	@{property}: distribute;
-}
-
-._ie10-align-property(@property; @value) when (default()) {
-	@{property}: @value;
-}
-
-.align-content(@value) {
-	._ie10-align-property(-ms-flex-line-pack; @value);
-	-webkit-align-content: @value;
-	align-content: @value;
-}
-
-.align-items(@value) {
-	._ie10-align-property(-ms-flex-align; @value);
-	-webkit-align-items: @value;
-	align-items: @value;
-}
-
-.align-self(@value) {
-	._ie10-align-property(-ms-flex-item-align; @value);
-	-webkit-align-self: @value;
-	align-self: @value;
-}
-
-.justify-content(@value) {
-	._ie10-align-property(-ms-flex-pack; @value);
-	-webkit-justify-content: @value;
-	justify-content: @value;
-}
-
-// reset
-body, ul, h1, h2, h3, h4, h5 {
-	margin: 0;
-	padding: 0;
-}
-
-// start
-body {
-	font: 300 .917em/1.5 "Segoe UI", "Helvetica Neue", "Yu Gothic", "游ゴシック", sans-serif;
-	letter-spacing: 0.02em;
-	color: #000;
-	background: #fff;
-}
-
-h1 {
-	font-weight: 200;
-	font-size: ( 42 / 11 ) * 100%; /* 42pt/12pt */
-	letter-spacing: 0;
-}
-
-h2 {
-	font-weight: 200;
-	font-size: ( 20 / 11 ) * 100%; /* 20pt/12pt */
-	letter-spacing: 0.01em;
-}
-
-h3, h4 {
-	font-weight: 600;
-}
-
-h5 {
-	font-weight: 600;
-	font-size: ( 9 / 11 ) * 100%; /* 20pt/12pt */
-}
-
-
-// page-size
-#content {
+.size-mixin() {
 	.box-sizing(border-box);
-	width: 1200px;
-	margin: 0 auto 40px;
+	width: @maxWidth;
 
-	@media (max-width: 1200px) {
+	@media (max-width: @maxWidth) {
 		width: 100%;
 	}
 }
 
-header, article, footer {
+// reset
+body, h1, h2, h3, h4, h5 {
+	margin: 0;
+	padding: 0;
+}
+
+// page-size
+#content {
+	.size-mixin();
+	margin: 20px auto 40px;
+
+	@media (max-width: @maxWidth) {
+		margin-top: 18px;
+	}
+}
+
+header #headline, article, footer {
 	padding: 0 20px;
 
-	@media (max-width: 1200px) {
+	@media (max-width: @maxWidth) {
 		padding: 0 18px;
+	}
+}
+
+header {
+	color: #fff;
+	background-color: @theme500;
+
+	#headline {
+		.size-mixin();
+		display: block;
+		margin: 0 auto;
 	}
 }
 
 footer {
 	margin-bottom: 20px;
 
-	@media (max-width: 1200px) {
+	@media (max-width: @maxWidth) {
 		margin-bottom: 18px;
 	}
 }
 
 // navigation
 nav {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	height: 88px;
-	width: 100%;
-	border-top: 2px solid #0078d7;
-	background: #f0f0f0;
+	background-color: @theme500;
 	.user-select(none);
 
-	@media (max-width: 500px) {
-		height: 54.5px;
+	ul {
+		.size-mixin();
+		display: table;
+		margin: 0 auto;
+		padding: 0 20px;
+		list-style: none;
+		table-layout: fixed;
 	}
-}
 
-#primary-list {
-	.display-inline-flex();
-	.justify-content(center);
-	.align-items(flex-start);
-	margin: 0 auto 2px;
-	list-style: none;
+	li {
+		display: table-cell;
+	}
 
 	a {
 		display: block;
-		height: 88px;
-		width: 88px;
-		margin: 14px 0 13px;
-		color: #000;
-		text-decoration: none;
+		height: 50px;
+		color: #fff;
+		font-size: 121%;
+		font-weight: 400;
+		line-height: 50px;
 
-		.image {
-			display: block;
-			height: 40px;
-			width: 40px;
-			margin: 0 auto 5px;
-			border: 2px solid #000;
-			border-radius: 50%;
-
-			@media (max-width: 500px) {
-				height: 50.5px;
-				width: 50.5px;
-			}
+		&:hover {
+			color: #000;
+			background-color: @accent200;
 		}
+	}
 
-		img {
-			height: 28px;
-			width: 28px;
-			margin: 6px;
-
-			@media (max-width: 500px) {
-				height: 34.5px;
-				width: 34.5px;
-				margin: 8px;
-			}
-		}
-
-		.text {
-			display: block;
+	@media (max-width: @narrowWidth) {
+		li {
 			text-align: center;
 		}
+
+		span {
+			display: none;
+		}
+	}
+
+	img {
+		margin: 10px;
+		height: 30px;
+		width: 30px;
+		vertical-align: middle;
 	}
 }

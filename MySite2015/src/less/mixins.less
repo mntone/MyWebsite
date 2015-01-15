@@ -1,0 +1,55 @@
+﻿// Mntone HTML5 UIKit (MNKit) is under MIT license. Copyright (C) 2014 mntone
+
+.text-size-adjust(@value) {
+	-webkit-text-size-adjust: @value;
+	-moz-text-size-adjust: @value;
+	-ms-text-size-adjust: @value;
+	text-size-adjust: @value;
+}
+
+.user-select(@value) {
+	-webkit-user-select: @value;
+	-moz-user-select: @value;
+	-ms-user-select: @value;
+	user-select: @value;
+}
+
+.box-sizing(@value) {
+	-webkit-box-sizing: @value;
+	-moz-box-sizing: @value;
+	box-sizing: @value;
+}
+
+.background-clip(@value) {
+	.mixin(border-box) {
+		-webkit-background-clip: border;
+		-moz-background-clip: border;
+	}
+
+	.mixin(padding-box) {
+		-webkit-background-clip: padding;
+		-moz-background-clip: padding;
+	}
+
+	.mixin(content-box) {
+		-webkit-background-clip: content;
+		-moz-background-clip: padding;
+	}
+
+	.mixin(@value);
+	background-clip: @value;
+}
+
+.transform(@value) {
+	-webkit-transform: @value;
+	-moz-transform: @value;
+	-ms-transform: @value;
+	-o-transform: @value;
+	transform: @value;
+}
+
+.calc(@property; @value) {
+	@{property}: -webkit-calc(@value);
+	@{property}: -moz-calc(@value);
+	@{property}: calc(@value);
+}

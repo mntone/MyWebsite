@@ -82,11 +82,6 @@ module.exports = function ( grunt )
 						dest: paths.dst.debug + "index.html",
 						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.debug + "index.html" ),
 					},
-					{
-						src: paths.src.ejs + "nicobriz/privacy.ejs",
-						dest: paths.dst.debug + "nicobriz/privacy.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "nicobriz/privacy.ejs"].concat( baseTemplates ), paths.dst.debug + "nicobriz/privacy.html" ),
-					},
 				],
 			},
 			debugEn: {
@@ -96,11 +91,6 @@ module.exports = function ( grunt )
 						src: paths.src.ejs + "index.ejs",
 						dest: paths.dst.debug + "en/index.html",
 						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.debug + "en/index.html" ),
-					},
-					{
-						src: paths.src.ejs + "nicobriz/privacy.ejs",
-						dest: paths.dst.debug + "en/nicobriz/privacy.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "nicobriz/privacy.ejs"].concat( baseTemplates ), paths.dst.debug + "en/nicobriz/privacy.html" ),
 					},
 				],
 			},
@@ -112,11 +102,6 @@ module.exports = function ( grunt )
 						dest: paths.dst.releaseObj + "index.html",
 						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.releaseObj + "index.html" ),
 					},
-					{
-						src: paths.src.ejs + "nicobriz/privacy.ejs",
-						dest: paths.dst.releaseObj + "nicobriz/privacy.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "nicobriz/privacy.ejs"].concat( baseTemplates ), paths.dst.releaseObj + "nicobriz/privacy.html" ),
-					},
 				],
 			},
 			releaseEn: {
@@ -126,11 +111,6 @@ module.exports = function ( grunt )
 						src: paths.src.ejs + "index.ejs",
 						dest: paths.dst.releaseObj + "en/index.html",
 						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.releaseObj + "en/index.html" ),
-					},
-					{
-						src: paths.src.ejs + "nicobriz/privacy.ejs",
-						dest: paths.dst.releaseObj + "en/nicobriz/privacy.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "nicobriz/privacy.ejs"].concat( baseTemplates ), paths.dst.releaseObj + "en/nicobriz/privacy.html" ),
 					},
 				],
 			},
@@ -160,13 +140,16 @@ module.exports = function ( grunt )
 					"box-model": false,
 					"box-sizing": false,
 					"unique-headings": false,
+					"font-faces": false,
+					"bulletproof-font-face": false,
+					"known-properties": false,
 				},
 			},
 			debug: {
-				src: [paths.src.less + "**/*.less"],
+				src: [paths.src.less + "app.less"],
 			},
 			release: {
-				src: [paths.src.less + "**/*.less"],
+				src: [paths.src.less + "app.less"],
 			},
 		},
 		less: {
@@ -179,7 +162,7 @@ module.exports = function ( grunt )
 					{
 						src: paths.src.less + "app.less",
 						dest: paths.dst.debug + "c/a.css",
-						filter: ff.isNewer( paths.dst.debug + "c/a.css" ),
+						filter: ff.isNewerAny( [paths.src.less + "mixins.less", paths.src.less + "app.less"], paths.dst.debug + "c/a.css" ),
 					},
 				],
 			},
@@ -192,57 +175,7 @@ module.exports = function ( grunt )
 					{
 						src: paths.src.less + "app.less",
 						dest: paths.dst.release + "c/a.css",
-						filter: ff.isNewer( paths.dst.release + "c/a.css" ),
-					},
-				],
-			},
-		},
-
-		// TypeScript, JavaScript
-		tslint: {
-			options: {
-				configuration: grunt.file.readJSON( "tslint.json" )
-			},
-			debug: {
-				src: [paths.src.ts + "**/*.ts"],
-			},
-			release: {
-				src: [paths.src.ts + "**/*.ts"],
-			},
-		},
-		typescript: {
-			options: {
-				target: "ES5",
-			},
-			debug: {
-				options: {
-					sourceMap: true,
-				},
-				files: [
-					{
-						src: paths.src.ts + "app.ts",
-						dest: paths.dst.debug + "j/a.js",
-						filter: ff.isNewerAny( [paths.src.ts + "base/MntoneLibrary.ts", paths.src.ts + "NavigationClient.ts", paths.src.ts + "app.ts"], paths.dst.debug + "j/a.js" ),
-					},
-				],
-			},
-			release: {
-				files: [
-					{
-						src: paths.src.ts + "app.ts",
-						dest: paths.dst.releaseObj + "j/a.js",
-						filter: ff.isNewerAny( [paths.src.ts + "base/MntoneLibrary.ts", paths.src.ts + "NavigationClient.ts", paths.src.ts + "app.ts"], paths.dst.releaseObj + "j/a.js" ),
-					},
-				],
-			},
-		},
-		uglify: {
-			release: {
-				files: [
-					{
-						src: paths.dst.releaseObj + "j/a.js",
-						dest: paths.dst.release + "j/a.js",
-						filter: ff.isNewer( paths.dst.release + "j/a.js" ),
+						filter: ff.isNewerAny( [paths.src.less + "mixins.less", paths.src.less + "app.less"], paths.dst.release + "c/a.css" ),
 					},
 				],
 			},
@@ -259,40 +192,11 @@ module.exports = function ( grunt )
 						filter: ff.isNewer( paths.dst.debug + "c/a.less" ),
 					},
 
-					// TypeScript
-					{
-						src: paths.src.root + "ts/base/MntoneLibrary.ts",
-						dest: paths.dst.debug + "j/base/MntoneLibrary.ts",
-						filter: ff.isNewer( paths.dst.debug + "j/base/MntoneLibrary.ts" ),
-					},
-					{
-						src: paths.src.root + "ts/NavigationClient.ts",
-						dest: paths.dst.debug + "j/NavigationClient.ts",
-						filter: ff.isNewer( paths.dst.debug + "j/NavigationClient.ts" ),
-					},
-					{
-						src: paths.src.root + "ts/app.ts",
-						dest: paths.dst.debug + "j/app.ts",
-						filter: ff.isNewer( paths.dst.debug + "j/app.ts" ),
-					},
-
 					// JavaScript
 					{
-						src: paths.src.root + "bower_components/minified/dist/minified-src.js",
-						dest: paths.dst.debug + "j/minified.js",
-						filter: ff.isNewer( paths.dst.debug + "j/minified.js" ),
-					},
-
-					// Navigation Resource
-					{
-						src: paths.src.root + "resources/nav-ja.json",
-						dest: paths.dst.debug + "d/nav-ja.json",
-						filter: ff.isNewer( paths.dst.debug + "d/nav-ja.json" ),
-					},
-					{
-						src: paths.src.root + "resources/nav-en.json",
-						dest: paths.dst.debug + "d/nav-en.json",
-						filter: ff.isNewer( paths.dst.debug + "d/nav-en.json" ),
+						src: paths.src.root + "js/p.js",
+						dest: paths.dst.debug + "j/p.js",
+						filter: ff.isNewer( paths.dst.debug + "j/p.js" ),
 					},
 
 					// .htaccess
@@ -307,9 +211,9 @@ module.exports = function ( grunt )
 				files: [
 					// JavaScript
 					{
-						src: paths.src.root + "bower_components/minified/dist/minified.js",
-						dest: paths.dst.release + "j/minified.js",
-						filter: ff.isNewer( paths.dst.release + "j/minified.js" ),
+						src: paths.src.root + "js/p.js",
+						dest: paths.dst.release + "j/p.js",
+						filter: ff.isNewer( paths.dst.release + "j/p.js" ),
 					},
 
 					// .htaccess
@@ -317,6 +221,34 @@ module.exports = function ( grunt )
 						src: paths.src.root + ".htaccess",
 						dest: paths.dst.release + ".htaccess",
 						filter: ff.isNewer( paths.dst.release + ".htaccess" ),
+					},
+				],
+			},
+		},
+		compress: {
+			release: {
+				options: {
+					mode: "gzip",
+					level: 5,
+				},
+				files: [
+					{
+						expand: true,
+						src: paths.dst.release + "**/*.html",
+						dst: paths.dst.release,
+						ext: ".html.gz",
+					},
+					{
+						expand: true,
+						src: paths.dst.release + "**/*.js",
+						dst: paths.dst.release,
+						ext: ".js.gz",
+					},
+					{
+						expand: true,
+						src: paths.dst.release + "**/*.css",
+						dst: paths.dst.release,
+						ext: ".css.gz",
 					},
 				],
 			},
@@ -357,9 +289,9 @@ module.exports = function ( grunt )
 			grunt.loadNpmTasks( taskName );
 		}
 	}
-	grunt.registerTask( "debug-nowatch", ["ejs:debugJa", "ejs:debugEn", "lesslint:debug", "less:debug", "tslint:debug", "typescript:debug", "copy:debug"] );
+	grunt.registerTask( "debug-nowatch", ["ejs:debugJa", "ejs:debugEn", "lesslint:debug", "less:debug", "copy:debug"] );
 	grunt.registerTask( "debug", ["debug-nowatch", "connect", "watch"] );
 	grunt.registerTask( "default", ["debug"] );
-	grunt.registerTask( "release", ["ejs:releaseJa", "ejs:releaseEn", "lesslint:release", "htmlmin:release", "less:release", "tslint:release", "typescript:release", "uglify:release", "copy:release"] );
+	grunt.registerTask( "release", ["ejs:releaseJa", "ejs:releaseEn", "lesslint:release", "htmlmin:release", "less:release", "copy:release", "compress:release"] );
 	grunt.registerTask( "all", ["debug-nowatch", "release"] );
 };

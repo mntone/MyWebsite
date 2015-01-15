@@ -4,16 +4,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 	<title><%- title %></title>
-	<style>
-		@-ms-viewport {
-			width: device-width;
-		}
-	</style>
+	<link rel="stylesheet" href="/c/mnuik.css">
 	<link rel="stylesheet" href="/c/a.css">
-	<script>if(!this["Promise"])document.write('<script src="/j/npoc.min.js"><'+'/script>');</script>
-	<script src="/j/a.js"></script>
+	<script src="/j/p.js"></script>
 </head>
 <body>
-	<div id="content">
+	<% include header %>
 
-		<% include header %>
+	<nav>
+		<ul itemscope itemtype="http://schema.org/SiteNavigationElement" id="nav-list">
+			<% navs.forEach( function( item ) { %>
+			<li>
+				<a href="<%= item.url %>" itemprop="url">
+					<img src="<%= item.icon %>" alt="<%= item.title %>">
+					<span><%= item.title %></span>
+				</a>
+			</li>
+			<% }) %>
+		</ul>
+	</nav>
+		
+	<div id="content">

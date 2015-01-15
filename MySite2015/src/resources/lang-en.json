@@ -1,4 +1,26 @@
 ﻿{
     "lang": "en",
-    "title": "mntone’s junks.(improving…)"
+    "title": "mntone’s junks.",
+    "navs": [
+        {
+            "title": "Home",
+            "url": "/en/",
+            "icon": "/i/home.svg"
+        },
+        {
+            "title": "Twitter",
+            "url": "https://twitter.com/mntone",
+            "icon": "/i/twitter.svg"
+        },
+        {
+            "title": "GitHub",
+            "url": "https://github.com/mntone",
+            "icon": "/i/github.svg"
+        },
+        {
+            "title": "Blog (Japanese)",
+            "url": "http://mntone.hateblo.jp/",
+            "icon": "/i/pencil.svg"
+        }
+    ]
 }
