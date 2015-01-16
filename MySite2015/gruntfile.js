@@ -68,6 +68,7 @@ module.exports = function ( grunt )
 		},
 	};
 	var baseTemplates = ["base/header.ejs", "base/head.ejs", "base/footer.ejs", "base/foot.ejs"].map( function ( item ) { return paths.src.ejs + item; } );
+	var htmlFiles = ["index", "univschedule/index", "univschedule/privacy"];
 	var config = {
 		pkg: grunt.file.readJSON( "package.json" ),
 		paths: paths,
@@ -76,43 +77,47 @@ module.exports = function ( grunt )
 		ejs: {
 			debugJa: {
 				options: grunt.file.readJSON( paths.src.res + "lang-ja.json" ),
-				files: [
-					{
-						src: paths.src.ejs + "index.ejs",
-						dest: paths.dst.debug + "index.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.debug + "index.html" ),
-					},
-				],
+				files: htmlFiles.map( function ( v )
+				{
+					return {
+						src: paths.src.ejs + v + ".ejs",
+						dest: paths.dst.debug + v + ".html",
+						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.debug + v + ".html" ),
+					};
+				} ),
 			},
 			debugEn: {
 				options: grunt.file.readJSON( paths.src.res + "lang-en.json" ),
-				files: [
-					{
-						src: paths.src.ejs + "index.ejs",
-						dest: paths.dst.debug + "en/index.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.debug + "en/index.html" ),
-					},
-				],
+				files: htmlFiles.map( function ( v )
+				{
+					return {
+						src: paths.src.ejs + v + ".ejs",
+						dest: paths.dst.debug + "en/" + v + ".html",
+						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.debug + "en/" + v + ".html" ),
+					};
+				} ),
 			},
 			releaseJa: {
 				options: grunt.file.readJSON( paths.src.res + "lang-ja.json" ),
-				files: [
-					{
-						src: paths.src.ejs + "index.ejs",
-						dest: paths.dst.releaseObj + "index.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.releaseObj + "index.html" ),
-					},
-				],
+				files: htmlFiles.map( function ( v )
+				{
+					return {
+						src: paths.src.ejs + v + ".ejs",
+						dest: paths.dst.releaseObj + v + ".html",
+						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.releaseObj + v + ".html" ),
+					};
+				} ),
 			},
 			releaseEn: {
 				options: grunt.file.readJSON( paths.src.res + "lang-en.json" ),
-				files: [
-					{
-						src: paths.src.ejs + "index.ejs",
-						dest: paths.dst.releaseObj + "en/index.html",
-						filter: ff.isNewerAny( [paths.src.ejs + "index.ejs"].concat( baseTemplates ), paths.dst.releaseObj + "en/index.html" ),
-					},
-				],
+				files: htmlFiles.map( function ( v )
+				{
+					return {
+						src: paths.src.ejs + v + ".ejs",
+						dest: paths.dst.releaseObj + "en/" + v + ".html",
+						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.releaseObj + "en/" + v + ".html" ),
+					};
+				} ),
 			},
 		},
 		htmlmin: {

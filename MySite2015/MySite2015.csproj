@@ -33,9 +33,10 @@
     <Content Include="src\less\app.less" />
     <Content Include="src\resources\lang-en.json" />
     <Content Include="src\resources\lang-ja.json" />
-    <Content Include="tsd.json" />
     <Content Include="tslint.json" />
     <Content Include="src\less\mixins.less" />
+    <Content Include="src\ejs\univschedule\index.ejs" />
+    <Content Include="src\ejs\univschedule\privacy.ejs" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

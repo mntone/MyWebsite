@@ -108,3 +108,17 @@ nav {
 		}
 	}
 }
+
+.image-right {
+	display: block;
+	float: right;
+	margin: 20px;
+	box-shadow: 0 6px 6px rgba(0,0,0,0.2);
+
+	@media (max-width: @narrowWidth) {
+		float: none;
+		margin: 0 auto;
+		height: auto;
+		width: 200px;
+	}
+}
