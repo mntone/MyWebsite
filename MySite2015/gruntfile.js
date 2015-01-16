@@ -186,6 +186,23 @@ module.exports = function ( grunt )
 			},
 		},
 
+		// JavaScript
+		uglify: {
+			options: {
+				mangle: true,
+				compress: true
+			},
+			release: {
+				files: [
+					{
+						src: paths.src.root + "js/p.js",
+						dest: paths.dst.release + "j/p.js",
+						filter: ff.isNewer( paths.dst.release + "j/p.js" ),
+					},
+				],
+			},
+		},
+
 		// Other
 		copy: {
 			debug: {
@@ -272,7 +289,7 @@ module.exports = function ( grunt )
 				tasks: ["tslint:debug", "typescript:debug"],
 			},
 			copy: {
-				files: [paths.src.root + "less/app.less", paths.src.root + "ts/app.ts", paths.src.root + ".htaccess"],
+				files: [paths.src.root + "less/app.less", paths.src.root + "js/p.js", paths.src.root + ".htaccess"],
 				tasks: ["copy:debug"],
 			},
 		},
@@ -297,6 +314,6 @@ module.exports = function ( grunt )
 	grunt.registerTask( "debug-nowatch", ["ejs:debugJa", "ejs:debugEn", "lesslint:debug", "less:debug", "copy:debug"] );
 	grunt.registerTask( "debug", ["debug-nowatch", "connect", "watch"] );
 	grunt.registerTask( "default", ["debug"] );
-	grunt.registerTask( "release", ["ejs:releaseJa", "ejs:releaseEn", "lesslint:release", "htmlmin:release", "less:release", "copy:release", "compress:release"] );
+	grunt.registerTask( "release", ["ejs:releaseJa", "ejs:releaseEn", "lesslint:release", "htmlmin:release", "less:release", "uglify:release", "copy:release", "compress:release"] );
 	grunt.registerTask( "all", ["debug-nowatch", "release"] );
 };
