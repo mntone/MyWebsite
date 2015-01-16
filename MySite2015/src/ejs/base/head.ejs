@@ -16,7 +16,9 @@
 			<% navs.forEach( function( item ) { %>
 			<li>
 				<a href="<%= item.url %>" itemprop="url">
-					<img src="<%= item.icon %>" alt="<%= item.title %>">
+					<object data="<%= item.icon %>.svg" type="image/svg+xml">
+						<img src="<%= item.icon %>.10.png" srcset="<%= item.icon %>.15.png 1.5x, <%= item.icon %>.20.png 2x" alt="<%= item.title %>">
+					</object>
 					<span><%= item.title %></span>
 				</a>
 			</li>
