@@ -1,1 +1,1 @@
-﻿var a=document;function b(){}window.onload=function(){a.addEventListener("touchstart",b);if(typeof a.msCSSOMElementFloatMetrics!=="undefined"){a.msCSSOMElementFloatMetrics=!0}}
+﻿var a=document;var nav;var original;function b(){}function c(e){window.scrollY>=original?nav.classList.add("sticky"):nav.classList.remove("sticky")}window.onload=function(){nav=a.getElementsByTagName("nav")[0];original=nav.offsetTop;a.addEventListener("scroll",c);a.addEventListener("touchstart",b);if(typeof a.msCSSOMElementFloatMetrics!=="undefined"){a.msCSSOMElementFloatMetrics=!0}}

@@ -48,6 +48,14 @@
 	transform: @value;
 }
 
+.transition(@value) {
+	-webkit-transition: @value;
+	-moz-transition: @value;
+	-ms-transition: @value;
+	-o-transition: @value;
+	transition: @value;
+}
+
 .calc(@property; @value) {
 	@{property}: -webkit-calc(@value);
 	@{property}: -moz-calc(@value);
