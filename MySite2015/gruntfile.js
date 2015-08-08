@@ -68,7 +68,7 @@ module.exports = function ( grunt )
 		},
 	};
 	var baseTemplates = ["base/header.ejs", "base/head.ejs", "base/footer.ejs", "base/foot.ejs"].map( function ( item ) { return paths.src.ejs + item; } );
-	var htmlFiles = ["index", "univschedule/index", "univschedule/privacy"];
+	var htmlFiles = ["index", "univschedule/index", "univschedule/privacy", "tvupl/index", "tvupl/privacy"];
 	var config = {
 		pkg: grunt.file.readJSON( "package.json" ),
 		paths: paths,

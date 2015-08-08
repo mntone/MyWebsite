@@ -16,6 +16,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="src\ejs\base\head.ejs" />
@@ -37,6 +38,8 @@
     <Content Include="src\less\mixins.less" />
     <Content Include="src\ejs\univschedule\index.ejs" />
     <Content Include="src\ejs\univschedule\privacy.ejs" />
+    <Content Include="src\ejs\tvupl\index.ejs" />
+    <Content Include="src\ejs\tvupl\privacy.ejs" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
