@@ -67,8 +67,8 @@ module.exports = function ( grunt )
 			releaseObj: "../obj/release/",
 		},
 	};
-	var baseTemplates = ["base/header.ejs", "base/head.ejs", "base/footer.ejs", "base/foot.ejs"].map( function ( item ) { return paths.src.ejs + item; } );
-	var htmlFiles = ["index", "univschedule/index", "univschedule/privacy", "tvupl/index", "tvupl/privacy"];
+	var baseTemplates = ["base/header.ejs", "base/head.ejs", "base/footer.ejs", "base/foot.ejs"].map(function (item) { return paths.src.ejs + item; });
+	var htmlFiles = ["index", "splatoon", "univschedule/index", "univschedule/privacy", "tvupl/index", "tvupl/privacy"];
 	var config = {
 		pkg: grunt.file.readJSON( "package.json" ),
 		paths: paths,
@@ -82,7 +82,6 @@ module.exports = function ( grunt )
 					return {
 						src: paths.src.ejs + v + ".ejs",
 						dest: paths.dst.debug + v + ".html",
-						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.debug + v + ".html" ),
 					};
 				} ),
 			},
@@ -93,7 +92,6 @@ module.exports = function ( grunt )
 					return {
 						src: paths.src.ejs + v + ".ejs",
 						dest: paths.dst.debug + "en/" + v + ".html",
-						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.debug + "en/" + v + ".html" ),
 					};
 				} ),
 			},
@@ -104,7 +102,6 @@ module.exports = function ( grunt )
 					return {
 						src: paths.src.ejs + v + ".ejs",
 						dest: paths.dst.releaseObj + v + ".html",
-						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.releaseObj + v + ".html" ),
 					};
 				} ),
 			},
@@ -115,7 +112,6 @@ module.exports = function ( grunt )
 					return {
 						src: paths.src.ejs + v + ".ejs",
 						dest: paths.dst.releaseObj + "en/" + v + ".html",
-						filter: ff.isNewerAny( [paths.src.ejs + v + ".ejs"].concat( baseTemplates ), paths.dst.releaseObj + "en/" + v + ".html" ),
 					};
 				} ),
 			},
@@ -131,7 +127,6 @@ module.exports = function ( grunt )
 					return {
 						src: paths.dst.releaseObj + fn,
 						dest: paths.dst.release + fn,
-						filter: ff.isNewer( paths.dst.release + fn ),
 					};
 				} ),
 			},
@@ -167,7 +162,6 @@ module.exports = function ( grunt )
 					{
 						src: paths.src.less + "app.less",
 						dest: paths.dst.debug + "c/a.css",
-						filter: ff.isNewerAny( [paths.src.less + "mixins.less", paths.src.less + "app.less"], paths.dst.debug + "c/a.css" ),
 					},
 				],
 			},
@@ -180,7 +174,6 @@ module.exports = function ( grunt )
 					{
 						src: paths.src.less + "app.less",
 						dest: paths.dst.release + "c/a.css",
-						filter: ff.isNewerAny( [paths.src.less + "mixins.less", paths.src.less + "app.less"], paths.dst.release + "c/a.css" ),
 					},
 				],
 			},
@@ -197,7 +190,6 @@ module.exports = function ( grunt )
 					{
 						src: paths.src.root + "js/p.js",
 						dest: paths.dst.release + "j/p.js",
-						filter: ff.isNewer( paths.dst.release + "j/p.js" ),
 					},
 				],
 			},

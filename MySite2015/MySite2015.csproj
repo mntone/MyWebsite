@@ -24,6 +24,7 @@
     <None Include="src\ejs\base\foot.ejs" />
     <None Include="src\ejs\base\footer.ejs" />
     <None Include="src\ejs\base\header.ejs" />
+    <Content Include="src\ejs\splatoon.ejs" />
     <None Include="src\ejs\index.ejs" />
     <Content Include="gruntfile.js" />
     <Content Include="src\js\p.js" />
