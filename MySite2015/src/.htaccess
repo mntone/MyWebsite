@@ -8,7 +8,8 @@ RewriteCond %{REQUEST_FILENAME} !\.gz$
 RewriteCond %{REQUEST_FILENAME}\.gz -s
 RewriteCond %{REQUEST_FILENAME} \.html$ [OR]
 RewriteCond %{REQUEST_FILENAME} \.js$ [OR]
-RewriteCond %{REQUEST_FILENAME} \.css$
+RewriteCond %{REQUEST_FILENAME} \.css$ [OR]
+RewriteCond %{REQUEST_FILENAME} \.json$
 RewriteRule .+ %{REQUEST_URI}.gz
 
 <FilesMatch "\.html\.gz$">
@@ -23,5 +24,10 @@ RewriteRule .+ %{REQUEST_URI}.gz
 
 <FilesMatch "\.css\.gz$">
     ForceType text/css
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.json\.gz$">
+    ForceType application/json
     AddEncoding x-gzip .gz
 </FilesMatch>

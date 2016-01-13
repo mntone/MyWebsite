@@ -10,7 +10,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -25,6 +25,7 @@
     <None Include="src\ejs\base\footer.ejs" />
     <None Include="src\ejs\base\header.ejs" />
     <Content Include="src\ejs\splatoon.ejs" />
+    <Content Include="src\ejs\ikaconnect\privacy.ejs" />
     <None Include="src\ejs\index.ejs" />
     <Content Include="gruntfile.js" />
     <Content Include="src\js\p.js" />
@@ -41,6 +42,7 @@
     <Content Include="src\ejs\univschedule\privacy.ejs" />
     <Content Include="src\ejs\tvupl\index.ejs" />
     <Content Include="src\ejs\tvupl\privacy.ejs" />
+    <Content Include="src\ejs\winrtlib\privacy.ejs" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

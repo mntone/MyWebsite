@@ -13,6 +13,11 @@
             "icon": "/i/twitter"
         },
         {
+            "title": "YouTube",
+            "url": "https://www.youtube.com/channel/UCjUcm2VgZKQqWAtKJhUW8fw",
+            "icon": "/i/youtube"
+        },
+        {
             "title": "GitHub",
             "url": "https://github.com/mntone",
             "icon": "/i/github"
