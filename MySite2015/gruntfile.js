@@ -190,6 +190,12 @@ module.exports = function (grunt) {
 					    dest: paths.dst.debug + "c/a.less",
 					},
 
+					// CSS
+					{
+					    src: paths.src.root + "css/mnuik.css",
+					    dest: paths.dst.debug + "c/mnuik.css",
+					},
+
 					// JavaScript
 					{
 					    src: paths.src.root + "js/p.js",
