@@ -1,0 +1,43 @@
+﻿<% include ../base/head %>
+
+<article itemscope itemtype="http://schema.org/Article">
+	<% if( lang == "ja" ) { %>
+	<h2 itemprop="headline">IkaConnect</h2>
+	<div itemprop="articleBody">
+		<p>
+			IkaConnectはスプラトゥーンのサービス「イカリング」を用いたフレンドのステータスやステージの予定を見ることができるアプリです。
+		</p>
+	</div>
+
+	<h2 itemprop="headline">対応環境</h2>
+	<div itemprop="articleBody">
+		<p>Windows 8.1, Windows RT 8.1, Windows Phone 8.1, Windows 10 (Desktop, Mobile)</p>
+	</div>
+
+	<h2 itemprop="headline">ダウンロード</h2>
+	<div itemprop="articleBody">
+		<p><a href="privacy.html">プライバシー ポリシー</a>に同意する場合のみご利用ください</p>
+		<p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6">Windows ストアでダウンロード</a></p>
+	</div>
+	<% } else { %>
+	<h2 itemprop="headline">SplatConnect</h2>
+	<div itemprop="articleBody">
+		<p>
+			SplatConnect is the app that get friends’ status and schedule from Nintendo Official Service “SplatNet.”
+		</p>
+	</div>
+
+	<h2 itemprop="headline">Support environment</h2>
+	<div itemprop="articleBody">
+		<p>Windows 8.1, Windows RT 8.1, Windows Phone 8.1, Windows 10 (Desktop, Mobile)</p>
+	</div>
+
+	<h2 itemprop="headline">Downloads</h2>
+	<div itemprop="articleBody">
+		<p>If you agree <a href="privacy.html">Privacy Policy</a>, you can use</p>
+		<p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6">Download by Windows Store</a></p>
+	</div>
+	<% } %>
+</article>
+
+<% include ../base/foot %>

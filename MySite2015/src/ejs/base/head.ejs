@@ -4,26 +4,48 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 	<title><%- title %></title>
-	<link rel="stylesheet" href="/c/mnuik.css">
 	<link rel="stylesheet" href="/c/a.css">
+	<script src="https://code.jquery.com/pep/0.4.1/pep.js"></script>
 	<script src="/j/p.js"></script>
 </head>
 <body>
-	<% include header %>
-
-	<nav>
-		<ul itemscope itemtype="http://schema.org/SiteNavigationElement" id="nav-list">
-			<% navs.forEach( function( item ) { %>
-			<li>
-				<a href="<%= item.url %>" itemprop="url">
-					<object data="<%= item.icon %>.svg" type="image/svg+xml">
-						<img src="<%= item.icon %>.100.png" srcset="<%= item.icon %>.125.png 1.25x, <%= item.icon %>.150.png 1.5x, <%= item.icon %>.175.png 1.75x, <%= item.icon %>.200.png 2x, <%= item.icon %>.250.png 2.5x, <%= item.icon %>.300.png 3x" alt="<%= item.title %>">
-					</object>
-					<span><%= item.title %></span>
-				</a>
-			</li>
-			<% }) %>
-		</ul>
-	</nav>
+	<header itemscope itemtype="http://schema.org/WPHeader"><div id="header-inner">
+		<span id="headline" itemprop="headline"><%- title %></span>
+						
+		<nav>
+			<ul id="nav-list" itemscope itemtype="http://schema.org/SiteNavigationElement">
+				<li>
+					<a href="javascript:void(0)" touch-action="none">アプリ &amp; ライブラリー</a>
+					<ul>
+						<li><a href="/ikaconnect/" itemprop="url">IkaConnect</a></li>
+						<li><a href="/tvupl/" itemprop="url">Twitter に動画をうｐするマン</a></li>
+						<li><a href="#">RtmpClient for Windows Runtime</a></li>
+						<li><a href="#">Svg for xaml</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0)" touch-action="none">コンテンツ</a>
+					<ul>
+						<li><a href="/zelda/" itemprop="url">64ゼルダ極道</a></li>
+						<li><a href="/splatoon.html" itemprop="url">Splatoon インク</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0)" touch-action="none">外部サイト</a>
+					<ul>
+						<li><a href="https://twitter.com/mntone" itemprop="url">Twitter</a></li>
+						<li><a href="https://www.youtube.com/channel/UCjUcm2VgZKQqWAtKJhUW8fw" itemprop="url">YouTube</a></li>
+						<li><a href="https://github.com/mntone" itemprop="url">GitHub</a></li>
+						<li><a href="http://mntone.hateblo.jp/" itemprop="url">はてなブログ</a></li>
+						<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38" itemprop="url">ほしい物リスト</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div id="menu-button" touch-action="none"><a href="javascript:void(0)">
+				<img id="menu-button-menu" src="/i/icon_menu.svg">
+				<img id="menu-button-close" src="/i/icon_close.svg">
+			</a></div>
+		</nav>
+	</div></header>
 		
 	<div id="content">

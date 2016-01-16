@@ -1,46 +1,6 @@
 "use strict";
 
 module.exports = function (grunt) {
-    var FileFilter = (function () {
-        function FileFilter(element) {
-            this.element = element;
-            this.fileSystem = require("fs");
-        }
-        FileFilter.prototype.compare = function (src, dst) {
-            var isNewer = true;
-            if (this.fileSystem.existsSync(dst)) {
-                isNewer = this.fileSystem.statSync(src).mtime > this.fileSystem.statSync(dst).mtime;
-            }
-            return isNewer;
-        };
-        FileFilter.prototype.isNewer = function (dst) {
-            var self = this;
-            return function (src) {
-                return self.compare(src, dst);
-            };
-        };
-        FileFilter.prototype.isNewerAny = function (src, dst) {
-            var self = this;
-            var ret;
-            return function (file) {
-                if (typeof value !== "undefined") return ret;
-                if (typeof src === "string") {
-                    src = eval(src);
-                }
-                else if (!(src instanceof Array)) {
-                    src = [src];
-                }
-                ret = src.some(function (s) {
-                    return self.compare(s, dst);
-                });
-                grunt.log.debug("isNewerAny: ", ret ? "yes" : "no", " (src: ", src, ")");
-                return ret;
-            };
-        };
-        return FileFilter;
-    })();
-    var ff = new FileFilter();
-
     var paths = {
         src: {
             root: "src/",
@@ -56,8 +16,8 @@ module.exports = function (grunt) {
             releaseObj: "../obj/release/",
         },
     };
-    var baseTemplates = ["base/header.ejs", "base/head.ejs", "base/footer.ejs", "base/foot.ejs"].map(function (item) { return paths.src.ejs + item; });
-    var htmlFiles = ["index", "splatoon", "univschedule/index", "univschedule/privacy", "tvupl/index", "tvupl/privacy", "ikaconnect/privacy", "winrtlib/privacy"];
+    var baseTemplates = ["base/head.ejs", "base/foot.ejs"].map(function (item) { return paths.src.ejs + item; });
+    var htmlFiles = ["index", "splatoon", "univschedule/index", "univschedule/privacy", "tvupl/index", "tvupl/privacy", "ikaconnect/index", "ikaconnect/privacy", "winrtlib/privacy"];
     var config = {
         pkg: grunt.file.readJSON("package.json"),
         paths: paths,
@@ -128,6 +88,11 @@ module.exports = function (grunt) {
                     "font-faces": false,
                     "bulletproof-font-face": false,
                     "known-properties": false,
+                    "font-sizes": false,
+                    "fallback-colors": false,
+                    "overqualified-elements": false,
+                    "adjoining-classes": false,
+                    "display-property-grouping": false,
                 },
             },
             debug: {
@@ -164,7 +129,7 @@ module.exports = function (grunt) {
             },
         },
 
-        // JavaScript
+        // TypeScript, JavaScript
         uglify: {
             options: {
                 mangle: true,
@@ -173,7 +138,7 @@ module.exports = function (grunt) {
             release: {
                 files: [
 					{
-					    src: paths.src.root + "js/p.js",
+					    src: paths.src.root + "ts/p.js",
 					    dest: paths.dst.release + "j/p.js",
 					},
                 ],
@@ -198,9 +163,8 @@ module.exports = function (grunt) {
 
 					// JavaScript
 					{
-					    src: paths.src.root + "js/p.js",
+					    src: paths.src.root + "ts/p.js",
 					    dest: paths.dst.debug + "j/p.js",
-					    filter: ff.isNewer(paths.dst.debug + "j/p.js"),
 					},
 
 					// Images
@@ -215,7 +179,6 @@ module.exports = function (grunt) {
 					{
 					    src: paths.src.root + ".htaccess",
 					    dest: paths.dst.debug + ".htaccess",
-					    filter: ff.isNewer(paths.dst.debug + ".htaccess"),
 					},
                 ],
             },
@@ -239,7 +202,6 @@ module.exports = function (grunt) {
 					{
 					    src: paths.src.root + ".htaccess",
 					    dest: paths.dst.release + ".htaccess",
-					    filter: ff.isNewer(paths.dst.release + ".htaccess"),
 					},
                 ],
             },
@@ -284,12 +246,8 @@ module.exports = function (grunt) {
                 files: [paths.src.less + "**/*.less"],
                 tasks: ["lesslint:debug", "less:debug"],
             },
-            ts: {
-                files: [paths.src.ts + "**/*.ts"],
-                tasks: ["tslint:debug", "typescript:debug"],
-            },
             copy: {
-                files: [paths.src.root + "less/app.less", paths.src.root + "js/p.js", paths.src.root + ".htaccess"],
+                files: [paths.src.root + "less/app.less", paths.src.root + "ts/p.js", paths.src.root + ".htaccess"],
                 tasks: ["copy:debug"],
             },
         },

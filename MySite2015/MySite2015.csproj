@@ -22,13 +22,12 @@
     <Content Include="src\ejs\base\head.ejs" />
     <Content Include="package.json" />
     <None Include="src\ejs\base\foot.ejs" />
-    <None Include="src\ejs\base\footer.ejs" />
-    <None Include="src\ejs\base\header.ejs" />
     <Content Include="src\ejs\splatoon.ejs" />
     <Content Include="src\ejs\ikaconnect\privacy.ejs" />
+    <Content Include="src\ejs\ikaconnect\index.ejs" />
     <None Include="src\ejs\index.ejs" />
     <Content Include="gruntfile.js" />
-    <Content Include="src\js\p.js" />
+    <TypeScriptCompile Include="src\ts\p.ts" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -38,8 +37,6 @@
     <Content Include="src\resources\lang-ja.json" />
     <Content Include="tslint.json" />
     <Content Include="src\less\mixins.less" />
-    <Content Include="src\ejs\univschedule\index.ejs" />
-    <Content Include="src\ejs\univschedule\privacy.ejs" />
     <Content Include="src\ejs\tvupl\index.ejs" />
     <Content Include="src\ejs\tvupl\privacy.ejs" />
     <Content Include="src\ejs\winrtlib\privacy.ejs" />
@@ -50,7 +47,6 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

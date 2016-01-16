@@ -21,8 +21,6 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-ejs": "^0.2.0",
     "grunt-lesslint": "^1.1.13",
-    "grunt-tslint": "^1.0.1",
-    "grunt-typescript": "^0.4.4",
     "load-grunt-tasks": "^1.0.0",
     "typescript": "^1.3.0"
   }
