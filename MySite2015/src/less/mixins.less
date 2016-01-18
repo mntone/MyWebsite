@@ -51,9 +51,15 @@
 .transition(@value) {
     -webkit-transition: @value;
     -moz-transition: @value;
-    -ms-transition: @value;
     -o-transition: @value;
     transition: @value;
+}
+
+.transition-delay(@value) {
+    -webkit-transition-delay: @value;
+    -moz-transition-delay: @value;
+    -o-transition-delay: @value;
+    transition-delay: @value;
 }
 
 .calc(@property; @value) {

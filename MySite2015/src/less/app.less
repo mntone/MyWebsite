@@ -410,42 +410,43 @@ nav {
 
     @media (max-width: @phoneHorizontalWidth) {
         visibility: hidden;
+        overflow: hidden;
+        overflow-y: auto;
         position: fixed;
         top: 48px;
         left: 0;
         width: 100%;
-        .calc(height; ~'100% - 48px');
+        height: 0;
         color: rgba(255, 255, 255, .8);
         background-color: rgba(0, 0, 0, .8);
-        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         opacity: 0;
         .transition(opacity cubic-bezier(0.1, 0.9, 0.2, 1) 220ms);
 
         & > li {
-            float: unset;
+            float: none;
             padding: 16px 0 12px;
-            width: unset;
-            height: unset;
+            width: initial;
+            height: initial;
             line-height: 20px;
 
             &.wide {
-                width: unset;
+                width: initial;
             }
 
             & > ul {
                 display: block;
-                visibility: unset;
-                transform: unset;
+                visibility: visible;
+                transform: initial;
                 color: #fff;
 
                 & > li {
                     display: block;
-                    float: unset;
-                    width: unset;
+                    float: none;
+                    width: initial;
 
                     & > a {
-                        background-color: unset;
+                        background-color: initial;
                     }
                 }
             }
@@ -453,6 +454,7 @@ nav {
 
         &.visible {
             visibility: visible;
+            .calc(height; ~'100% - 48px');
             opacity: 1;
 
             & + #menu-button #menu-button-menu {
@@ -476,7 +478,7 @@ nav {
 
 article {
     float: left;
-    max-width: 32rem;
+    max-width: 32em;
 
     & > div {
         font-family: "Segoe UI", "San Francisco", "Yu Gothic", "Hiragino Sans", Meiryo, sans-serif;
@@ -499,12 +501,8 @@ article {
         }
     }
 
-    & > table {
-        max-width: 50rem;
-    }
-
-    @media (max-width: 70rem) {
-        float: unset;
+    @media (max-width: 70em) {
+        float: none;
     }
 }
 
@@ -528,7 +526,7 @@ input[type=checkbox]:checked + .more {
 
 .screenshot {
     float: right;
-    .calc(width, ~"100% - 36rem");
+    .calc(width, ~"100% - 36em");
 
     & > h2 {
         display: none;
@@ -552,14 +550,16 @@ input[type=checkbox]:checked + .more {
 
     img.top {
         width: 100%;
-        max-height: unset;
         box-shadow: 0 6px 6px rgba(0, 0, 0, .2);
     }
 
-    @media (max-width: 70rem) {
-        float: unset;
-        width: unset;
-        text-align: unset;
+    @media (max-width: 70em) {
+        float: none;
+        width: 100%;
+
+        & > div.image-list {
+            margin-left: -12px;
+        }
 
         & > h2 {
             display: block;
