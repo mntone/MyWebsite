@@ -14,26 +14,10 @@ AddLanguage ja .ja
 AddLanguage ja-jp-mac .ja
 AddLanguage ja-jp .ja
 
-AddLanguage es-ar .es-419
-AddLanguage es-bo .es-419
-AddLanguage es-cl .es-419
-AddLanguage es-co .es-419
-AddLanguage es-cr .es-419
-AddLanguage es-do .es-419
-AddLanguage es-ec .es-419
-AddLanguage es-hn .es-419
-AddLanguage es-mx .es-419
-AddLanguage es-pa .es-419
-AddLanguage es-pe .es-419
-AddLanguage es-pr .es-419
-AddLanguage es-py .es-419
-AddLanguage es-sv .es-419
-AddLanguage es-uv .es-419
-AddLanguage es-ve .es-419
 AddLanguage es-419 .es-419
 
-AddLanguage es-es .es
 AddLanguage es .es
+AddLanguage es-es .es
 
 AddLanguage fr-ca .fr-ca
 
@@ -48,7 +32,7 @@ AddLanguage it-it .it
 
 AddEncoding x-gzip .gz
 
-LanguagePriority en-us en-gb ja-jp es-es es-419 fr-fr fr-ca it-it de-de
+LanguagePriority en en-gb ja-jp es-419 es-es fr-fr fr-ca it-it de-de
 ForceLanguagePriority Prefer Fallback
 DefaultLanguage en
 
