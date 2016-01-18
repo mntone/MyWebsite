@@ -16,8 +16,23 @@ module.exports = function (grunt) {
             releaseObj: "../obj/release/",
         },
     };
-    var baseTemplates = ["base/head.ejs", "base/foot.ejs"].map(function (item) { return paths.src.ejs + item; });
-    var htmlFiles = ["index", "splatoon", "univschedule/index", "univschedule/privacy", "tvupl/index", "tvupl/privacy", "ikaconnect/index", "ikaconnect/privacy", "winrtlib/privacy"];
+    var res = grunt.file.readJSON(paths.src.res + "res.json");
+    var getFilteredFunc = function (language) {
+        return function (f) {
+            return f.lang.some(function (l) { return l == language; });
+        };
+    };
+    var getFileMappingFunc = function (language, dir) {
+        return function (f) {
+            return {
+                src: paths.src.ejs + f.file + ".ejs",
+                dest: dir + f.file + ".html." + language,
+            };
+        };
+    };
+    var htmlFilesFunc = function (language, dir) {
+        return res.files.filter(getFilteredFunc(language)).map(getFileMappingFunc(language, dir));
+    };
     var config = {
         pkg: grunt.file.readJSON("package.json"),
         paths: paths,
@@ -25,40 +40,68 @@ module.exports = function (grunt) {
         // EJS, HTML
         ejs: {
             debugJa: {
-                options: grunt.file.readJSON(paths.src.res + "lang-ja.json"),
-                files: htmlFiles.map(function (v) {
-                    return {
-                        src: paths.src.ejs + v + ".ejs",
-                        dest: paths.dst.debug + v + ".html",
-                    };
-                }),
+                options: res.res["ja"],
+                files: htmlFilesFunc("ja", paths.dst.debug),
             },
             debugEn: {
-                options: grunt.file.readJSON(paths.src.res + "lang-en.json"),
-                files: htmlFiles.map(function (v) {
-                    return {
-                        src: paths.src.ejs + v + ".ejs",
-                        dest: paths.dst.debug + "en/" + v + ".html",
-                    };
-                }),
+                options: res.res["en"],
+                files: htmlFilesFunc("en", paths.dst.debug),
+            },
+            debugFr: {
+                options: res.res["fr"],
+                files: htmlFilesFunc("fr", paths.dst.debug),
+            },
+            debugFrCa: {
+                options: res.res["fr"],
+                files: htmlFilesFunc("fr-ca", paths.dst.debug),
+            },
+            debugEs: {
+                options: res.res["es"],
+                files: htmlFilesFunc("es", paths.dst.debug),
+            },
+            debugEs419: {
+                options: res.res["es"],
+                files: htmlFilesFunc("es-419", paths.dst.debug),
+            },
+            debugDe: {
+                options: res.res["de"],
+                files: htmlFilesFunc("de", paths.dst.debug),
+            },
+            debugIt: {
+                options: res.res["it"],
+                files: htmlFilesFunc("it", paths.dst.debug),
             },
             releaseJa: {
-                options: grunt.file.readJSON(paths.src.res + "lang-ja.json"),
-                files: htmlFiles.map(function (v) {
-                    return {
-                        src: paths.src.ejs + v + ".ejs",
-                        dest: paths.dst.releaseObj + v + ".html",
-                    };
-                }),
+                options: res.res["ja"],
+                files: htmlFilesFunc("ja", paths.dst.releaseObj),
             },
             releaseEn: {
-                options: grunt.file.readJSON(paths.src.res + "lang-en.json"),
-                files: htmlFiles.map(function (v) {
-                    return {
-                        src: paths.src.ejs + v + ".ejs",
-                        dest: paths.dst.releaseObj + "en/" + v + ".html",
-                    };
-                }),
+                options: res.res["en"],
+                files: htmlFilesFunc("en", paths.dst.releaseObj),
+            },
+            releaseFr: {
+                options: res.res["fr"],
+                files: htmlFilesFunc("fr", paths.dst.releaseObj),
+            },
+            releaseFrCa: {
+                options: res.res["fr"],
+                files: htmlFilesFunc("fr-ca", paths.dst.releaseObj),
+            },
+            releaseEs: {
+                options: res.res["es"],
+                files: htmlFilesFunc("es", paths.dst.releaseObj),
+            },
+            releaseEs419: {
+                options: res.res["es"],
+                files: htmlFilesFunc("es-419", paths.dst.releaseObj),
+            },
+            releaseDe: {
+                options: res.res["de"],
+                files: htmlFilesFunc("de", paths.dst.releaseObj),
+            },
+            releaseIt: {
+                options: res.res["it"],
+                files: htmlFilesFunc("it", paths.dst.releaseObj),
             },
         },
         htmlmin: {
@@ -70,9 +113,8 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: paths.dst.releaseObj,
-                    src: ["**/*.html"],
+                    src: ["**/*.html.*"],
                     dest: paths.dst.release,
-                    ext: ".html",
                 }],
             },
         },
@@ -85,7 +127,6 @@ module.exports = function (grunt) {
                     "box-model": false,
                     "box-sizing": false,
                     "unique-headings": false,
-                    "font-faces": false,
                     "bulletproof-font-face": false,
                     "known-properties": false,
                     "font-sizes": false,
@@ -93,6 +134,8 @@ module.exports = function (grunt) {
                     "overqualified-elements": false,
                     "adjoining-classes": false,
                     "display-property-grouping": false,
+                    "floats": false,
+                    "qualified-headings": false,
                 },
             },
             debug: {
@@ -155,23 +198,19 @@ module.exports = function (grunt) {
 					    dest: paths.dst.debug + "c/a.less",
 					},
 
-					// CSS
-					{
-					    src: paths.src.root + "css/mnuik.css",
-					    dest: paths.dst.debug + "c/mnuik.css",
-					},
-
 					// JavaScript
 					{
-					    src: paths.src.root + "ts/p.js",
-					    dest: paths.dst.debug + "j/p.js",
+					    expand: true,
+					    cwd: paths.src.root + "ts/",
+					    src: ["*.ts", "*.js.map", "*.js"],
+					    dest: paths.dst.debug + "j/",
 					},
 
 					// Images
 					{
 					    expand: true,
 					    cwd: paths.src.img,
-					    src: ["*.png", "*.jpg", "*.svg"],
+					    src: ["*.png", "*.png.*", "*.svg"],
 					    dest: paths.dst.debug + "i/",
 					},
 
@@ -186,15 +225,17 @@ module.exports = function (grunt) {
                 files: [
 					// JavaScript
 					{
-					    src: paths.src.root + "js/p.js",
-					    dest: paths.dst.release + "j/p.js",
+					    expand: true,
+					    cwd: paths.src.root + "ts/",
+					    src: ["*.ts", "*.js.map"],
+					    dest: paths.dst.debug + "j/",
 					},
 
 					// Images
 					{
 					    expand: true,
 					    cwd: paths.src.img,
-					    src: ["*.png", "*.jpg", "*.svg"],
+					    src: ["*.png", "*.png.*", "*.svg"],
 					    dest: paths.dst.release + "i/",
 					},
 
@@ -213,13 +254,14 @@ module.exports = function (grunt) {
                     level: 9,
                 },
                 files: [
-					{
-					    expand: true,
-					    cwd: paths.dst.release,
-					    src: ["**/*.html"],
-					    dest: paths.dst.release,
-					    ext: ".html.gz",
-					},
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.ja"], dest: paths.dst.release, extDot: "last", ext: ".ja.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.en"], dest: paths.dst.release, extDot: "last", ext: ".en.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.fr"], dest: paths.dst.release, extDot: "last", ext: ".fr.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.fr-ca"], dest: paths.dst.release, extDot: "last", ext: ".fr-ca.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.es"], dest: paths.dst.release, extDot: "last", ext: ".es.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.es-419"], dest: paths.dst.release, extDot: "last", ext: ".es-419.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.de"], dest: paths.dst.release, extDot: "last", ext: ".de.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["**/*.html.it"], dest: paths.dst.release, extDot: "last", ext: ".it.gz" },
 					{
 					    expand: true,
 					    cwd: paths.dst.release,
@@ -234,20 +276,44 @@ module.exports = function (grunt) {
 					    dest: paths.dst.release,
 					    ext: ".css.gz",
 					},
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.ja"], dest: paths.dst.release, extDot: "last", ext: ".ja.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.en"], dest: paths.dst.release, extDot: "last", ext: ".en.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.fr"], dest: paths.dst.release, extDot: "last", ext: ".fr.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.fr-ca"], dest: paths.dst.release, extDot: "last", ext: ".fr-ca.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.es"], dest: paths.dst.release, extDot: "last", ext: ".es.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.es-419"], dest: paths.dst.release, extDot: "last", ext: ".es-419.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.de"], dest: paths.dst.release, extDot: "last", ext: ".de.gz" },
+					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.it"], dest: paths.dst.release, extDot: "last", ext: ".it.gz" },
+					{
+					    expand: true,
+					    cwd: paths.dst.release,
+					    src: ["i/**/*.svg"],
+					    dest: paths.dst.release,
+					    ext: ".svg.gz"
+					},
                 ],
             },
         },
         watch: {
             ejs: {
                 files: [paths.src.ejs + "**/*.ejs"],
-                tasks: ["ejs:debugJa", "ejs:debugEn"],
+                tasks: ["ejs:debugJa", "ejs:debugEn", "ejs:debugFr", "ejs:debugFrCa", "ejs:debugEs", "ejs:debugEs419", "ejs:debugDe", "ejs:debugIt"],
             },
             less: {
                 files: [paths.src.less + "**/*.less"],
                 tasks: ["lesslint:debug", "less:debug"],
             },
             copy: {
-                files: [paths.src.root + "less/app.less", paths.src.root + "ts/p.js", paths.src.root + ".htaccess"],
+                files: [
+                    paths.src.root + "less/app.less",
+                    paths.src.img + "**/*.png",
+                    paths.src.img + "**/*.jpg",
+                    paths.src.img + "**/*.svg",
+                    paths.src.root + "ts/**/*.ts",
+                    paths.src.root + "ts/**/*.js.map",
+                    paths.src.root + "ts/**/*.js",
+                    paths.src.root + ".htaccess"
+                ],
                 tasks: ["copy:debug"],
             },
         },
@@ -267,9 +333,36 @@ module.exports = function (grunt) {
             grunt.loadNpmTasks(taskName);
         }
     }
-    grunt.registerTask("debug-nowatch", ["ejs:debugJa", "ejs:debugEn", "lesslint:debug", "less:debug", "copy:debug"]);
+    grunt.registerTask("debug-nowatch", [
+        "ejs:debugJa",
+        "ejs:debugEn",
+        "ejs:debugFr",
+        "ejs:debugFrCa",
+        "ejs:debugEs",
+        "ejs:debugEs419",
+        "ejs:debugDe",
+        "ejs:debugIt",
+        "lesslint:debug",
+        "less:debug",
+        "copy:debug"
+    ]);
     grunt.registerTask("debug", ["debug-nowatch", "connect", "watch"]);
     grunt.registerTask("default", ["debug"]);
-    grunt.registerTask("release", ["ejs:releaseJa", "ejs:releaseEn", "lesslint:release", "htmlmin:release", "less:release", "uglify:release", "copy:release", "compress:release"]);
+    grunt.registerTask("release", [
+        "ejs:releaseJa",
+        "ejs:releaseEn",
+        "ejs:releaseFr",
+        "ejs:releaseFrCa",
+        "ejs:releaseEs",
+        "ejs:releaseEs419",
+        "ejs:releaseDe",
+        "ejs:releaseIt",
+        "lesslint:release",
+        "htmlmin:release",
+        "less:release",
+        "uglify:release",
+        "copy:release",
+        "compress:release"
+    ]);
     grunt.registerTask("all", ["debug-nowatch", "release"]);
 };

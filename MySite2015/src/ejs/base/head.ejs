@@ -10,40 +10,40 @@
 </head>
 <body>
 	<header itemscope itemtype="http://schema.org/WPHeader"><div id="header-inner">
-		<span id="headline" itemprop="headline"><%- title %></span>
+		<div id="headline" itemprop="headline"><a href="/"><span><%- title %></span></a></div>
 						
 		<nav>
 			<ul id="nav-list" itemscope itemtype="http://schema.org/SiteNavigationElement">
-				<li>
-					<a href="javascript:void(0)" touch-action="none">アプリ &amp; ライブラリー</a>
+				<li class="wide">
+					<a href="javascript:void(0)" touch-action="none"><%- app_lib %></a>
 					<ul>
-						<li><a href="/ikaconnect/" itemprop="url">IkaConnect</a></li>
-						<li><a href="/tvupl/" itemprop="url">Twitter に動画をうｐするマン</a></li>
-						<li><a href="#">RtmpClient for Windows Runtime</a></li>
-						<li><a href="#">Svg for xaml</a></li>
+						<li><a href="/ikaconnect/" itemprop="url" touch-action="none"><%- ikaconnect %></a></li>
+						<li><a href="/tvupl/" itemprop="url" touch-action="none"><%- twittervideouploader %></a></li>
+						<li><a href="https://github.com/mntone/RtmpClient" target="blank" touch-action="none">RtmpClient for Windows Runtime</a></li>
+						<li><a href="https://github.com/mntone/SvgForXaml" target="blank" touch-action="none">Svg for xaml</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" touch-action="none">コンテンツ</a>
+					<a href="javascript:void(0)" touch-action="none"><%- contents %></a>
 					<ul>
-						<li><a href="/zelda/" itemprop="url">64ゼルダ極道</a></li>
-						<li><a href="/splatoon.html" itemprop="url">Splatoon インク</a></li>
+						<li><a href="/zelda/" itemprop="url" touch-action="none">64ゼルダ極道</a></li>
+						<li><a href="/splatoon.html" itemprop="url" touch-action="none">Splatoon インク</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" touch-action="none">外部サイト</a>
+					<a href="javascript:void(0)" touch-action="none"><%- external_site %></a>
 					<ul>
-						<li><a href="https://twitter.com/mntone" itemprop="url">Twitter</a></li>
-						<li><a href="https://www.youtube.com/channel/UCjUcm2VgZKQqWAtKJhUW8fw" itemprop="url">YouTube</a></li>
-						<li><a href="https://github.com/mntone" itemprop="url">GitHub</a></li>
-						<li><a href="http://mntone.hateblo.jp/" itemprop="url">はてなブログ</a></li>
-						<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38" itemprop="url">ほしい物リスト</a></li>
+						<li><a href="https://twitter.com/mntone" itemprop="url" touch-action="none">Twitter</a></li>
+						<li><a href="https://www.youtube.com/channel/UCjUcm2VgZKQqWAtKJhUW8fw" itemprop="url" touch-action="none">YouTube</a></li>
+						<li><a href="https://github.com/mntone" itemprop="url" touch-action="none">GitHub</a></li>
+						<li><a href="http://mntone.hateblo.jp/" itemprop="url" touch-action="none"><%- hatena_blog %></a></li>
+						<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38" itemprop="url" touch-action="none"><%- wish_list %></a></li>
 					</ul>
 				</li>
 			</ul>
 			<div id="menu-button" touch-action="none"><a href="javascript:void(0)">
-				<img id="menu-button-menu" src="/i/icon_menu.svg">
-				<img id="menu-button-close" src="/i/icon_close.svg">
+				<img id="menu-button-menu" src="/i/icon_menu.svg" alt="menu">
+				<img id="menu-button-close" src="/i/icon_close.svg" alt="close">
 			</a></div>
 		</nav>
 	</div></header>

@@ -33,8 +33,7 @@
   <ItemGroup>
     <Content Include="src\.htaccess" />
     <Content Include="src\less\app.less" />
-    <Content Include="src\resources\lang-en.json" />
-    <Content Include="src\resources\lang-ja.json" />
+    <Content Include="src\resources\res.json" />
     <Content Include="tslint.json" />
     <Content Include="src\less\mixins.less" />
     <Content Include="src\ejs\tvupl\index.ejs" />

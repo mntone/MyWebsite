@@ -1,30 +1,35 @@
 ﻿<% include base/head %>
 
-<article itemscope itemtype="http://schema.org/Article">
-	<% if( lang == "ja" ) { %>
-	
-	<h2 itemprop="headline">アプリ &amp; ライブラリー</h2>
+<div>
+	<h2 itemprop="headline"><%- app_lib %></h2>
 	<div id="gc" class="grid-container my-grid-container">
 		<div class="grid3-item-cols2 grid3-item-rows2 my-grid-item my-grid-item-image" touch-action="pan-y">
 			<p style="background-image: url('/i/ikaconnect.100.png')"></p>
 			<a href="/ikaconnect/"><div>
-				スプラトゥーンを楽しんでるあなたに
-				<h1>IkaConnect</h1>
-				<h3>￥600 で&nbsp;<wbr>Windows ストアにて&nbsp;<wbr>配信中</h3>
+				<%- enjoysplatoon %>
+				<h1><%- ikaconnect %></h1>
+				<h3><%- deliveredikaconnect %></h3>
 			</div></a>
 		</div>
-		<div class="grid3-item my-grid-item" touch-action="pan-y"><a><div>
-			<small>Twitter に高画質で動画を上げたいあなたに</small>
-			<h3>Twitter に動画を<wbr>うｐするマン</h3>
-		</div></a></div>
-		<div class="grid3-item my-grid-item" touch-action="pan-y"><a><div>
-			<small>Windows ストア アプリ で&nbsp;<wbr>rtmp ストリーミングを使いたいあなたに</small>
-			<h3>RtmpClient <wbr>for Windows Runtime</h3>
-		</div></a></div>
-		<div class="grid3-item my-grid-item" touch-action="pan-y"><a><div>
-			<small>Windows ストア アプリ、UWP で&nbsp;<wbr>SVG を使いたいあなたに</small>
-			<h3>Svg for xaml</h3>
-		</div></a></div>
+		<div class="grid3-item my-grid-item my-grid-item-image" touch-action="pan-y">
+			<p style="background-image: url('/i/tvupl.15.png')"></p>
+			<a href="/tvupl/"><div>
+				<small><%- twitterhighquality %></small>
+				<h3><%- twittervideouploader %></h3>
+			</div></a>
+		</div>
+		<div class="grid3-item my-grid-item" touch-action="pan-y">
+			<a href="https://github.com/mntone/RtmpClient" target="blank"><div>
+				<small><%- usertmp %></small>
+				<h3>RtmpClient <wbr>for Windows Runtime</h3>
+			</div></a>
+		</div>
+		<div class="grid3-item my-grid-item" touch-action="pan-y">
+			<a href="https://github.com/mntone/SvgForXaml" target="blank"><div>
+				<small><%- usesvg %></small>
+				<h3>Svg for xaml</h3>
+			</div></a>
+		</div>
 	</div>
 	<script>
 		var gc = document.getElementById("gc");
@@ -41,57 +46,17 @@
 		}
 	</script>
 
-	<h2 itemprop="headline">その他</h2>
+	<h2 itemprop="headline"><%- other %></h2>
 	<div itemprop="articleBody">
 		<ul itemscope itemtype="http://schema.org/SiteNavigationElement">
-			<li><a href="/b.html">Device-dependent border-width test</a></li>
-			<li><a href="/g.html">Accelerator/gyro sensor test</a></li>
-			<li><a href="/h.html">Multiple weight font test</a></li>
-			<li><a href="/k.html">Keyboard event test</a></li>
-			<li><a href="/p.html">Pointer (touch/pen/mouse) event test</a></li>
-			<li><a href="/t.html">DOM params test</a></li>
+			<li><a href="/o/b.html">Device-dependent border-width test</a></li>
+			<li><a href="/o/g.html">Accelerator/gyro sensor test</a></li>
+			<li><a href="/o/h.html">Multiple weight font test</a></li>
+			<li><a href="/o/k.html">Keyboard event test</a></li>
+			<li><a href="/o/p.html">Pointer (touch/pen/mouse) event test</a></li>
+			<li><a href="/o/t.html">DOM params test</a></li>
 		</ul>
 	</div>
-	<% } else { %>
-	<h2 itemprop="headline">Welcome!</h2>
-	<div itemprop="articleBody">
-		<p>
-			Welcome to my website! I’m a.k.a. mntone, which writes programs in C++, C#, Java, or JavaScript. There are my programs’ links.
-		</p>
-		<p style="text-align: right">a.k.a. mntone</p>
-	</div>
-
-	<h2 itemprop="headline">App list</h2>
-	<div itemprop="articleBody">
-		Deliverying app now
-		<ul itemscope itemtype="http://schema.org/SiteNavigationElement">
-			<li><a href="/en/univschedule/">Univ Schedule app</a>, <a href="http://mntone.hateblo.jp/entry/2015/01/10/182525">Blog entry [Japanese]</a></li>
-			<li><a href="/en/tvupl/">Twitter Video Uploader</a>, <a href="http://mntone.hateblo.jp/entry/2015/08/08/111228">Blog entry [Japanese]</a></li>
-			<li><a href="/dpc/">Dot-pitch Calc. [Web app]</a></li>
-		</ul>
-	</div>
-
-	<h2 itemprop="headline">Browser tests</h2>
-	<div itemprop="articleBody">
-		These pages is created for browser functional test.
-		<ul itemscope itemtype="http://schema.org/SiteNavigationElement">
-			<li><a href="/b.html">Device-dependent border-width test</a></li>
-			<li><a href="/g.html">Accelerator/gyro sensor test</a></li>
-			<li><a href="/h.html">Multiple weight font test</a></li>
-			<li><a href="/k.html">Keyboard event test</a></li>
-			<li><a href="/p.html">Pointer (touch/pen/mouse) event test</a></li>
-			<li><a href="/t.html">DOM params test</a></li>
-		</ul>
-	</div>
-
-	<h2 itemprop="headline">Other</h2>
-	<div itemprop="articleBody">
-		You give me high and low presents if you thank me.
-		<ul itemscope itemtype="http://schema.org/SiteNavigationElement">
-			<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38">wish list</a></li>
-		</ul>
-	</div>
-	<% } %>
-</article>
+</div>
 
 <% include base/foot %>

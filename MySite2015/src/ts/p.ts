@@ -1,8 +1,14 @@
 ﻿"use strict";
 
-var lasttarget: HTMLLIElement = null;
-var focustarget: HTMLAnchorElement = null;
-var isshown: boolean = false;
+var style: number = 1;
+var styleType = { "narrow": 0, "full": 1 };
+function setStyle(value: number): boolean {
+    if (style != value) {
+        style = value;
+        return true;
+    }
+    return false;
+}
 
 var mode: number = 0;
 var modeType = { "mouse": 0, "touch": 1, "keyboard": 2 };
@@ -20,222 +26,553 @@ function setMode(value: number) {
             break;
     }
 }
-
-
-function show(li: HTMLLIElement, istouch: boolean) {
-    if (isshown) return;
-
-    li.classList.add("visible");
-    if (istouch) li.classList.add("visible-touch");
-    lasttarget = li;
-    isshown = true;
+function setModeFromType(type: string) {
+    setMode(type == "touch" ? modeType.touch : modeType.mouse);
 }
 
-function hide() {
-    if (!isshown) return;
-
-    lasttarget.classList.remove("visible", "visible-touch");
-    lasttarget = null;
-    isshown = false;
-}
-
-function getFilteredItems(nodes: NodeList, nodeName: string) {
+function getFilteredItems(nodes: NodeList, nodeName: string): any[] {
     return [].filter.call(nodes, (n: HTMLElement) => n.nodeName == nodeName);
 }
 
-function indexOf(items: Array<HTMLLIElement>, current: HTMLLIElement): number {
-    for (var i = 0; i != items.length; ++i) {
-        var item = items[i];
-        if (item == current) return i;
+interface IDisposable {
+    dispose(): void;
+}
+
+class EventDisposable implements IDisposable {
+    _element: HTMLElement;
+    _eventName: string;
+    _func: any;
+
+    constructor(element: HTMLElement, eventName: string, func: any) {
+        this._element = element;
+        this._eventName = eventName;
+        this._func = func;
+        element.addEventListener(eventName, func);
     }
-    return -1;
+
+    dispose(): void {
+        this._element.removeEventListener(this._eventName, this._func);
+    }
 }
 
-function findPreviousSibling(ul: HTMLUListElement, current: HTMLLIElement): HTMLLIElement {
-    var items = getFilteredItems(ul.childNodes, "LI");
-    var index = indexOf(items, current);
-    if (index == 0) return null;
-    return items[index - 1];
+class DisposableCollection implements IDisposable {
+    _collection: IDisposable[];
+
+    constructor() {
+        this._collection = [];
+    }
+
+    dispose(): void {
+        this._collection.forEach(d => d.dispose());
+        this._collection.length = 0;
+    }
+
+    push(disposable: IDisposable): void {
+        this._collection.push(disposable);
+    }
 }
 
-function findNextSibling(ul: HTMLUListElement, current: HTMLLIElement): HTMLLIElement {
-    var items = getFilteredItems(ul.childNodes, "LI");
-    var index = indexOf(items, current);
-    if (index >= items.length - 1) return null;
-    return items[index + 1];
+interface IKeyboardArrowListener {
+    onuparrowdown(e: KeyboardEvent): boolean;
+    ondownarrowdown(e: KeyboardEvent): boolean;
+    onleftarrowdown(e: KeyboardEvent): boolean;
+    onrightarrowdown(e: KeyboardEvent): boolean;
 }
 
-function init() {
-    var body = document.body;
-    body.addEventListener("keydown", (e: KeyboardEvent) => {
+abstract class KeyboardArrowSupport implements IKeyboardArrowListener {
+    _element: HTMLElement;
+    _ev: EventDisposable;
+
+    constructor(protected element: HTMLElement) {
+        this._element = element;
+        this._init();
+    }
+
+    _init(): void {
+        this._ev = new EventDisposable(this._element, "keydown", this.onkeydown.bind(this));
+    }
+
+    clear(): void {
+        this._ev.dispose();
+    }
+
+    onkeydown(e: KeyboardEvent): void {
         setMode(modeType.keyboard);
-    });
-    body.addEventListener("pointerdown", (e: PointerEvent) => {
-        if (e.pointerType == "touch" && mode != modeType.touch) {
-            setMode(modeType.touch);
-        }
-        else if (mode != modeType.mouse) {
-            setMode(modeType.mouse);
-        }
-        hide();
-    });
 
-    var ul = <HTMLUListElement>document.getElementById("nav-list");
-    var btn = <HTMLUListElement>document.getElementById("menu-button");
-    btn.addEventListener("pointerdown", (e: PointerEvent) => {
-        if (ul.classList.contains("visible")) {
-            ul.classList.remove("visible", "visible-touch");
+        var c = e.keyCode;
+        var ret = false;
+        switch (c) {
+            case 37: ret = this.onleftarrowdown(e); break;
+            case 38: ret = this.onuparrowdown(e); break;
+            case 39: ret = this.onrightarrowdown(e); break;
+            case 40: ret = this.ondownarrowdown(e); break;
+        }
+        if (ret) e.preventDefault();
+    }
+
+    abstract onuparrowdown(e: KeyboardEvent): boolean;
+    abstract ondownarrowdown(e: KeyboardEvent): boolean;
+    abstract onleftarrowdown(e: KeyboardEvent): boolean;
+    abstract onrightarrowdown(e: KeyboardEvent): boolean;
+}
+
+class SecondLevelLiCodeBehind extends KeyboardArrowSupport {
+    _parent: SecondLevelUlCodeBehind;
+    private _li: HTMLLIElement;
+    private _a: HTMLAnchorElement;
+
+    private _disposables: DisposableCollection;
+
+    constructor(parent: SecondLevelUlCodeBehind, li: HTMLLIElement) {
+        this._parent = parent;
+        this._li = li;
+        this._a = li.getElementsByTagName("a")[0];
+        super(this._a);
+
+        this._disposables = new DisposableCollection();
+    }
+
+    init(): void {
+        this._disposables.dispose();
+        this._disposables = new DisposableCollection();
+
+        if (style == styleType.full) {
+            this._disposables.push(new EventDisposable(this._li, "pointerover", this.onpointerover.bind(this)));
+        }
+    }
+
+    focus(): void {
+        this._a.focus();
+    }
+
+    onpointerover(e: PointerEvent): void {
+        if (e.pointerType != "touch") {
+            setMode(modeType.mouse);
+            this._parent.setSelectedItem(this);
+        }
+    }
+
+    onuparrowdown(e: KeyboardEvent): boolean {
+        this._parent.prev();
+        return true;
+    }
+
+    ondownarrowdown(e: KeyboardEvent): boolean {
+        this._parent.next();
+        return true;
+    }
+
+    onleftarrowdown(e: KeyboardEvent): boolean {
+        this._parent._parent._parent.prev();
+        return true;
+    }
+
+    onrightarrowdown(e: KeyboardEvent): boolean {
+        this._parent._parent._parent.next();
+        return true;
+    }
+}
+
+abstract class UlCodeBehindBase<TChild> {
+    protected _ul: HTMLUListElement;
+
+    protected _items: Array<TChild>;
+    protected _selectedItem: TChild;
+
+    constructor(ul: HTMLUListElement, func: (li: HTMLLIElement) => TChild) {
+        this._ul = ul;
+
+        var liItems = <HTMLLIElement[]>getFilteredItems(this._ul.childNodes, "LI");
+        this._items = liItems.map(li => func(li));
+    }
+
+    init(): void {
+        this._selectedItem = null;
+    }
+
+    getPrevItem(current: TChild): TChild {
+        var newIndex = this._items.indexOf(current) - 1;
+        if (newIndex >= 0 && newIndex < this._items.length) {
+            return this._items[newIndex];
+        }
+        return null;
+    }
+
+    getNextItem(current: TChild): TChild {
+        var newIndex = this._items.indexOf(current) + 1;
+        if (newIndex < this._items.length) {
+            return this._items[newIndex];
+        }
+        return null;
+    }
+}
+
+class SecondLevelUlCodeBehind extends UlCodeBehindBase<SecondLevelLiCodeBehind> {
+    _parent: FirstLevelLiCodeBehind;
+
+    private _isshown: boolean;
+
+    constructor(parent: FirstLevelLiCodeBehind, ul: HTMLUListElement) {
+        this._parent = parent;
+        super(ul, li => new SecondLevelLiCodeBehind(this, li));
+    }
+
+    init(): void {
+        super.init();
+        if (style == styleType.narrow && this._isshown) {
+            this.hide();
+        }
+
+        this._items.forEach(i => i.init());
+    }
+
+    show(): void {
+        if (this._isshown) return;
+        this._isshown = true;
+        if (mode == modeType.touch) {
+            this._ul.classList.add("visible", "visible-touch");
+        } else {
+            this._ul.classList.add("visible");
+        }
+    }
+
+    hide(): void {
+        if (!this._isshown) return;
+        this._ul.classList.remove("visible", "visible-touch");
+        this._isshown = false;
+        this.setSelectedItem(null);
+    }
+
+    prev(): void {
+        var item = this._selectedItem != null ? this.getPrevItem(this._selectedItem) : this._items[this._items.length - 1];
+        if (item != null) {
+            this.setSelectedItem(item);
+        } else if (style == styleType.full) {
+            this.setSelectedItem(null);
+            this._parent.focus();
+        } else {
+            var prevItem = this._parent._parent.getPrevItem(this._parent);
+            if (prevItem != null) {
+                prevItem.getChild().prev();
+            }
+        }
+    }
+
+    next(): void {
+        var item = this._selectedItem != null ? this.getNextItem(this._selectedItem) : this._items[0];
+        if (item != null) {
+            this.setSelectedItem(item);
+        } else if (style == styleType.full) {
+            this.setSelectedItem(null);
+            this._parent.focus();
+        } else {
+            var nextItem = this._parent._parent.getNextItem(this._parent);
+            if (nextItem != null) {
+                nextItem.getChild().next();
+            }
+        }
+    }
+
+    getSelectedItem(): SecondLevelLiCodeBehind {
+        return this._selectedItem;
+    }
+    setSelectedItem(value: SecondLevelLiCodeBehind): boolean {
+        if (this._selectedItem == value) return false;
+
+        this._selectedItem = value;
+        if (this._selectedItem != null) {
+            this._selectedItem.focus();
+        }
+        return true;
+    }
+}
+
+class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
+    _parent: FirstLevelUlCodeBehind;
+    private _li: HTMLLIElement;
+    private _a: HTMLAnchorElement;
+
+    private _child: SecondLevelUlCodeBehind;
+    private _disposables: DisposableCollection;
+
+    private _isfocus: boolean;
+
+    constructor(parent: FirstLevelUlCodeBehind, li: HTMLLIElement) {
+        this._parent = parent;
+        this._li = li;
+        this._a = li.getElementsByTagName("a")[0];
+        super(this._a);
+
+        var ul = li.getElementsByTagName("ul")[0];
+        this._child = new SecondLevelUlCodeBehind(this, ul);
+
+        this._disposables = new DisposableCollection();
+    }
+
+    init(): void {
+        this._disposables.dispose();
+        this._disposables = new DisposableCollection();
+
+        if (style == styleType.full) {
+            this._disposables.push(new EventDisposable(this._li, "pointerdown", this.onpointerdown.bind(this)));
+            this._disposables.push(new EventDisposable(this._li, "pointerover", this.onpointerover.bind(this)));
+            this._disposables.push(new EventDisposable(this._li, "pointerout", this.onpointerout.bind(this)));
+            this._disposables.push(new EventDisposable(this._a, "focus", this.onfocus.bind(this)));
+            this._disposables.push(new EventDisposable(this._a, "blur", this.onblur.bind(this)));
+        }
+
+        this._child.init();
+    }
+
+    focus(): void {
+        this._a.focus();
+    }
+
+    onfocus(e: FocusEvent): void {
+        this._parent.setSelectedItem(this);
+    }
+
+    onblur(e: FocusEvent): void {
+        if (mode == modeType.keyboard) {
+            if (!this._isfocus) {
+                this._parent.setSelectedItem(null);
+            } else {
+                this._isfocus = false;
+            }
+        }
+    }
+
+    onpointerdown(e: PointerEvent): void {
+        if (e.pointerType == "touch") {
+            setMode(modeType.touch);
+            this._parent.setSelectedItem(this);
+        }
+        e.cancelBubble = true;
+    }
+
+    onpointerover(e: PointerEvent): void {
+        if (e.pointerType != "touch") {
+            setMode(modeType.mouse);
+            this._parent.setSelectedItem(this);
+        }
+    }
+
+    onpointerout(e: PointerEvent): void {
+        if (e.pointerType != "touch") {
+            setMode(modeType.mouse);
+            this._parent.setSelectedItem(null);
+        }
+    }
+
+    onkeydown(e: KeyboardEvent): void {
+        if (e.keyCode == 9) {
+            if (!e.shiftKey) {
+                this._isfocus = true;
+            } else if (e.shiftKey && this._parent.getPrevItem(this) != null) {
+                this._isfocus = true;
+            }
         }
         else {
-            if (e.pointerType == "touch") {
-                ul.classList.add("visible", "visible-touch");
-            }
-            else {
-                ul.classList.add("visible");
+            super.onkeydown(e);
+        }
+    }
+
+    onuparrowdown(e: KeyboardEvent): boolean {
+        this._isfocus = true;
+        this._child.prev();
+        return true;
+    }
+
+    ondownarrowdown(e: KeyboardEvent): boolean {
+        this._isfocus = true;
+        this._child.next();
+        return true;
+    }
+
+    onleftarrowdown(e: KeyboardEvent): boolean {
+        if (style == styleType.full) {
+            this._parent.prev();
+            return true;
+        }
+        return false;
+    }
+
+    onrightarrowdown(e: KeyboardEvent): boolean {
+        if (style == styleType.full) {
+            this._parent.next();
+            return true;
+        }
+        return false;
+    }
+
+    getChild(): SecondLevelUlCodeBehind {
+        return this._child;
+    }
+}
+
+class FirstLevelUlCodeBehind extends UlCodeBehindBase<FirstLevelLiCodeBehind> {
+    _parent: PageCodeBehind;
+
+    private _isshown: boolean;
+
+    constructor(parent: PageCodeBehind, ul: HTMLUListElement) {
+        this._parent = parent;
+        super(ul, li => new FirstLevelLiCodeBehind(this, li));
+
+        this._isshown = false;
+    }
+
+    init(): void {
+        super.init();
+        if (style == styleType.full && this._isshown) {
+            this.hide();
+        }
+
+        this._items.forEach(i => i.init());
+    }
+
+    toggle(): void {
+        if (!this._isshown) {
+            this.show();
+        } else {
+            this.hide();
+        }
+    }
+
+    show(): void {
+        this._isshown = true;
+        if (mode == modeType.touch) {
+            this._ul.classList.add("visible", "visible-touch");
+        } else {
+            this._ul.classList.add("visible");
+        }
+    }
+
+    hide(): void {
+        this._ul.classList.remove("visible", "visible-touch");
+        this._isshown = false;
+    }
+
+    prev(): void {
+        if (style == styleType.narrow) throw new Error();
+        if (this._selectedItem != null) {
+            var item = this.getPrevItem(this._selectedItem);
+            if (item != null) {
+                item.focus();
             }
         }
-    });
+    }
 
-    var items = getFilteredItems(ul.childNodes, "LI");
-    for (var i = 0; i != items.length; ++i) {
-        var li = <HTMLLIElement>items[i];
-        li.addEventListener("pointerdown", (e: PointerEvent) => {
-            if (e.pointerType == "touch") {
-                setMode(modeType.touch);
-                show(<HTMLLIElement>e.currentTarget, true);
+    next(): void {
+        if (style == styleType.narrow) throw new Error();
+        if (this._selectedItem != null) {
+            var item = this.getNextItem(this._selectedItem);
+            if (item != null) {
+                item.focus();
             }
-            e.cancelBubble = true;
-        });
-        li.addEventListener("pointerover", (e: PointerEvent) => {
-            if (e.pointerType != "touch") {
-                setMode(modeType.mouse);
-                var target = <HTMLLIElement>e.currentTarget;
-                show(target, false);
+        }
+    }
 
-                var anchor = <HTMLAnchorElement>target.getElementsByTagName("a")[0];
-                anchor.focus();
+    getSelectedItem(): FirstLevelLiCodeBehind {
+        if (style == styleType.narrow) throw new Error();
+        return this._selectedItem;
+    }
+    setSelectedItem(value: FirstLevelLiCodeBehind): boolean {
+        if (style == styleType.narrow) throw new Error();
+        if (this._selectedItem == value) return false;
+
+        if (this._selectedItem != null) {
+            this._selectedItem.getChild().hide();
+        }
+        this._selectedItem = value;
+        if (this._selectedItem != null) {
+            if (mode == modeType.mouse) {
+                this._selectedItem.focus();
             }
-        });
-        li.addEventListener("pointerout", (e: PointerEvent) => {
-            if (e.pointerType != "touch") {
-                setMode(modeType.mouse);
-                hide();
+            this._selectedItem.getChild().show();
+        }
+        return true;
+    }
+}
+
+class PageCodeBehind {
+    _body: HTMLBodyElement;
+    _menuButton: HTMLDivElement;
+
+    _child: FirstLevelUlCodeBehind;
+    _disposables: DisposableCollection;
+
+    constructor(body: HTMLBodyElement) {
+        window.addEventListener("resize", (e: UIEvent) => {
+            if (this.initStyle()) {
+                this.init();
             }
         });
 
-        var a = li.getElementsByTagName("a")[0];
-        a.addEventListener("focus", (e: FocusEvent) => {
-            if (mode == modeType.keyboard) {
-                show(<HTMLLIElement>(<HTMLElement>e.currentTarget).parentElement, false);
-            }
-        });
-        a.addEventListener("blur", (e: FocusEvent) => {
-            if (mode == modeType.keyboard && focustarget != e.currentTarget) {
-                hide();
-            }
-        });
-        a.addEventListener("keydown", (e: KeyboardEvent) => {
+        this._body = body;
+        body.addEventListener("keydown", (e: KeyboardEvent) => {
             setMode(modeType.keyboard);
+        });
+        body.addEventListener("pointerdown", (e: PointerEvent) => {
+            if (e.pointerType == "touch" && mode != modeType.touch) {
+                setMode(modeType.touch);
+            }
+            else if (mode != modeType.mouse) {
+                setMode(modeType.mouse);
+            }
 
-            var anchor = <HTMLAnchorElement>e.currentTarget;
-            var target = <HTMLLIElement>anchor.parentElement;
-            var parent = <HTMLUListElement>target.parentElement;
-            if (e.keyCode == 38) {
-                var secondLevelItems = target.getElementsByTagName("ul")[0].getElementsByTagName("li");
-                var lastItem = secondLevelItems[secondLevelItems.length - 1].getElementsByTagName("a")[0];
-                focustarget = anchor;
-                lastItem.focus();
-                e.preventDefault();
-            }
-            else if (e.keyCode == 40) {
-                var secondLevelItems = target.getElementsByTagName("ul")[0].getElementsByTagName("li");
-                var firstItem = secondLevelItems[0].getElementsByTagName("a")[0];
-                focustarget = anchor;
-                firstItem.focus();
-                e.preventDefault();
-            }
-            else if (e.keyCode == 37) {
-                var prevItem = findPreviousSibling(parent, target);
-                if (prevItem != null) {
-                    var prevItemAnchor = prevItem.getElementsByTagName("a")[0];
-                    focustarget = prevItemAnchor;
-                    prevItemAnchor.focus();
-                    e.preventDefault();
-                }
-            }
-            else if (e.keyCode == 39) {
-                var nextItem = findNextSibling(parent, target);
-                if (nextItem != null) {
-                    var nextItemAnchor = nextItem.getElementsByTagName("a")[0];
-                    focustarget = nextItemAnchor;
-                    nextItemAnchor.focus();
-                    e.preventDefault();
-                }
+            if (style == styleType.full) {
+                this._child.setSelectedItem(null);
             }
         });
 
-        var ul2 = li.getElementsByTagName("ul")[0];
-        var items2 = getFilteredItems(ul2.childNodes, "LI")
-        for (var j = 0; j != items2.length; ++j) {
-            var li2 = <HTMLLIElement>items2[j];
-            var a2 = li2.getElementsByTagName("a")[0];
-            a2.addEventListener("blur", (e: FocusEvent) => {
-                if (focustarget != <HTMLAnchorElement>((<HTMLElement>e.currentTarget).parentElement.parentElement.parentElement.getElementsByTagName("a")[0])) {
-                    hide();
-                }
-            });
-            a2.addEventListener("keydown", (e: KeyboardEvent) => {
-                setMode(modeType.keyboard);
+        var ul = <HTMLUListElement>document.getElementById("nav-list");
+        this._child = new FirstLevelUlCodeBehind(this, ul);
+        this._menuButton = <HTMLDivElement>document.getElementById("menu-button");
 
-                var target = <HTMLLIElement>(<HTMLElement>e.currentTarget).parentElement;
-                var parent = <HTMLUListElement>target.parentElement;
-                if (e.keyCode == 38) {
-                    var prevItem = findPreviousSibling(parent, target);
-                    if (prevItem != null) {
-                        prevItem.getElementsByTagName("a")[0].focus();
-                    }
-                    else {
-                        var first = parent.parentElement.getElementsByTagName("a")[0];
-                        first.focus();
-                    }
-                    e.preventDefault();
-                }
-                else if (e.keyCode == 40) {
-                    var nextItem = findNextSibling(parent, target);
-                    if (nextItem != null) {
-                        nextItem.getElementsByTagName("a")[0].focus();
-                    }
-                    else {
-                        var first = parent.parentElement.getElementsByTagName("a")[0];
-                        first.focus();
-                    }
-                    e.preventDefault();
-                }
-                else {
-                    var firstLevelItem = <HTMLLIElement>parent.parentElement;
-                    var firstLevelItems = <HTMLUListElement>firstLevelItem.parentElement;
-                    if (e.keyCode == 37) {
-                        var prevItem = findPreviousSibling(firstLevelItems, firstLevelItem);
-                        if (prevItem != null) {
-                            var prevItemAnchor = prevItem.getElementsByTagName("a")[0];
-                            focustarget = prevItemAnchor;
-                            prevItemAnchor.focus();
-                            e.preventDefault();
-                        }
-                    }
-                    else if (e.keyCode == 39) {
-                        var nextItem = findNextSibling(firstLevelItems, firstLevelItem);
-                        if (nextItem != null) {
-                            var nextItemAnchor = nextItem.getElementsByTagName("a")[0];
-                            focustarget = nextItemAnchor;
-                            nextItemAnchor.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-            });
+        this._disposables = new DisposableCollection();
+
+        this.initStyle();
+        this.init();
+    }
+
+    init(): void {
+        this._disposables.dispose();
+        this._disposables = new DisposableCollection();
+
+        if (style == styleType.narrow) {
+            this._disposables.push(new EventDisposable(this._menuButton, "pointerdown", this.onmenubuttonpointerdown.bind(this)));
+            this._disposables.push(new EventDisposable(this._menuButton, "keydown", this.onmenubuttonkeydown.bind(this)));
+        }
+
+        this._child.init();
+    }
+
+    private initStyle(): boolean {
+        if (this._body.clientWidth >= 720) {
+            return setStyle(styleType.full);
+        } else {
+            return setStyle(styleType.narrow);
+        }
+    }
+
+    onmenubuttonpointerdown(e: PointerEvent): void {
+        setModeFromType(e.pointerType);
+        this._child.toggle();
+    }
+
+    onmenubuttonkeydown(e: KeyboardEvent): void {
+        setMode(modeType.keyboard);
+        if (e.keyCode == 13) {
+            this._child.toggle();
         }
     }
 }
-window.onload = function ()
-{ if (typeof document.msCSSOMElementFloatMetrics !== "undefined") { document.msCSSOMElementFloatMetrics = !0; } init(); }
+
+var codeBehind: PageCodeBehind;
+window.onload = function () {
+    if (typeof document.msCSSOMElementFloatMetrics !== "undefined") {
+        document.msCSSOMElementFloatMetrics = !0;
+    }
+    codeBehind = new PageCodeBehind(<HTMLBodyElement>document.body);
+}

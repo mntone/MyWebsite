@@ -1,0 +1,178 @@
+﻿{
+  "files": [
+    {
+      "file": "index",
+      "lang": [ "en", "ja" ]
+    },
+    {
+      "file": "splatoon",
+      "lang": [ "ja" ]
+    },
+    {
+      "file": "winrtlib/privacy",
+      "lang": [ "en" ]
+    },
+    {
+      "file": "tvupl/index",
+      "lang": [ "en", "ja" ]
+    },
+    {
+      "file": "tvupl/privacy",
+      "lang": [ "en", "ja" ]
+    },
+    {
+      "file": "ikaconnect/index",
+      "lang": [ "en", "ja", "fr", "fr-ca", "es", "es-419", "de", "it" ]
+    },
+    {
+      "file": "ikaconnect/privacy",
+      "lang": [ "en", "ja" ]
+    }
+  ],
+  "res": {
+    "en": {
+      "lang": "en",
+      "title": "mntone’s junks",
+      "app_lib": "Apps &amp; libraries",
+      "ikaconnect": "SplatConnect",
+      "twittervideouploader": "Twitter Video Uploader",
+      "contents": "Contents",
+      "external_site": "External",
+      "hatena_blog": "Hatena Blog",
+      "wish_list": "Wish List",
+      "other": "Other",
+      "resolution": "Res.",
+      "all_supports": "All supports",
+      "recommended_environment": "Recommended environment",
+      "downloads": "Donwloads",
+      "screenshots": "Screenshots",
+      "update_history": "Update History",
+      "agree_privacy_policy": "If you agree <a href=\"{0}\">Privacy Policy</a>, you can use",
+      "download": "Donwload",
+      "download_by_windows_store": "Download by Windows store",
+      "version": "Version",
+
+      "enjoysplatoon": "Enjoy Splatoon for you",
+      "deliveredikaconnect": "Being delivered&nbsp;<wbr>in the Windows store&nbsp;<wbr>at $5.99",
+      "twitterhighquality": "Wish to upload HQ-video&nbsp;<wbr>to Twitter for you",
+      "usertmp": "Wish to use rtmp streaming&nbsp;<wbr>in Windows Store apps",
+      "usesvg": "Wish to use svg&nbsp;<wbr>in Windows Store apps or UWP apps"
+    },
+    "ja": {
+      "lang": "ja",
+      "title": "mntoneのガラクタ置き場。",
+      "app_lib": "アプリ &amp; ライブラリー",
+      "ikaconnect": "IkaConnect",
+      "twittervideouploader": "Twitter に動画を<wbr>うｐするマン",
+      "contents": "コンテンツ",
+      "external_site": "外部サイト",
+      "hatena_blog": "はてなブログ",
+      "wish_list": "ほしい物リスト",
+      "other": "その他",
+      "resolution": "解像度",
+      "all_supports": "すべてサポート",
+      "recommended_environment": "推奨環境",
+      "downloads": "ダウンロード",
+      "screenshots": "スクリーンショット",
+      "update_history": "更新履歴",
+      "agree_privacy_policy": "<a href=\"{0}\">プライバシー ポリシー</a>に同意する場合のみご利用ください",
+      "download": "ダウンロード",
+      "download_by_windows_store": "Windows ストアでダウンロード",
+      "version": "バージョン",
+
+      "enjoysplatoon": "スプラトゥーンを楽しんでるあなたに",
+      "deliveredikaconnect": "￥600 で&nbsp;<wbr>Windows ストアにて&nbsp;<wbr>配信中",
+      "twitterhighquality": "Twitter に高画質で動画を上げたいあなたに",
+      "usertmp": "Windows ストア アプリ で&nbsp;<wbr>rtmp ストリーミングを使う",
+      "usesvg": "Windows ストア アプリ、UWP で&nbsp;<wbr>SVG を使う"
+    },
+    "fr": {
+      "lang": "fr",
+      "title": "Jonques de mntone",
+      "app_lib": "Apps &amp; bibliothèques",
+      "ikaconnect": "SplatConnect",
+      "twittervideouploader": "Twitter Video Uploader",
+      "contents": "Contenu",
+      "external_site": "Externe",
+      "hatena_blog": "Hatena Blog",
+      "wish_list": "Liste de Souhaits",
+      "other": "Autres",
+      "resolution": "Résolution",
+      "all_supports": "Tous supports",
+      "recommended_environment": "Environnement recommandé",
+      "downloads": "Télécharger",
+      "screenshots": "Captures d'écran",
+      "update_history": "Histoire de la mise à jour",
+      "agree_privacy_policy": "Si vous acceptez la <a href=\"{0}\">politique de confidentialité</a>, vous pouvez utiliser",
+      "download": "Téléchargement",
+      "download_by_windows_store": "Télécharger en magasin de Windows",
+      "version": "Version"
+    },
+    "es": {
+      "lang": "es",
+      "title": "mntone juncos",
+      "app_lib": "Aplicaciones y bibliotecas",
+      "ikaconnect": "SplatConnect",
+      "twittervideouploader": "Twitter Video Uploader",
+      "contents": "Contenido",
+      "external_site": "Externo",
+      "hatena_blog": "Hatena Blog",
+      "wish_list": "Lista de Deseos",
+      "other": "Otros",
+      "resolution": "Resolución",
+      "all_supports": "Todos los soportes",
+      "recommended_environment": "Entorno recomendado",
+      "downloads": "Descargar",
+      "screenshots": "Capturas de pantalla",
+      "update_history": "Actualización historia",
+      "agree_privacy_policy": "Si usted acepta la política de privacidad, puede utilizar",
+      "download": "Descarga",
+      "download_by_windows_store": "Descarga de Windows store",
+      "version": "Versión"
+    },
+    "de": {
+      "lang": "de",
+      "title": "mntone’s Dschunken",
+      "app_lib": "Apps &amp; Bibliotheken",
+      "ikaconnect": "SplatConnect",
+      "twittervideouploader": "Twitter Video Uploader",
+      "contents": "Inhalt",
+      "external_site": "Externe",
+      "hatena_blog": "Hatena Blog",
+      "wish_list": "Wunschliste",
+      "other": "Andere",
+      "resolution": "Auflösung",
+      "all_supports": "Alle unterstützt",
+      "recommended_environment": "Empfohlene Umgebung",
+      "downloads": "Herunterladen",
+      "screenshots": "Screenshots",
+      "update_history": "Update-Historie",
+      "agree_privacy_policy": "Wenn Sie <a href=\"{0}\">Privacy Policy</a> zustimmen, können Sie",
+      "download": "Herunterladen",
+      "download_by_windows_store": "Download von Windows-Speicher",
+      "version": "Version"
+    },
+    "it": {
+      "lang": "it",
+      "title": "mntone giunche",
+      "app_lib": "Apps &amp; librerie",
+      "ikaconnect": "SplatConnect",
+      "twittervideouploader": "Twitter Video Uploader",
+      "contents": "Contenuto",
+      "external_site": "Esterno",
+      "hatena_blog": "Hatena Blog",
+      "wish_list": "Lista dei Desideri",
+      "other": "Altri",
+      "resolution": "Risoluzione",
+      "all_supports": "Tutti i supporti",
+      "recommended_environment": "Ambiente consigliato",
+      "downloads": "Scarica",
+      "screenshots": "Screenshots",
+      "update_history": "Cronologia degli aggiornamenti",
+      "agree_privacy_policy": "Se siete d'accordo sulla <a href=\"{0}\">privacy</a>, è possibile utilizzare",
+      "download": "Scaricare",
+      "download_by_windows_store": "Scaricare da Windows store",
+      "version": "Versione"
+    }
+  }
+}

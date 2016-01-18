@@ -1,47 +1,149 @@
 ﻿<% include ../base/head %>
 
 <article itemscope itemtype="http://schema.org/Article">
-	<% if( lang == "ja" ) { %>
-	<img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" height="180" width="500" alt="アプリ画面サンプル" class="image-right">
+    <h1 itemprop="headline"><%- twittervideouploader %></h1>
+    <% if (lang == "ja") { %>
+    <div itemprop="articleBody">
+        <p>Twitterに動画をうｐするマンとは、Twitterに動画をアップロードするツールです。動画を高画質であげたい! って方には便利なツールです。制約がかなりでかいので注意してください。</p>
+    </div>
 
-	<h2 itemprop="headline">Twitterに動画をうｐするマン</h2>
-	<div itemprop="articleBody">
-		<p>
-			Twitterに動画をうｐするマンとは、Twitterに動画をアップロードしてくれるそんなハートフルなやつです。かわいいです。動画投稿に関してはブログ記事 <a href="http://mntone.hateblo.jp/entry/2015/08/08/111228">http://mntone.hateblo.jp/entry/2015/08/08/111228</a> をチェックしてください。
-		</p>
-	</div>
+    <h2 itemprop="headline"><%- recommended_environment %></h2>
+    <div itemprop="articleBody">
+        <p>Windows Vista SP2 以降 (.NET Framework 4.5 が必要です)</p>
+    </div>
 
-	<h2 itemprop="headline">対応環境</h2>
-	<div itemprop="articleBody">
-		<p>Windows Vista SP2 以降 (.NET Framework 4.5 が必要です)</p>
-	</div>
+    <h2 itemprop="headline">動画仕様および推奨</h2>
+    <div itemprop="articleBody">
+        <p>ここでは Twitter で再生可能な動画についての仕様について簡単に書きます。</p>
+        <ul>
+            <li>ファイルサイズ: 15 MB</li>
+            <li>コンテナ: MP4 (MPEG-4 Part 14)</li>
+            <li>
+                <p>動画: H.264/MPEG-4 AVC</p>
+                <ul>
+                    <li>解像度: 32x32～1280x1024</li>
+                    <li>アスペクト比: 1:3～3:1</li>
+                    <li>フレームレート: 40 fps 以下</li>
+                </ul>
+            </li>
+            <li>
+                音声: AAC-LC
+                <ul>
+                    <li>オーディオ: 2 ch 以下</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <h3 itemprop="headline">推奨設定</h3>
+    <table>
+        <tr><th>方向</th><th>width [pixel]</th><th>height [pixel]</th><th>video bitrate [Kbps]</th><th>audio bitrate [Kbps]</th></tr>
+        <tr><td rowspan="3">横長</td><td>1280</td><td>720</td><td>2048</td><td>128</td></tr>
+        <tr><td>640</td><td>360</td><td>768</td><td>64</td></tr>
+        <tr><td>320</td><td>180</td><td>256</td><td>64</td></tr>
+        <tr><td rowspan="3">正方</td><td>640</td><td>640</td><td>1024</td><td>96</td></tr>
+        <tr><td>480</td><td>480</td><td>768</td><td>64</td></tr>
+        <tr><td>240</td><td>240</td><td>256</td><td>64</td></tr>
+    </table>
 
-	<h2 itemprop="headline">ダウンロード</h2>
-	<div itemprop="articleBody">
-		<p><a href="privacy.html">プライバシー ポリシー</a>に同意する場合のみご利用ください</p>
-		<p><a href="/tvupl091.zip">ダウンロード (バージョン 0.9.1)</a></p>
-	</div>
-	<% } else { %>
-	<img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" height="180" width="500" alt="app screen sample" class="image-right">
+    <h2 itemprop="headline"><%- downloads %></h2>
+    <div itemprop="articleBody">
+        <p><%- agree_privacy_policy.replace("{0}", "privacy.html") %></p>
+        <p><a href="/tvupl091.zip"><%- download %> (<%- version %> 0.9.1)</a></p>
+        <p>
+            またソースコードのダウンロードも可能です。<br>
+            <a href="https://github.com/mntone/TwitterVideoUploader">TwitterVideoUploader</a>
+        </p>
+    </div>
 
-	<h2 itemprop="headline">Twitter Video Uploader</h2>
-	<div itemprop="articleBody">
-		<p>
-			Twitter Video Uploader is very heartfelt software that can upload a video to Twitter. I think it’s pretty. You must check blog entry <a href="http://mntone.hateblo.jp/entry/2015/08/08/111228">http://mntone.hateblo.jp/entry/2015/08/08/111228</a> (Japanese) for use.
-		</p>
-	</div>
+    <h2 itemprop="headline"><%- update_history %></h2>
+    <h5>v0.9.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Per-monitor DPI に対応しました</li>
+        </ul>
+    </div>
+    <h5>v0.9.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>初期版をリリースしました</li>
+        </ul>
+    </div>
 
-	<h2 itemprop="headline">Support environment</h2>
-	<div itemprop="articleBody">
-		<p>Windows Vista SP2 or later (.NET Framework 4.5 is required)</p>
-	</div>
+    <% } else { %>
 
-	<h2 itemprop="headline">Downloads</h2>
-	<div itemprop="articleBody">
-		<p>If you agree <a href="privacy.html">Privacy Policy</a>, you can use</p>
-		<p><a href="/tvupl091.zip">Download (Version 0.9.1)</a></p>
-	</div>
-	<% } %>
+    <div itemprop="articleBody">
+        <p>Twitter Video Uploader is very useful tool. It can upload HQ-video to Twitter; however, Twitter limits AV format.</p>
+    </div>
+
+    <h2 itemprop="headline"><%- recommended_environment %></h2>
+    <div itemprop="articleBody">
+        <p>Windows Vista SP2 or later (.NET Framework 4.5 is required)</p>
+    </div>
+
+    <h2 itemprop="headline">Recommended video spec</h2>
+    <div itemprop="articleBody">
+        <p>In this section, write playable video spec in Twitter.</p>
+        <ul>
+            <li>File size: 15 MB</li>
+            <li>Container: MP4 (MPEG-4 Part 14)</li>
+            <li>
+                <p>Video: H.264/MPEG-4 AVC</p>
+                <ul>
+                    <li>Resolution: 32x32～1280x1024</li>
+                    <li>Aspect ratio: 1:3～3:1</li>
+                    <li>Framerate: 40 fps or below</li>
+                </ul>
+            </li>
+            <li>
+                Audio: AAC-LC
+                <ul>
+                    <li>Channel: mono or stereo</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <h3 itemprop="headline">Recommended settings</h3>
+    <table>
+        <tr><th>orientation</th><th>width [pixel]</th><th>height [pixel]</th><th>video bitrate [Kbps]</th><th>audio bitrate [Kbps]</th></tr>
+        <tr><td rowspan="3">Horizontal</td><td>1280</td><td>720</td><td>2048</td><td>128</td></tr>
+        <tr><td>640</td><td>360</td><td>768</td><td>64</td></tr>
+        <tr><td>320</td><td>180</td><td>256</td><td>64</td></tr>
+        <tr><td rowspan="3">Square</td><td>640</td><td>640</td><td>1024</td><td>96</td></tr>
+        <tr><td>480</td><td>480</td><td>768</td><td>64</td></tr>
+        <tr><td>240</td><td>240</td><td>256</td><td>64</td></tr>
+    </table>
+
+    <h2 itemprop="headline"><%- downloads %></h2>
+    <div itemprop="articleBody">
+        <p><%- agree_privacy_policy.replace("{0}", "privacy.html") %></p>
+        <p><a href="/tvupl091.zip"><%- download %> (<%- version %> 0.9.1)</a></p>
+        <p>
+            You can also download source code.<br>
+            <a href="https://github.com/mntone/TwitterVideoUploader">TwitterVideoUploader</a>
+        </p>
+    </div>
+
+    <h2 itemprop="headline"><%- update_history %></h2>
+    <h5>v0.9.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Support Per-monitor DPI</li>
+        </ul>
+    </div>
+    <h5>v0.9.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Initial release</li>
+        </ul>
+    </div>
+    <% } %>
 </article>
+
+<div class="screenshot">
+    <h2 itemprop="headline"><%- screenshots %></h2>
+    <div itemprop="articleBody">
+        <img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" class="top" style="max-width: 500px" alt="ss1">
+    </div>
+</div>
 
 <% include ../base/foot %>

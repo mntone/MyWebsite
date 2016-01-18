@@ -1,43 +1,417 @@
 ﻿<% include ../base/head %>
 
 <article itemscope itemtype="http://schema.org/Article">
-	<% if( lang == "ja" ) { %>
-	<h2 itemprop="headline">IkaConnect</h2>
-	<div itemprop="articleBody">
-		<p>
-			IkaConnectはスプラトゥーンのサービス「イカリング」を用いたフレンドのステータスやステージの予定を見ることができるアプリです。
-		</p>
-	</div>
+    <h1 itemprop="headline"><%- ikaconnect %></h1>
 
-	<h2 itemprop="headline">対応環境</h2>
-	<div itemprop="articleBody">
-		<p>Windows 8.1, Windows RT 8.1, Windows Phone 8.1, Windows 10 (Desktop, Mobile)</p>
-	</div>
 
-	<h2 itemprop="headline">ダウンロード</h2>
-	<div itemprop="articleBody">
-		<p><a href="privacy.html">プライバシー ポリシー</a>に同意する場合のみご利用ください</p>
-		<p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6">Windows ストアでダウンロード</a></p>
-	</div>
-	<% } else { %>
-	<h2 itemprop="headline">SplatConnect</h2>
-	<div itemprop="articleBody">
-		<p>
-			SplatConnect is the app that get friends’ status and schedule from Nintendo Official Service “SplatNet.”
-		</p>
-	</div>
+    <div itemprop="articleBody">
+        <% if (lang == "ja") { %>
+        <p>IkaConnectはスプラトゥーンのサービス「イカリング」を用いたフレンドのステータスやステージの予定を見ることができるアプリです。</p>
+        <p class="mark">※ 当アプリは、スプラトゥーンの非公式アプリであり、任天堂株式会社とは一切の関係がございません。アプリに関するお問い合わせはサポートの連絡先のほうへお願いします。</p>
+        <p class="mark">※ イカリングの仕様変更によりアプリが予期せぬ動作が発生することがあります。</p>
+        <% } else if (lang == "fr" || lang == "fr-ca") { %>
+        <p>SplatConnect est l'application qui obtiennent le statut et le calendrier des amis de tout Service officiel « SplatNet. »</p>
+        <p class="mark">* L'application est Splatoon app non officielle, donc il n'est pas lié à Nintendo. Si vous avez des questions, veuillez envoyer contact.</p>
+        <p class="mark">* L'application arrive comportement bogué en raison de nouveaux SplatNet spec.</p>
+        <% } else if (lang == "es" || lang == "es-419") { %>
+        <p>SplatConnect es la aplicación que haz amigos estado y horario de servicio oficial n. "SplatNet."</p>
+        <p class="mark">* La aplicación está app no oficial de Splatoon, por lo que no está relacionado con Nintendo. Por favor enviar contacto si usted tiene alguna pregunta.</p>
+        <p class="mark">* La aplicación ocurre comportamiento buggy por cambio de especificaciones de SplatNet.</p>
+        <% } else if (lang == "de") { %>
+        <p>SplatConnect ist die app, die Status und Zeitplan der Freunde von Nintendo Official Service "SplatNet" erhalten.</p>
+        <p class="mark">* Die app ist Splatoon inoffizielle app, so dass es Nintendo nicht verwandt ist. Bitte senden Sie Kontakt, wenn Sie irgendwelche Fragen haben.</p>
+        <p class="mark">* Die app passiert fehlerhafte Verhalten aufgrund der sich verändernden SplatNet Spec.</p>
+        <% } else if (lang == "it") { %>
+        <p>SplatConnect è l'app che ottenere lo stato degli amici e il calendario da ninte servizio ufficiale "SplatNet."</p>
+        <p class="mark">* L'app è Splatoon app non ufficiale, quindi non è correlato alla Nintendo. Se avete domande, si prega di inviare il contatto.</p>
+        <p class="mark">* L'app succede comportamento anomalo a causa del cambiamento SplatNet spec.</p>
+        <% } else { %>
+        <p>SplatConnect is the app that get friends’ status and schedule from Nintend Official Service “SplatNet.”</p>
+        <p class="mark">* The app is Splatoon unofficial app, so it is not related to Nintendo. Please send contact if you have any questions.</p>
+        <p class="mark">* The app happens buggy behavior because of changing SplatNet spec.</p>
+        <% } %>
+    </div>
 
-	<h2 itemprop="headline">Support environment</h2>
-	<div itemprop="articleBody">
-		<p>Windows 8.1, Windows RT 8.1, Windows Phone 8.1, Windows 10 (Desktop, Mobile)</p>
-	</div>
+    <h2 itemprop="headline"><%- recommended_environment %></h2>
+    <h5><%- ikaconnect %> for Windows 8.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Arch: Intel x86, AMD64 (Intel 64), ARM</li>
+            <li>OS: Windows 8.1, Windows RT 8.1</li>
+        </ul>
+    </div>
+    <h5><%- ikaconnect %> for Windows Phone 8.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>OS: Windows Phone 8.1</li>
+            <li><%- resolution %>: <%- all_supports %> (WVGA, WXGA, 720p, 1080p)</li>
+        </ul>
+    </div>
+    <h5><%- ikaconnect %> for UWP</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Arch: Intel x86, AMD64 (Intel 64), ARM</li>
+            <li>OS: Windows 10 (Desktop, Mobile)</li>
+        </ul>
+    </div>
 
-	<h2 itemprop="headline">Downloads</h2>
-	<div itemprop="articleBody">
-		<p>If you agree <a href="privacy.html">Privacy Policy</a>, you can use</p>
-		<p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6">Download by Windows Store</a></p>
-	</div>
-	<% } %>
+    <h2 itemprop="headline"><%- downloads %></h2>
+    <div itemprop="articleBody">
+        <p><%- agree_privacy_policy.replace("{0}", "privacy.html") %></p>
+        <p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6" target="blank"><%- download_by_windows_store %></a></p>
+    </div>
+
+    <% if (lang == "ja") { %>
+    <h2 itemprop="headline"><%- update_history %> (UWP 版)</h2>
+    <h5>v2.2.3</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>ハイドラントカスタムに対応しました</li>
+        </ul>
+    </div>
+    <h5>v2.2.2</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>アタマ、クツのみギア名表示に対応しました</li>
+            <li>不具合を修正しました</li>
+        </ul>
+    </div>
+    <h5>v2.2.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>スクリュースロッシャーネオに対応しました</li>
+            <li>不具合を修正しました</li>
+        </ul>
+    </div>
+    <h5>v2.2.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Cortanaに対応しました!!</li>
+            <li>不具合を修正しました</li>
+        </ul>
+    </div>
+    <h5>v2.1.9</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>不具合を修正しました</li>
+        </ul>
+    </div>
+    <label class="more-button" for="more-version">続きを読む</label>
+    <input id="more-version" type="checkbox" />
+    <div class="more">
+        <h5>v2.1.8</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>バッテリー節約機能に対応しました。バッテリー節約機能が有効になっている場合、通常より更新間隔が遅くなります。</li>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.7</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>ホクサイ・ヒューのローカライズを追加しました</li>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.6</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>言語選択機能を付けました</li>
+                <li>不具合の修正およびWindows 10 Mobileでの動作を改善しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.5</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>ショッツル鉱山の画像に対応しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.4</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Rブラスターエリートデコのローカライズを追加しました</li>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.3</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>フェスマッチ表示に対応しました</li>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.2</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>セマンティック ズームに対応しました</li>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.1</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.1.0</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>ウデマエ、最後に使用していた装備の表示に対応しました</li>
+                <li>ソート機能を実装しました</li>
+                <li>動作の改善を行いました</li>
+            </ul>
+        </div>
+        <h5>v2.0.7</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>トーストが 2 重に表示される問題を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.0.6</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>キーボード操作の向上 (Ctrl+Tab, Ctrl+Shift+Tab でタブを移動できます)</li>
+                <li>「ikaconnect://」スキームに対応しました</li>
+                <li>ジャンプリストに対応しました (バージョン 1511 以降)</li>
+            </ul>
+        </div>
+        <h5>v2.0.5</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.0.4</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Windows 10 の新しいアダプティブ タイルに対応しました</li>
+                <li>タイルやトーストの通知のオプションを追加しました</li>
+            </ul>
+        </div>
+        <h5>v2.0.3</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>ステージ変更までのカウントダウンタイマー機能を追加しました</li>
+                <li>オフラインやオンラインのユーザーを非表示にする機能を追加しました</li>
+                <li>Windows 10 Mobile (Phone) でのステータス バー表示を復活しました</li>
+            </ul>
+        </div>
+        <h5>v2.0.2</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>ユーザー体験の向上</li>
+                <li>濃色設定を追加しました (Desktop ファミリー)</li>
+                <li>Windows 10 Mobile で起動しない不具合の修正</li>
+            </ul>
+        </div>
+        <h5>v2.0.1</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>F5 更新のサポートを復活しました</li>
+                <li>いくつかの不具合を修正しました</li>
+            </ul>
+        </div>
+        <h5>v2.0.0</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>UWP 版をリリースしました</li>
+            </ul>
+        </div>
+    </div>
+    <% } else { %>
+    <h2 itemprop="headline"><%- update_history %> (UWP version)</h2>
+    <h5>v2.2.3</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Add Custom Hydra Splatling</li>
+        </ul>
+    </div>
+    <h5>v2.2.2</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Show head’s and shoes’ gear name</li>
+            <li>Some bug fixes.</li>
+        </ul>
+    </div>
+    <h5>v2.2.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Add Sloshing Machine Neo</li>
+            <li>Some bug fixes</li>
+        </ul>
+    </div>
+    <h5>v2.2.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Add Cortana support!!</li>
+            <li>Some bug fixes</li>
+        </ul>
+    </div>
+    <h5>v2.1.9</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Some bug fixes</li>
+        </ul>
+    </div>
+    <label class="more-button" for="more-version">more</label>
+    <input id="more-version" type="checkbox" />
+    <div class="more">
+        <h5>v2.1.8</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Support battery saver. Delay fetching data when battery saving mode is on</li>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.1.7</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Add Octobrush Nouveau</li>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.1.6</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Support language selection</li>
+                <li>Some bug fixes and improve behaviors for Windows 10 Mobile</li>
+            </ul>
+        </div>
+        <h5>v2.1.5</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Support Piranha Pit image</li>
+            </ul>
+        </div>
+        <h5>v2.1.4</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Add Rapid Blaster Pro Deco</li>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.1.3</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Support Splatfest Battle</li>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.1.2</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Change app brand name, “IkaConnect” to “SplatConnect”</li>
+                <li>Support semantic zoom</li>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.1.1</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.1.0</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Show users’ level/rank and latest equipment</li>
+                <li>Friend list is sortable!</li>
+                <li>Improve app behavior</li>
+            </ul>
+        </div>
+        <h5>v2.0.7</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Fix the problem to notify the same toast.</li>
+            </ul>
+        </div>
+        <h5>v2.0.6</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Improve keyboard support. (Move with Ctrl+Tab, Ctrl+Shift+Tab)</li>
+                <li>Support scheme “ikaconnect://.”</li>
+                <li>Support jump list. (Version 1511 and later)</li>
+            </ul>
+        </div>
+        <h5>v2.0.5</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.0.4</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Support adaptive tile (It's Windows 10 new feature)</li>
+                <li>Add options for tile and toast</li>
+            </ul>
+        </div>
+        <h5>v2.0.3</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Add count down timer</li>
+                <li>Add feature to hide offline/online users</li>
+                <li>Come back to status bar indicator for Windows 10 Mobile (Phone)</li>
+            </ul>
+        </div>
+        <h5>v2.0.2</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Improve user experience</li>
+                <li>Add dark theme (Desktop family)</li>
+                <li>Do not launch app in Windows 10 Mobile</li>
+            </ul>
+        </div>
+        <h5>v2.0.1</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Add F5 update support</li>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
+        <h5>v2.0.0</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Release UWP version</li>
+            </ul>
+        </div>
+    </div>
+    <% } %>
 </article>
+
+<div class="screenshot">
+    <h2 itemprop="headline"><%- screenshots %></h2>
+    <div>
+        <img src="/i/ikaconnect.100.png" class="top" style="max-width: 512px" alt="ss1">
+    </div>
+
+    <h5><%- ikaconnect %> for Windows 8.1</h5>
+    <div class="image-list">
+        <img src="/i/ic-win81-main.png">
+        <img src="/i/ic-win81-profile.png">
+    </div>
+    <h5><%- ikaconnect %> for Windows Phone 8.1</h5>
+    <div class="image-list">
+        <img src="/i/ic-wpa81-friends.png">
+        <img src="/i/ic-wpa81-profile.png">
+        <img src="/i/ic-wpa81-regular.png">
+        <img src="/i/ic-wpa81-ranked.png">
+        <img src="/i/ic-wpa81-tile1.png">
+        <img src="/i/ic-wpa81-tile2.png">
+    </div>
+    <h5><%- ikaconnect %> for UWP</h5>
+    <h6>Desktop</h6>
+    <div class="image-list">
+        <img src="/i/ikaconnect.100.png">
+        <img src="/i/ic-uap10.0d-regular.png">
+        <img src="/i/ic-uap10.0d-ranked.png">
+    </div>
+    <h6>Mobile</h6>
+    <div class="image-list">
+        <img src="/i/ic-uap10.0m-friends.png">
+        <img src="/i/ic-uap10.0m-regular.png">
+        <img src="/i/ic-uap10.0m-ranked.png">
+    </div>
+</div>
 
 <% include ../base/foot %>

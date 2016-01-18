@@ -1,33 +1,85 @@
-#####mime#####
+#####mime#########mime#####
 AddType image/svg+xml svg
 #####end:mime#####
 
-RewriteEngine On
-RewriteCond %{HTTP:Accept-Encoding} gzip
-RewriteCond %{REQUEST_FILENAME} !\.gz$
-RewriteCond %{REQUEST_FILENAME}\.gz -s
-RewriteCond %{REQUEST_FILENAME} \.html$ [OR]
-RewriteCond %{REQUEST_FILENAME} \.js$ [OR]
-RewriteCond %{REQUEST_FILENAME} \.css$ [OR]
-RewriteCond %{REQUEST_FILENAME} \.json$
-RewriteRule .+ %{REQUEST_URI}.gz
+Options +MultiViews
+AddLanguage en-nz .en-gb
+AddLanguage en-au .en-gb
+AddLanguage en-gb .en-gb
 
-<FilesMatch "\.html\.gz$">
+AddLanguage en .en
+AddLanguage en-us .en
+
+AddLanguage ja .ja
+AddLanguage ja-jp-mac .ja
+AddLanguage ja-jp .ja
+
+AddLanguage es-ar .es-419
+AddLanguage es-bo .es-419
+AddLanguage es-cl .es-419
+AddLanguage es-co .es-419
+AddLanguage es-cr .es-419
+AddLanguage es-do .es-419
+AddLanguage es-ec .es-419
+AddLanguage es-hn .es-419
+AddLanguage es-mx .es-419
+AddLanguage es-pa .es-419
+AddLanguage es-pe .es-419
+AddLanguage es-pr .es-419
+AddLanguage es-py .es-419
+AddLanguage es-sv .es-419
+AddLanguage es-uv .es-419
+AddLanguage es-ve .es-419
+AddLanguage es-419 .es-419
+
+AddLanguage es-es .es
+AddLanguage es .es
+
+AddLanguage fr-ca .fr-ca
+
+AddLanguage fr .fr
+AddLanguage fr-fr .fr
+
+AddLanguage de .de
+AddLanguage de-de .de
+
+AddLanguage it .it
+AddLanguage it-it .it
+
+AddEncoding x-gzip .gz
+
+LanguagePriority en-us en-gb ja-jp es-es es-419 fr-fr fr-ca it-it de-de
+ForceLanguagePriority Prefer Fallback
+DefaultLanguage en
+
+RewriteEngine Off
+
+<FilesMatch "\.html(\..+?)?\.gz$">
     ForceType text/html
     AddEncoding x-gzip .gz
 </FilesMatch>
 
-<FilesMatch "\.js\.gz$">
+<FilesMatch "\.js(\..+?)?\.gz$">
     ForceType application/x-javascript
     AddEncoding x-gzip .gz
 </FilesMatch>
 
-<FilesMatch "\.css\.gz$">
+<FilesMatch "\.css(\..+?)?\.gz$">
     ForceType text/css
     AddEncoding x-gzip .gz
 </FilesMatch>
 
-<FilesMatch "\.json\.gz$">
+<FilesMatch "\.json(\..+?)?\.gz$">
     ForceType application/json
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.png(\..+?)?\.gz$">
+    ForceType 	image/png
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.svg(\..+?)?\.gz$">
+    ForceType 	image/svg+xml
     AddEncoding x-gzip .gz
 </FilesMatch>
