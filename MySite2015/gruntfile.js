@@ -235,7 +235,7 @@ module.exports = function (grunt) {
 					{
 					    expand: true,
 					    cwd: paths.src.img,
-					    src: ["*.png", "*.png.*", "*.svg"],
+					    src: ["*.svg"],
 					    dest: paths.dst.release + "i/",
 					},
 
@@ -245,6 +245,17 @@ module.exports = function (grunt) {
 					    dest: paths.dst.release + ".htaccess",
 					},
                 ],
+            },
+            releaseImage: {
+                files: [
+                    // Images
+                    {
+                        expand: true,
+                        cwd: paths.src.img,
+                        src: ["*.png.*"],
+                        dest: paths.dst.release + "i/",
+                    },
+                ]
             },
         },
         compress: {
@@ -276,14 +287,6 @@ module.exports = function (grunt) {
 					    dest: paths.dst.release,
 					    ext: ".css.gz",
 					},
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.ja"], dest: paths.dst.release, extDot: "last", ext: ".ja.gz" },
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.en"], dest: paths.dst.release, extDot: "last", ext: ".en.gz" },
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.fr"], dest: paths.dst.release, extDot: "last", ext: ".fr.gz" },
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.fr-ca"], dest: paths.dst.release, extDot: "last", ext: ".fr-ca.gz" },
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.es"], dest: paths.dst.release, extDot: "last", ext: ".es.gz" },
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.es-419"], dest: paths.dst.release, extDot: "last", ext: ".es-419.gz" },
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.de"], dest: paths.dst.release, extDot: "last", ext: ".de.gz" },
-					{ expand: true, cwd: paths.dst.release, src: ["i/**/*.png.it"], dest: paths.dst.release, extDot: "last", ext: ".it.gz" },
 					{
 					    expand: true,
 					    cwd: paths.dst.release,
@@ -292,6 +295,18 @@ module.exports = function (grunt) {
 					    ext: ".svg.gz"
 					},
                 ],
+            },
+            releaseImage: {
+                files: [
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.ja"], dest: paths.dst.release, extDot: "last", ext: ".ja.gz" },
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.en"], dest: paths.dst.release, extDot: "last", ext: ".en.gz" },
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.fr"], dest: paths.dst.release, extDot: "last", ext: ".fr.gz" },
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.fr-ca"], dest: paths.dst.release, extDot: "last", ext: ".fr-ca.gz" },
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.es"], dest: paths.dst.release, extDot: "last", ext: ".es.gz" },
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.es-419"], dest: paths.dst.release, extDot: "last", ext: ".es-419.gz" },
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.de"], dest: paths.dst.release, extDot: "last", ext: ".de.gz" },
+                    { expand: true, cwd: paths.dst.release, src: ["i/**/*.png.it"], dest: paths.dst.release, extDot: "last", ext: ".it.gz" },
+                ]
             },
         },
         watch: {
@@ -306,8 +321,6 @@ module.exports = function (grunt) {
             copy: {
                 files: [
                     paths.src.root + "less/app.less",
-                    paths.src.img + "**/*.png",
-                    paths.src.img + "**/*.jpg",
                     paths.src.img + "**/*.svg",
                     paths.src.root + "ts/**/*.ts",
                     paths.src.root + "ts/**/*.js.map",
@@ -364,5 +377,6 @@ module.exports = function (grunt) {
         "copy:release",
         "compress:release"
     ]);
+    grunt.registerTask("releaseImage", ["copy:releaseImage", "compress:releaseImage"]);
     grunt.registerTask("all", ["debug-nowatch", "release"]);
 };

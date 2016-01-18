@@ -387,30 +387,48 @@
 
     <h5><%- ikaconnect %> for Windows 8.1</h5>
     <div class="image-list">
-        <img src="/i/ic-win81-main.png">
-        <img src="/i/ic-win81-profile.png">
+    <% ["main", "profile"].forEach(function (item) { %>
+        <a href="/i/ic-win81-<%- item %>.png" target="_blank">
+            <img
+                 src="/i/ic-win81-<%- item %>-thumb.s-100.png"
+                 srcset="/i/ic-win81-<%- item %>-thumb.s-100.png 1x, /i/ic-win81-<%- item %>-thumb.s-150.png 1.5x, /i/ic-win81-<%- item %>-thumb.s-200.png 2x, /i/ic-win81-<%- item %>-thumb.s-300.png 3x">
+            </a>
+    <% }) %>
     </div>
+
     <h5><%- ikaconnect %> for Windows Phone 8.1</h5>
     <div class="image-list">
-        <img src="/i/ic-wpa81-friends.png">
-        <img src="/i/ic-wpa81-profile.png">
-        <img src="/i/ic-wpa81-regular.png">
-        <img src="/i/ic-wpa81-ranked.png">
-        <img src="/i/ic-wpa81-tile1.png">
-        <img src="/i/ic-wpa81-tile2.png">
+    <% ["friends", "profile", "regular", "ranked", "tile1", "tile2"].forEach(function (item) { %>
+        <a href="/i/ic-wpa81-<%- item %>.png" target="_blank">
+            <img
+                 src="/i/ic-wpa81-<%- item %>-thumb.s-100.png"
+                 srcset="/i/ic-wpa81-<%- item %>-thumb.s-100.png 1x, /i/ic-wpa81-<%- item %>-thumb.s-150.png 1.5x, /i/ic-wpa81-<%- item %>-thumb.s-200.png 2x, /i/ic-wpa81-<%- item %>-thumb.s-300.png 3x">
+        </a>
+    <% }) %>
     </div>
+
     <h5><%- ikaconnect %> for UWP</h5>
     <h6>Desktop</h6>
     <div class="image-list">
-        <img src="/i/ikaconnect.100.png">
-        <img src="/i/ic-uap10.0d-regular.png">
-        <img src="/i/ic-uap10.0d-ranked.png">
+        <a href="/i/ikaconnect.100.png" target="_blank">
+            <img src="/i/ikaconnect.100-thumb.s-100.png"
+                 srcset="/i/ikaconnect.100-thumb.s-100.png 1x, /i/ikaconnect.100-thumb.s-150.png 1.5x, /i/ikaconnect.100-thumb.s-200.png 2x, /i/ikaconnect.100-thumb.s-300.png 3x">
+        </a>
+        <% ["regular", "ranked"].forEach(function (item) { %>
+            <a href="/i/ic-uap10.0d-<%- item %>.png" target="_blank">
+                <img src="/i/ic-uap10.0d-<%- item %>-thumb.s-100.png"
+                     srcset="/i/ic-uap10.0d-<%- item %>-thumb.s-100.png 1x, /i/ic-uap10.0d-<%- item %>-thumb.s-150.png 1.5x, /i/ic-uap10.0d-<%- item %>-thumb.s-200.png 2x, /i/ic-uap10.0d-<%- item %>-thumb.s-300.png 3x">
+            </a>
+        <% }) %>
     </div>
     <h6>Mobile</h6>
     <div class="image-list">
-        <img src="/i/ic-uap10.0m-friends.png">
-        <img src="/i/ic-uap10.0m-regular.png">
-        <img src="/i/ic-uap10.0m-ranked.png">
+    <% ["friends", "regular", "ranked"].forEach(function (item) { %>
+        <a href="/i/ic-uap10.0m-<%- item %>.png" target="_blank">
+            <img src="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png"
+                 srcset="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png 1x, /i/ic-uap10.0m-<%- item %>-thumb.s-150.png 1.5x, /i/ic-uap10.0m-<%- item %>-thumb.s-200.png 2x, /i/ic-uap10.0m-<%- item %>-thumb.s-300.png 3x">
+        </a>
+    <% }) %>
     </div>
 </div>
 
