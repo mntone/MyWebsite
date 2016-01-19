@@ -20,11 +20,11 @@ function Resize-Image
 	$scale = 0
 	if ($width -gt 0 -and $height -eq 0)
 	{
-		$scale = $srcImg.PixelWidth / $width
+		$scale = $width / $srcImg.PixelWidth
 	}
 	elseif ($height -gt 0 -and $width -eq 0)
 	{
-		$scale = $srcImg.PixelHeight / $height
+		$scale = $height / $srcImg.PixelHeight
 	}
 	else
 	{
