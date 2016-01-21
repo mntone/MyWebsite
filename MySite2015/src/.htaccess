@@ -37,6 +37,7 @@ ForceLanguagePriority Prefer Fallback
 DefaultLanguage en
 
 RewriteEngine Off
+Redirect permanent /en/ /
 
 <FilesMatch "\.html(\..+?)?\.gz$">
     ForceType text/html
