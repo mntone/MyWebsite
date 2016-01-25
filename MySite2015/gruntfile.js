@@ -227,7 +227,7 @@ module.exports = function (grunt) {
 					{
 					    expand: true,
 					    cwd: paths.src.root + "ts/",
-					    src: ["*.ts", "*.js.map"],
+					    src: ["*.ts", "*.js.map", "*.js"],
 					    dest: paths.dst.debug + "j/",
 					},
 
