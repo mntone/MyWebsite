@@ -63,6 +63,18 @@
 
     <% if (lang == "ja") { %>
     <h2 itemprop="headline"><%- update_history %> (UWP 版)</h2>
+    <h5>v2.3.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>サブ/スペシャルウェポンの表示に対応しました</li>
+        </ul>
+    </div>
+    <h5>v2.3.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>ギアパワー情報の表示に対応しました</li>
+        </ul>
+    </div>
     <h5>v2.2.5</h5>
     <div itemprop="articleBody">
         <ul>
@@ -81,23 +93,23 @@
             <li>ハイドラントカスタムに対応しました</li>
         </ul>
     </div>
-    <h5>v2.2.2</h5>
-    <div itemprop="articleBody">
-        <ul>
-            <li>アタマ、クツのみギア名表示に対応しました</li>
-            <li>不具合を修正しました</li>
-        </ul>
-    </div>
-    <h5>v2.2.1</h5>
-    <div itemprop="articleBody">
-        <ul>
-            <li>スクリュースロッシャーネオに対応しました</li>
-            <li>不具合を修正しました</li>
-        </ul>
-    </div>
     <label class="more-button" for="more-version">続きを読む</label>
     <input id="more-version" type="checkbox" />
     <div class="more">
+		<h5>v2.2.2</h5>
+		<div itemprop="articleBody">
+			<ul>
+				<li>アタマ、クツのみギア名表示に対応しました</li>
+				<li>不具合を修正しました</li>
+			</ul>
+		</div>
+        <h5>v2.2.1</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>スクリュースロッシャーネオに対応しました</li>
+                <li>不具合を修正しました</li>
+            </ul>
+        </div>
         <h5>v2.2.0</h5>
         <div itemprop="articleBody">
             <ul>
@@ -232,6 +244,18 @@
     </div>
     <% } else { %>
     <h2 itemprop="headline"><%- update_history %> (UWP version)</h2>
+    <h5>v2.3.1</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Show sub/special weapon name</li>
+        </ul>
+    </div>
+    <h5>v2.3.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Support ability information view</li>
+        </ul>
+    </div>
     <h5>v2.2.5</h5>
     <div itemprop="articleBody">
         <ul>
@@ -250,23 +274,23 @@
             <li>Add Custom Hydra Splatling</li>
         </ul>
     </div>
-    <h5>v2.2.2</h5>
-    <div itemprop="articleBody">
-        <ul>
-            <li>Show head’s and shoes’ gear name</li>
-            <li>Some bug fixes.</li>
-        </ul>
-    </div>
-    <h5>v2.2.1</h5>
-    <div itemprop="articleBody">
-        <ul>
-            <li>Add Sloshing Machine Neo</li>
-            <li>Some bug fixes</li>
-        </ul>
-    </div>
     <label class="more-button" for="more-version">more</label>
     <input id="more-version" type="checkbox" />
     <div class="more">
+		<h5>v2.2.2</h5>
+		<div itemprop="articleBody">
+			<ul>
+				<li>Show head’s and shoes’ gear name</li>
+				<li>Some bug fixes.</li>
+			</ul>
+		</div>
+        <h5>v2.2.1</h5>
+        <div itemprop="articleBody">
+            <ul>
+                <li>Add Sloshing Machine Neo</li>
+                <li>Some bug fixes</li>
+            </ul>
+        </div>
         <h5>v2.2.0</h5>
         <div itemprop="articleBody">
             <ul>
@@ -447,7 +471,7 @@
     </div>
     <h6>Mobile</h6>
     <div class="image-list">
-    <% ["friends", "regular", "ranked"].forEach(function (item) { %>
+    <% ["friends", "profile", "profile2", "regular", "ranked"].forEach(function (item) { %>
         <a href="/i/ic-uap10.0m-<%- item %>.png" target="_blank">
             <img src="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png"
                  srcset="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png 1x, /i/ic-uap10.0m-<%- item %>-thumb.s-150.png 1.5x, /i/ic-uap10.0m-<%- item %>-thumb.s-200.png 2x, /i/ic-uap10.0m-<%- item %>-thumb.s-300.png 3x">

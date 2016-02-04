@@ -35,6 +35,8 @@
 			"files": [
 				{ "src": "ic-wpa81-tile1.png.{1}", "dst": "ic-wpa81-tile1-thumb.s-{0}.png.{1}" },
 				{ "src": "ic-uap10.0m-friends.png.{1}", "dst": "ic-uap10.0m-friends-thumb.s-{0}.png.{1}" },
+				{ "src": "ic-uap10.0m-profile.png.{1}", "dst": "ic-uap10.0m-profile-thumb.s-{0}.png.{1}" },
+				{ "src": "ic-uap10.0m-profile2.png.{1}", "dst": "ic-uap10.0m-profile2-thumb.s-{0}.png.{1}" },
 				{ "src": "ic-uap10.0m-regular.png.{1}", "dst": "ic-uap10.0m-regular-thumb.s-{0}.png.{1}" },
 				{ "src": "ic-uap10.0m-ranked.png.{1}", "dst": "ic-uap10.0m-ranked-thumb.s-{0}.png.{1}" }
 			],
