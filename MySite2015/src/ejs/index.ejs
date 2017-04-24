@@ -1,6 +1,15 @@
 ﻿<% include base/head %>
 
 <div>
+	<h2 itemprop="headline"><%- bio %></h2>
+	<div itemprop="articleBody">
+		<% if (lang == "ja") { %>
+		私のプロフィールは<a href="/bio.html">ここ</a>。
+		<% } else { %>
+		My bio is <a href="/bio.html">here</a>.
+		<% } %>
+	</div>
+
 	<h2 itemprop="headline"><%- app_lib %></h2>
 	<div id="gc" class="grid-container my-grid-container">
 		<div class="grid3-item-cols2 grid3-item-rows2 my-grid-item my-grid-item-image" touch-action="pan-y">

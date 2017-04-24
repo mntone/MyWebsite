@@ -1,0 +1,92 @@
+﻿<% include base/head %>
+
+<article itemscope itemtype="http://schema.org/Article">
+
+	<% if (lang == "ja") { %>
+	<h2 itemprop="headline">プロフィール</h2>
+	<div itemprop="articleBody">
+		<p>
+			大阪に住む専門大学院生。
+			S+ の Splatoon プレイヤーでもあります。
+			興味のある分野は C# や Scala，SIMD，メディア処理，Minecraft，Splatoon です。
+		</p>
+	</div>
+	
+	<h2 itemprop="headline">カンパ等</h2>
+	<div itemprop="articleBody">
+		<p>
+			私の趣味活動の中心は OSS への貢献です。
+			その活動において，私は無償の労働を提供しています。
+			モチベーション維持のために，あるいは私の完全なる趣味 (Splatoon 配信といった) へ
+			カンパしていただける方は以下のお好きな方法でカンパしてください。
+		</p>
+
+		<ul>
+			<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38"><%- wish_list %></a></li>
+			<li><a href="http://www.yggdore.com/t4u/">YggDore (ユグドア)</a></li>
+		</ul>
+	</div>
+
+	<h2 itemprop="headline">リンク</h2>
+	<div itemprop="articleBody">
+		<p>
+			掲載内容の中心は趣味に関することです。
+			掲載内容は私自身の見解であり、所属する組織を代表するものではありません。
+		</p>
+	
+    <% } else { %>
+	<h2 itemprop="headline">Profile</h2>
+	<div itemprop="articleBody">
+		<p>
+			I’m professional graduate student, and live in Osaka, Japan.
+			And I’m also Splatoon S+ player.
+			My interests are C#, Scala, SIMD, media processing, Minecraft, Splatoon, and so on.
+		</p>
+	</div>
+	
+	<h2 itemprop="headline">Donation</h2>
+	<div itemprop="articleBody">
+		<p>
+			The center of my activity is contribution to OSS.
+			I offer unpaid work on the activity.
+			You can donate me, and you can choose to want one.
+		</p>
+
+		<ul>
+			<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38"><%- wish_list %></a></li>
+			<li><a href="http://www.yggdore.com/t4u/">YggDore</a></li>
+		</ul>
+	</div>
+
+	<h2 itemprop="headline">Link</h2>
+	<div itemprop="articleBody">
+		<p>
+			All contents is my interest and opinion.
+		</p>
+
+    <% } %>
+		
+		<dl>
+			<dt><%- hatena_blog %>:</dt>
+			<dd><a href="http://mntone.hateblo.jp/">モノトーンの伝説日記</a> (Japanese only)</dd>
+		</dl>
+		<dl>
+			<dt>GitHub:</dt>
+			<dd><a href="https://github.com/mntone">mntone</a></dd>
+		</dl>
+		<dl>
+			<dt>Twitter:</dt>
+			<dd><a href="https://twitter.com/mntone">@mntone</a></dd>
+		</dl>
+		<dl>
+			<dt>Mastodon:</dt>
+			<dd><a href="https://mstdn.jp/@mntone">mntone@mstdn.jp</a></dd>
+		</dl>
+		<dl>
+			<dt>YouTube:</dt>
+			<dd><a href="https://www.youtube.com/channel/UCjUcm2VgZKQqWAtKJhUW8fw">モノトーン</a></dd>
+		</dl>
+	</div>
+</article>
+
+<% include base/foot %>

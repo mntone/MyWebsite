@@ -25,6 +25,7 @@
     <Content Include="src\ejs\splatoon.ejs" />
     <Content Include="src\ejs\ikaconnect\privacy.ejs" />
     <Content Include="src\ejs\ikaconnect\index.ejs" />
+    <Content Include="src\ejs\bio.ejs" />
     <None Include="src\ejs\index.ejs" />
     <Content Include="gruntfile.js" />
     <TypeScriptCompile Include="src\ts\p.ts" />

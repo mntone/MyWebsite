@@ -5,6 +5,10 @@
       "lang": [ "en", "ja" ]
     },
     {
+      "file": "bio",
+      "lang": [ "en", "ja" ]
+    },
+    {
       "file": "splatoon",
       "lang": [ "ja" ]
     },
@@ -51,6 +55,7 @@
       "download": "Donwload",
       "download_by_windows_store": "Download by Windows store",
       "version": "Version",
+      "bio": "Bio",
 
       "enjoysplatoon": "Enjoy Splatoon for you",
       "deliveredikaconnect": "Being delivered&nbsp;<wbr>in the Windows store&nbsp;<wbr>at $5.99",
@@ -79,6 +84,7 @@
       "download": "ダウンロード",
       "download_by_windows_store": "Windows ストアでダウンロード",
       "version": "バージョン",
+      "bio": "プロフィール",
 
       "enjoysplatoon": "スプラトゥーンを楽しんでるあなたに",
       "deliveredikaconnect": "￥600 で&nbsp;<wbr>Windows ストアにて&nbsp;<wbr>配信中",
