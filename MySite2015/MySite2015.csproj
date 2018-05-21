@@ -40,6 +40,8 @@
     <Content Include="src\ejs\tvupl\index.ejs" />
     <Content Include="src\ejs\tvupl\privacy.ejs" />
     <Content Include="src\ejs\winrtlib\privacy.ejs" />
+    <Content Include="src\ejs\pubgmgr\index.ejs" />
+    <Content Include="src\ejs\pubgmgr\privacy.ejs" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

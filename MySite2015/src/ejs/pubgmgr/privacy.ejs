@@ -1,0 +1,39 @@
+﻿<% include ../base/head %>
+
+<article itemscope itemtype="http://schema.org/Article">
+    <% if( lang == "ja" ) { %>
+    <h2 itemprop="headline">プライバシー ポリシー</h2>
+    <div itemprop="articleBody">
+        <p>アプリ PUBGの監督 (以下「本アプリ」) は、以下のようにプライバシー ポリシーを定めます。</p>
+
+        <ul>
+            <li>本アプリにおけるインターネットを用いた通信は、PUBG Developer APIを利用するために使われます。PUBGの戦績データをダウンロードするのみで利用されます。</li>
+            <li>あなたが本アプリで使うPUBGでご使用のアカウント名はあなたのデバイスに保存されます。なおアカウント名はPUBG Developer APIを利用するために使われ、PUBG Corporationの管理する戦績サーバーに送信されます。</li>
+            <li>その他本アプリに関してご不明なことがございましたら、<br>&nbsp;&nbsp;&nbsp;&nbsp;Twitter <a href="http://twitter.com/mntone">@mntone</a><br>または<br>&nbsp;&nbsp;&nbsp;&nbsp;mntone[at]outlook.com ([at] は @ に変更してください)<br>までご連絡ください。</li>
+        </ul>
+    </div>
+
+    <h2 itemprop="headline">改訂履歴</h2>
+    <div itemprop="articleBody">
+        <p>2018年5月21日 プライバシーポリシー（初版）発行</p>
+    </div>
+    <% } else { %>
+    <h2 itemprop="headline">Privacy Policy</h2>
+    <div itemprop="articleBody">
+        <p>This privacy policy cover the use of the app PUBG's Manager (called “this app”).</p>
+
+        <ul>
+            <li>This app use internet connection to use the PUBG Developer API. Internet connection use to only download PUBG battle data.</li>
+            <li>This app save “PUBG's account name” on your device. Account name is sent to the server whitch is owned by PUBG Corporation.</li>
+            <li>If you have any questions about this app, <br>&nbsp;&nbsp;&nbsp;&nbsp;reply to Twitter <a href="http://twitter.com/mntone">@mntone</a><br>or<br>&nbsp;&nbsp;&nbsp;&nbsp;send mail to mntone[at]outlook.com (change [at] to @)<br></li>
+        </ul>
+    </div>
+
+    <h2 itemprop="headline">History</h2>
+    <div itemprop="articleBody">
+        <p>May 21, 2018 Initial privacy policy</p>
+    </div>
+    <% } %>
+</article>
+
+<% include ../base/foot %>

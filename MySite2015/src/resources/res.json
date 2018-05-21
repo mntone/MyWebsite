@@ -31,6 +31,14 @@
     {
       "file": "ikaconnect/privacy",
       "lang": [ "en", "ja" ]
+    },
+    {
+      "file": "pubgmgr/index",
+      "lang": [ "en", "ja" ]
+    },
+    {
+      "file": "pubgmgr/privacy",
+      "lang": [ "en", "ja" ]
     }
   ],
   "res": {
@@ -39,6 +47,7 @@
       "title": "mntone’s junks",
       "app_lib": "Apps &amp; libraries",
       "ikaconnect": "SplatConnect",
+      "pubgmgr": "PUBG's Manager",
       "twittervideouploader": "Twitter Video Uploader",
       "contents": "Contents",
       "external_site": "External",
@@ -68,6 +77,7 @@
       "title": "mntoneのガラクタ置き場。",
       "app_lib": "アプリ &amp; ライブラリー",
       "ikaconnect": "IkaConnect",
+      "pubgmgr": "PUBGの監督",
       "twittervideouploader": "Twitter に動画を<wbr>うｐするマン",
       "contents": "コンテンツ",
       "external_site": "外部サイト",

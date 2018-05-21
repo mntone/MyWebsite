@@ -1,0 +1,111 @@
+﻿<% include ../base/head %>
+
+<article itemscope itemtype="http://schema.org/Article">
+    <h1 itemprop="headline"><%- pubgmgr %></h1>
+
+    <div itemprop="articleBody">
+        <% if (lang == "ja") { %>
+        <p>PUBGの監督はPUBG Developer APIを使用した戦績管理アプリです。</p>
+        <p>PUBGの監督は現在、以下のような機能が使用できます</p>
+        <ul>
+            <li>直近20戦の戦績を見る</li>
+            <li>1戦ごとの戦績を見る</li>
+        </ul>
+        <p class="mark">※ 当アプリは、PUBG Developer APIによって公開されている情報を用いたアプリであり、PUBG Corporationとは一切の関係がございません。アプリに関するお問い合わせはサポートの連絡先のほうへお願いします。</p>
+        <p class="mark">※ PUBG Developer APIの仕様変更により、アプリの動作に不具合が発生する可能性があります。</p>
+        <% } else { %>
+        <p>PUBG's Manager is a battle log with using PUBG Developer API.</p>
+        <p>PUBG's Manager has these features</p>
+        <ul>
+            <li>Show latest 20 battles' records.</li>
+            <li>Show each battle in detail.</li>
+        </ul>
+        <p class="mark">* The app is battle record to get from PUBG Developer API, so it is not related to PUBG Corporation. Please send contact if you have any questions.</p>
+        <p class="mark">* The app happens buggy behavior because of changing PUBG Developer API.</p>
+        <% } %>
+    </div>
+
+    <h2 itemprop="headline"><%- recommended_environment %></h2>
+    <h5><%- pubgmgr %> for iOS</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>OS: iOS 10<% if (lang == "ja") { %>以降<% } else { %> or later<% } %></li>
+            <li>Arch: ARM64</li>
+        </ul>
+    </div>
+    <h5><%- pubgmgr %> for Windows 10</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>OS: Windows 10 Fall Creators Update<% if (lang == "ja") { %>以降<% } else { %> or later<% } %></li>
+            <li>Arch: Intel x86, AMD64 (Intel 64), ARM</li>
+        </ul>
+    </div>
+
+    <h2 itemprop="headline"><%- downloads %></h2>
+    <div itemprop="articleBody">
+        <p><%- agree_privacy_policy.replace("{0}", "privacy.html") %></p>
+        <p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6" target="blank"><%- download_by_windows_store %></a></p>
+    </div>
+
+    <% if (lang == "ja") { %>
+    <h2 itemprop="headline"><%- update_history %></h2>
+    <h5>v0.9.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>初期版をリリースしました (iOS, Windows 10)</li>
+        </ul>
+    </div>
+    <% } else { %>
+    <h2 itemprop="headline"><%- update_history %></h2>
+    <h5>v0.9.0</h5>
+    <div itemprop="articleBody">
+        <ul>
+            <li>Initial release. (iOS, Windows 10)</li>
+        </ul>
+    </div>
+    <% } %>
+</article>
+
+<div class="screenshot">
+    <h2 itemprop="headline"><%- screenshots %></h2>
+    <div>
+        <img src="/i/ikaconnect.100.png" class="top" style="max-width: 512px" alt="ss1">
+    </div>
+
+    <h5><%- ikaconnect %> for iOS</h5>
+    <div class="image-list">
+    <% ["friends", "profile", "regular", "ranked", "tile1", "tile2"].forEach(function (item) { %>
+        <a href="/i/ic-wpa81-<%- item %>.png" target="_blank">
+            <img
+                 src="/i/ic-wpa81-<%- item %>-thumb.s-100.png"
+                 srcset="/i/ic-wpa81-<%- item %>-thumb.s-100.png 1x, /i/ic-wpa81-<%- item %>-thumb.s-150.png 1.5x, /i/ic-wpa81-<%- item %>-thumb.s-200.png 2x, /i/ic-wpa81-<%- item %>-thumb.s-300.png 3x">
+        </a>
+    <% }) %>
+    </div>
+
+    <h5><%- ikaconnect %> for Windows 10</h5>
+    <h6>Desktop</h6>
+    <div class="image-list">
+        <a href="/i/ikaconnect.100.png" target="_blank">
+            <img src="/i/ikaconnect.100-thumb.s-100.png"
+                 srcset="/i/ikaconnect.100-thumb.s-100.png 1x, /i/ikaconnect.100-thumb.s-150.png 1.5x, /i/ikaconnect.100-thumb.s-200.png 2x, /i/ikaconnect.100-thumb.s-300.png 3x">
+        </a>
+        <% ["regular", "ranked"].forEach(function (item) { %>
+            <a href="/i/ic-uap10.0d-<%- item %>.png" target="_blank">
+                <img src="/i/ic-uap10.0d-<%- item %>-thumb.s-100.png"
+                     srcset="/i/ic-uap10.0d-<%- item %>-thumb.s-100.png 1x, /i/ic-uap10.0d-<%- item %>-thumb.s-150.png 1.5x, /i/ic-uap10.0d-<%- item %>-thumb.s-200.png 2x, /i/ic-uap10.0d-<%- item %>-thumb.s-300.png 3x">
+            </a>
+        <% }) %>
+    </div>
+    <h6>Mobile</h6>
+    <div class="image-list">
+    <% ["friends", "profile", "profile2", "regular", "ranked"].forEach(function (item) { %>
+        <a href="/i/ic-uap10.0m-<%- item %>.png" target="_blank">
+            <img src="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png"
+                 srcset="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png 1x, /i/ic-uap10.0m-<%- item %>-thumb.s-150.png 1.5x, /i/ic-uap10.0m-<%- item %>-thumb.s-200.png 2x, /i/ic-uap10.0m-<%- item %>-thumb.s-300.png 3x">
+        </a>
+    <% }) %>
+    </div>
+</div>
+
+<% include ../base/foot %>
