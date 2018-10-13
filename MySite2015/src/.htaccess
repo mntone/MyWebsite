@@ -36,8 +36,14 @@ LanguagePriority en en-gb ja-jp es-419 es-es fr-fr fr-ca it-it de-de
 ForceLanguagePriority Prefer Fallback
 DefaultLanguage en
 
-RewriteEngine Off
-Redirect permanent /en/ /
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} mntone.minibird.jp
+RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+RewriteRule ^/?splw(/.*)?$ %{DOCUMENT_ROOT}/splatwiki/index.php [L] 
 
 <FilesMatch "\.html(\..+?)?\.gz$">
     ForceType text/html
@@ -60,11 +66,16 @@ Redirect permanent /en/ /
 </FilesMatch>
 
 <FilesMatch "\.png(\..+?)?\.gz$">
-    ForceType 	image/png
+    ForceType   image/png
     AddEncoding x-gzip .gz
 </FilesMatch>
 
 <FilesMatch "\.svg(\..+?)?\.gz$">
-    ForceType 	image/svg+xml
+    ForceType   image/svg+xml
     AddEncoding x-gzip .gz
 </FilesMatch>
+#####fastcgi#####
+AddHandler fcgid-script .php .phps
+FCGIWrapper "/home/mntone/mntone.minibird.jp/php/php-cgi" .php
+FCGIWrapper "/home/mntone/mntone.minibird.jp/php/php-cgi" .phps
+#####end:fastcgi#####

@@ -17,12 +17,12 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="src\ejs\base\head.ejs" />
     <Content Include="package.json" />
     <None Include="src\ejs\base\foot.ejs" />
-    <Content Include="src\ejs\splatoon.ejs" />
     <Content Include="src\ejs\ikaconnect\privacy.ejs" />
     <Content Include="src\ejs\ikaconnect\index.ejs" />
     <Content Include="src\ejs\bio.ejs" />
