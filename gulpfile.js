@@ -155,7 +155,7 @@ gulp.task('thumb-width', () => {
 });
 gulp.task('thumb-height', () => {
 	const tasks = thumbScale.map(scale =>
-		gulp.src(['./src/images/ic-wpa81-*.png', './src/images/ic-uap10.0m-*.png'])
+		gulp.src(['./src/images/ic-wpa81-*.png', './src/images/ic-uap10.0m-*.png', './src/images/ca-ios-*.png'])
 			.pipe(imageresize({
 				height: 200 * scale,
 			}))
