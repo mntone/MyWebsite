@@ -493,8 +493,10 @@ class PageCodeBehind {
             setMode(modeType.keyboard);
         });
         body.addEventListener("pointerdown", (e: PointerEvent) => {
-            if (e.pointerType === "touch" && mode !== modeType.touch) {
-                setMode(modeType.touch);
+            if (e.pointerType === "touch") {
+                if (mode !== modeType.touch) {
+                    setMode(modeType.touch);
+                }
             }
             else if (mode !== modeType.mouse) {
                 setMode(modeType.mouse);
