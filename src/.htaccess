@@ -1,0 +1,118 @@
+#####mime#########mime#####
+AddType image/svg+xml svg
+AddType image/webp webp
+#####end:mime#####
+
+#####fastcgi#####
+AddHandler fcgid-script .php .phps
+FCGIWrapper "/home/mntone/mntone.minibird.jp/php/php-cgi" .php
+FCGIWrapper "/home/mntone/mntone.minibird.jp/php/php-cgi" .phps
+#####end:fastcgi#####
+
+Options +MultiViews
+AddLanguage en-nz .en-gb
+AddLanguage en-au .en-gb
+AddLanguage en-gb .en-gb
+
+AddLanguage en .en
+AddLanguage en-us .en
+
+AddLanguage ja .ja
+AddLanguage ja-jp-mac .ja
+AddLanguage ja-jp .ja
+
+AddLanguage es-419 .es-419
+
+AddLanguage es .es
+AddLanguage es-es .es
+
+AddLanguage fr-ca .fr-ca
+
+AddLanguage fr .fr
+AddLanguage fr-fr .fr
+
+AddLanguage de .de
+AddLanguage de-de .de
+
+AddLanguage it .it
+AddLanguage it-it .it
+
+AddEncoding x-gzip .gz
+
+LanguagePriority en en-gb ja-jp es-419 es-es fr-fr fr-ca it-it de-de
+ForceLanguagePriority Prefer Fallback
+DefaultLanguage en
+
+# Otherwise Content-Language: br is added
+# Only needed if mod_mime configures that language
+# in /etc/apache2/mods-enabled/mime.conf
+RemoveLanguage .br
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} mntone.minibird.jp
+RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+# Serve pre-compressed Brotli assets
+RewriteCond %{HTTP:Accept-Encoding} br
+RewriteCond %{REQUEST_FILENAME}.br -f
+RewriteRule ^(.*)$ $1.br [L]
+
+# Serve pre-compressed gzip assets
+RewriteCond %{HTTP:Accept-Encoding} gzip
+RewriteCond %{REQUEST_FILENAME}.gz -f
+RewriteRule ^(.*)$ $1.gz [L]
+
+RewriteRule ^/?splw(/.*)?$ %{DOCUMENT_ROOT}/splatwiki/index.php [L] 
+
+<FilesMatch "\.html(\..+?)?\.gz$">
+    ForceType text/html
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.html(\..+?)?\.br$">
+    ForceType text/html
+    AddEncoding br .br
+</FilesMatch>
+
+<FilesMatch "\.js\.gz$">
+    ForceType application/javascript
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.js\.br$">
+    ForceType application/javascript
+    AddEncoding br .br
+</FilesMatch>
+
+<FilesMatch "\.css\.gz$">
+    ForceType text/css
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.css\.br$">
+    ForceType text/css
+    AddEncoding br .br
+</FilesMatch>
+
+<FilesMatch "\.svg\.gz$">
+    ForceType   image/svg+xml
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.svg\.br$">
+    ForceType   image/svg+xml
+    AddEncoding br .br
+</FilesMatch>
+
+<FilesMatch "\.ico\.gz$">
+    ForceType image/x-icons
+    AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.ico\.br$">
+    ForceType image/x-icon
+    AddEncoding br .br
+</FilesMatch>

@@ -1,6 +1,5 @@
-bin/
-obj/
+.DS_Store
+dst/
+prod/
 node_modules/
-bower_components/
-*.suo
-*-thumb.*.png.*
+package-lock.json

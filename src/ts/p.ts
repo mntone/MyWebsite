@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 var style: number = 1;
-var styleType = { "narrow": 0, "full": 1 };
+const styleType = { "narrow": 0, "full": 1 };
 function setStyle(value: number): boolean {
     if (style != value) {
         style = value;
@@ -11,7 +11,7 @@ function setStyle(value: number): boolean {
 }
 
 var mode: number = 0;
-var modeType = { "mouse": 0, "touch": 1, "keyboard": 2 };
+const modeType = { "mouse": 0, "touch": 1, "keyboard": 2 };
 function setMode(value: number) {
     mode = value;
     var f = document.body.classList.contains("key");
@@ -80,16 +80,14 @@ interface IKeyboardArrowListener {
 }
 
 abstract class KeyboardArrowSupport implements IKeyboardArrowListener {
-    _element: HTMLElement;
     _ev: EventDisposable;
 
-    constructor(protected element: HTMLElement) {
-        this._element = element;
+    protected constructor(protected element: HTMLElement) {
         this._init();
     }
 
-    _init(): void {
-        this._ev = new EventDisposable(this._element, "keydown", this.onkeydown.bind(this));
+    _init = (): void => {
+        this._ev = new EventDisposable(this.element, "keydown", this.onkeydown.bind(this));
     }
 
     clear(): void {
@@ -117,27 +115,23 @@ abstract class KeyboardArrowSupport implements IKeyboardArrowListener {
 }
 
 class SecondLevelLiCodeBehind extends KeyboardArrowSupport {
-    _parent: SecondLevelUlCodeBehind;
-    private _li: HTMLLIElement;
     private _a: HTMLAnchorElement;
 
     private _disposables: DisposableCollection;
 
-    constructor(parent: SecondLevelUlCodeBehind, li: HTMLLIElement) {
-        this._parent = parent;
-        this._li = li;
-        this._a = li.getElementsByTagName("a")[0];
-        super(this._a);
+    constructor(private parent: SecondLevelUlCodeBehind, private li: HTMLLIElement) {
+        super(li.getElementsByTagName("a")[0]);
+        this._a = <HTMLAnchorElement>this.element;
 
         this._disposables = new DisposableCollection();
     }
 
-    init(): void {
+    init = (): void => {
         this._disposables.dispose();
         this._disposables = new DisposableCollection();
 
         if (style == styleType.full) {
-            this._disposables.push(new EventDisposable(this._li, "pointerover", this.onpointerover.bind(this)));
+            this._disposables.push(new EventDisposable(this.li, "pointerover", this.onpointerover.bind(this)));
         }
     }
 
@@ -146,48 +140,44 @@ class SecondLevelLiCodeBehind extends KeyboardArrowSupport {
     }
 
     onpointerover(e: PointerEvent): void {
-        if (e.pointerType != "touch") {
+        if (e.pointerType !== "touch") {
             setMode(modeType.mouse);
-            this._parent.setSelectedItem(this);
+            this.parent.setSelectedItem(this);
         }
     }
 
     onuparrowdown(e: KeyboardEvent): boolean {
-        this._parent.prev();
+        this.parent.prev();
         return true;
     }
 
     ondownarrowdown(e: KeyboardEvent): boolean {
-        this._parent.next();
+        this.parent.next();
         return true;
     }
 
     onleftarrowdown(e: KeyboardEvent): boolean {
-        this._parent._parent._parent.prev();
+        this.parent.parent.parent.prev();
         return true;
     }
 
     onrightarrowdown(e: KeyboardEvent): boolean {
-        this._parent._parent._parent.next();
+        this.parent.parent.parent.next();
         return true;
     }
 }
 
 abstract class UlCodeBehindBase<TChild> {
-    protected _ul: HTMLUListElement;
-
     protected _items: Array<TChild>;
     protected _selectedItem: TChild;
 
-    constructor(ul: HTMLUListElement, func: (li: HTMLLIElement) => TChild) {
-        this._ul = ul;
+    constructor(protected ul: HTMLUListElement) { }
 
-        var liItems = <HTMLLIElement[]>getFilteredItems(this._ul.childNodes, "LI");
-        this._items = liItems.map(li => func(li));
-    }
-
-    init(): void {
+    init(func: (li: HTMLLIElement) => TChild): void {
         this._selectedItem = null;
+
+        var liItems = <HTMLLIElement[]>getFilteredItems(this.ul.childNodes, "LI");
+        this._items = liItems.map(li => func(li));
     }
 
     getPrevItem(current: TChild): TChild {
@@ -208,18 +198,15 @@ abstract class UlCodeBehindBase<TChild> {
 }
 
 class SecondLevelUlCodeBehind extends UlCodeBehindBase<SecondLevelLiCodeBehind> {
-    _parent: FirstLevelLiCodeBehind;
-
     private _isshown: boolean;
 
-    constructor(parent: FirstLevelLiCodeBehind, ul: HTMLUListElement) {
-        this._parent = parent;
-        super(ul, li => new SecondLevelLiCodeBehind(this, li));
+    constructor(public parent: FirstLevelLiCodeBehind, ul: HTMLUListElement) {
+        super(ul);
     }
 
     init(): void {
-        super.init();
-        if (style == styleType.narrow && this._isshown) {
+        super.init(li => new SecondLevelLiCodeBehind(this, li));
+        if (style === styleType.narrow && this._isshown) {
             this.hide();
         }
 
@@ -229,30 +216,30 @@ class SecondLevelUlCodeBehind extends UlCodeBehindBase<SecondLevelLiCodeBehind> 
     show(): void {
         if (this._isshown) return;
         this._isshown = true;
-        if (mode == modeType.touch) {
-            this._ul.classList.add("visible", "visible-touch");
+        if (mode === modeType.touch) {
+            this.ul.classList.add("visible", "visible-touch");
         } else {
-            this._ul.classList.add("visible");
+            this.ul.classList.add("visible");
         }
     }
 
     hide(): void {
         if (!this._isshown) return;
-        this._ul.classList.remove("visible", "visible-touch");
+        this.ul.classList.remove("visible", "visible-touch");
         this._isshown = false;
         this.setSelectedItem(null);
     }
 
     prev(): void {
         var item = this._selectedItem != null ? this.getPrevItem(this._selectedItem) : this._items[this._items.length - 1];
-        if (item != null) {
+        if (item !== null) {
             this.setSelectedItem(item);
-        } else if (style == styleType.full) {
+        } else if (style === styleType.full) {
             this.setSelectedItem(null);
-            this._parent.focus();
+            this.parent.focus();
         } else {
-            var prevItem = this._parent._parent.getPrevItem(this._parent);
-            if (prevItem != null) {
+            var prevItem = this.parent.parent.getPrevItem(this.parent);
+            if (prevItem !== null) {
                 prevItem.getChild().prev();
             }
         }
@@ -260,13 +247,13 @@ class SecondLevelUlCodeBehind extends UlCodeBehindBase<SecondLevelLiCodeBehind> 
 
     next(): void {
         var item = this._selectedItem != null ? this.getNextItem(this._selectedItem) : this._items[0];
-        if (item != null) {
+        if (item !== null) {
             this.setSelectedItem(item);
-        } else if (style == styleType.full) {
+        } else if (style === styleType.full) {
             this.setSelectedItem(null);
-            this._parent.focus();
+            this.parent.focus();
         } else {
-            var nextItem = this._parent._parent.getNextItem(this._parent);
+            var nextItem = this.parent.parent.getNextItem(this.parent);
             if (nextItem != null) {
                 nextItem.getChild().next();
             }
@@ -277,7 +264,7 @@ class SecondLevelUlCodeBehind extends UlCodeBehindBase<SecondLevelLiCodeBehind> 
         return this._selectedItem;
     }
     setSelectedItem(value: SecondLevelLiCodeBehind): boolean {
-        if (this._selectedItem == value) return false;
+        if (this._selectedItem === value) return false;
 
         this._selectedItem = value;
         if (this._selectedItem != null) {
@@ -288,8 +275,6 @@ class SecondLevelUlCodeBehind extends UlCodeBehindBase<SecondLevelLiCodeBehind> 
 }
 
 class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
-    _parent: FirstLevelUlCodeBehind;
-    private _li: HTMLLIElement;
     private _a: HTMLAnchorElement;
 
     private _child: SecondLevelUlCodeBehind;
@@ -297,11 +282,9 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
 
     private _isfocus: boolean;
 
-    constructor(parent: FirstLevelUlCodeBehind, li: HTMLLIElement) {
-        this._parent = parent;
-        this._li = li;
-        this._a = li.getElementsByTagName("a")[0];
-        super(this._a);
+    constructor(public parent: FirstLevelUlCodeBehind, private li: HTMLLIElement) {
+        super(li.getElementsByTagName("a")[0]);
+        this._a = <HTMLAnchorElement>this.element;
 
         var ul = li.getElementsByTagName("ul")[0];
         this._child = new SecondLevelUlCodeBehind(this, ul);
@@ -313,10 +296,10 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
         this._disposables.dispose();
         this._disposables = new DisposableCollection();
 
-        if (style == styleType.full) {
-            this._disposables.push(new EventDisposable(this._li, "pointerdown", this.onpointerdown.bind(this)));
-            this._disposables.push(new EventDisposable(this._li, "pointerover", this.onpointerover.bind(this)));
-            this._disposables.push(new EventDisposable(this._li, "pointerout", this.onpointerout.bind(this)));
+        if (style === styleType.full) {
+            this._disposables.push(new EventDisposable(this.li, "pointerdown", this.onpointerdown.bind(this)));
+            this._disposables.push(new EventDisposable(this.li, "pointerover", this.onpointerover.bind(this)));
+            this._disposables.push(new EventDisposable(this.li, "pointerout", this.onpointerout.bind(this)));
             this._disposables.push(new EventDisposable(this._a, "focus", this.onfocus.bind(this)));
             this._disposables.push(new EventDisposable(this._a, "blur", this.onblur.bind(this)));
         }
@@ -329,13 +312,13 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
     }
 
     onfocus(e: FocusEvent): void {
-        this._parent.setSelectedItem(this);
+        this.parent.setSelectedItem(this);
     }
 
     onblur(e: FocusEvent): void {
-        if (mode == modeType.keyboard) {
+        if (mode === modeType.keyboard) {
             if (!this._isfocus) {
-                this._parent.setSelectedItem(null);
+                this.parent.setSelectedItem(null);
             } else {
                 this._isfocus = false;
             }
@@ -343,32 +326,32 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
     }
 
     onpointerdown(e: PointerEvent): void {
-        if (e.pointerType == "touch") {
+        if (e.pointerType === "touch") {
             setMode(modeType.touch);
-            this._parent.setSelectedItem(this);
+            this.parent.setSelectedItem(this);
         }
         e.cancelBubble = true;
     }
 
     onpointerover(e: PointerEvent): void {
-        if (e.pointerType != "touch") {
+        if (e.pointerType !== "touch") {
             setMode(modeType.mouse);
-            this._parent.setSelectedItem(this);
+            this.parent.setSelectedItem(this);
         }
     }
 
     onpointerout(e: PointerEvent): void {
-        if (e.pointerType != "touch") {
+        if (e.pointerType !== "touch") {
             setMode(modeType.mouse);
-            this._parent.setSelectedItem(null);
+            this.parent.setSelectedItem(null);
         }
     }
 
     onkeydown(e: KeyboardEvent): void {
-        if (e.keyCode == 9) {
+        if (e.keyCode === 9) {
             if (!e.shiftKey) {
                 this._isfocus = true;
-            } else if (e.shiftKey && this._parent.getPrevItem(this) != null) {
+            } else if (e.shiftKey && this.parent.getPrevItem(this) != null) {
                 this._isfocus = true;
             }
         }
@@ -391,15 +374,15 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
 
     onleftarrowdown(e: KeyboardEvent): boolean {
         if (style == styleType.full) {
-            this._parent.prev();
+            this.parent.prev();
             return true;
         }
         return false;
     }
 
     onrightarrowdown(e: KeyboardEvent): boolean {
-        if (style == styleType.full) {
-            this._parent.next();
+        if (style === styleType.full) {
+            this.parent.next();
             return true;
         }
         return false;
@@ -411,20 +394,16 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
 }
 
 class FirstLevelUlCodeBehind extends UlCodeBehindBase<FirstLevelLiCodeBehind> {
-    _parent: PageCodeBehind;
-
     private _isshown: boolean;
 
-    constructor(parent: PageCodeBehind, ul: HTMLUListElement) {
-        this._parent = parent;
-        super(ul, li => new FirstLevelLiCodeBehind(this, li));
-
-        this._isshown = false;
+    constructor(ul: HTMLUListElement) {
+        super(ul);
     }
 
     init(): void {
-        super.init();
-        if (style == styleType.full && this._isshown) {
+        super.init(li => new FirstLevelLiCodeBehind(this, li));
+        this._isshown = false;
+        if (style === styleType.full && this._isshown) {
             this.hide();
         }
 
@@ -441,52 +420,52 @@ class FirstLevelUlCodeBehind extends UlCodeBehindBase<FirstLevelLiCodeBehind> {
 
     show(): void {
         this._isshown = true;
-        if (mode == modeType.touch) {
-            this._ul.classList.add("visible", "visible-touch");
+        if (mode === modeType.touch) {
+            this.ul.classList.add("visible", "visible-touch");
         } else {
-            this._ul.classList.add("visible");
+            this.ul.classList.add("visible");
         }
     }
 
     hide(): void {
-        this._ul.classList.remove("visible", "visible-touch");
+        this.ul.classList.remove("visible", "visible-touch");
         this._isshown = false;
     }
 
     prev(): void {
-        if (style == styleType.narrow) throw new Error();
-        if (this._selectedItem != null) {
+        if (style === styleType.narrow) throw new Error();
+        if (this._selectedItem !== null) {
             var item = this.getPrevItem(this._selectedItem);
-            if (item != null) {
+            if (item !== null) {
                 item.focus();
             }
         }
     }
 
     next(): void {
-        if (style == styleType.narrow) throw new Error();
-        if (this._selectedItem != null) {
+        if (style === styleType.narrow) throw new Error();
+        if (this._selectedItem !== null) {
             var item = this.getNextItem(this._selectedItem);
-            if (item != null) {
+            if (item !== null) {
                 item.focus();
             }
         }
     }
 
     getSelectedItem(): FirstLevelLiCodeBehind {
-        if (style == styleType.narrow) throw new Error();
+        if (style === styleType.narrow) throw new Error();
         return this._selectedItem;
     }
     setSelectedItem(value: FirstLevelLiCodeBehind): boolean {
-        if (style == styleType.narrow) throw new Error();
-        if (this._selectedItem == value) return false;
+        if (style === styleType.narrow) throw new Error();
+        if (this._selectedItem === value) return false;
 
-        if (this._selectedItem != null) {
+        if (this._selectedItem !== null) {
             this._selectedItem.getChild().hide();
         }
         this._selectedItem = value;
-        if (this._selectedItem != null) {
-            if (mode == modeType.mouse) {
+        if (this._selectedItem !== null) {
+            if (mode === modeType.mouse) {
                 this._selectedItem.focus();
             }
             this._selectedItem.getChild().show();
@@ -514,20 +493,20 @@ class PageCodeBehind {
             setMode(modeType.keyboard);
         });
         body.addEventListener("pointerdown", (e: PointerEvent) => {
-            if (e.pointerType == "touch" && mode != modeType.touch) {
+            if (e.pointerType === "touch" && mode !== modeType.touch) {
                 setMode(modeType.touch);
             }
-            else if (mode != modeType.mouse) {
+            else if (mode !== modeType.mouse) {
                 setMode(modeType.mouse);
             }
 
-            if (style == styleType.full) {
+            if (style === styleType.full) {
                 this._child.setSelectedItem(null);
             }
         });
 
         var ul = <HTMLUListElement>document.getElementById("nav-list");
-        this._child = new FirstLevelUlCodeBehind(this, ul);
+        this._child = new FirstLevelUlCodeBehind(ul);
         this._menuButton = <HTMLDivElement>document.getElementById("menu-button");
 
         this._disposables = new DisposableCollection();
@@ -540,7 +519,7 @@ class PageCodeBehind {
         this._disposables.dispose();
         this._disposables = new DisposableCollection();
 
-        if (style == styleType.narrow) {
+        if (style === styleType.narrow) {
             this._disposables.push(new EventDisposable(this._menuButton, "pointerdown", this.onmenubuttonpointerdown.bind(this)));
             this._disposables.push(new EventDisposable(this._menuButton, "keydown", this.onmenubuttonkeydown.bind(this)));
         }
@@ -563,7 +542,7 @@ class PageCodeBehind {
 
     onmenubuttonkeydown(e: KeyboardEvent): void {
         setMode(modeType.keyboard);
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             this._child.toggle();
         }
     }
@@ -571,8 +550,9 @@ class PageCodeBehind {
 
 var codeBehind: PageCodeBehind;
 window.onload = function () {
-    if (typeof document.msCSSOMElementFloatMetrics !== "undefined") {
-        document.msCSSOMElementFloatMetrics = !0;
+    var anyDocument = <any>document;
+    if (typeof anyDocument.msCSSOMElementFloatMetrics !== "undefined") {
+        anyDocument.msCSSOMElementFloatMetrics = !0;
     }
     codeBehind = new PageCodeBehind(<HTMLBodyElement>document.body);
 }

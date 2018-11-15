@@ -1,4 +1,4 @@
-﻿<% include ../base/head %>
+﻿<% include ../common/_header %>
 
 <article itemscope itemtype="http://schema.org/Article">
     <h1 itemprop="headline"><%- ikaconnect %></h1>
@@ -548,27 +548,32 @@
 <div class="screenshot">
     <h2 itemprop="headline"><%- screenshots %></h2>
     <div>
-        <img src="/i/ikaconnect.100.png" class="top" style="max-width: 512px" alt="ss1">
+        <picture>
+            <source type="image/webp" srcset="/i/ic-uap10.0d-main-<%- lang %>.webp">
+            <img src="/i/ic-uap10.0d-main-<%- lang %>.png" class="top" style="max-width: 512px" alt="ss1">
+        </picture>
     </div>
 
     <h5><%- ikaconnect %> for Windows 8.1</h5>
     <div class="image-list">
     <% ["main", "profile"].forEach(function (item) { %>
-        <a href="/i/ic-win81-<%- item %>.png" target="_blank">
-            <img
-                 src="/i/ic-win81-<%- item %>-thumb.s-100.png"
-                 srcset="/i/ic-win81-<%- item %>-thumb.s-100.png 1x, /i/ic-win81-<%- item %>-thumb.s-150.png 1.5x, /i/ic-win81-<%- item %>-thumb.s-200.png 2x, /i/ic-win81-<%- item %>-thumb.s-300.png 3x">
-            </a>
+        <a href="/i/ic-win81-<%- item %>-<%- lang %>.png" target="_blank">
+            <picture>
+                <source type="image/webp" srcset="/i/ic-win81-<%- item %>-<%- lang %>-t10.webp, /i/ic-win81-<%- item %>-<%- lang %>-t15.webp 1.5x, /i/ic-win81-<%- item %>-<%- lang %>-t20.webp 2x, /i/ic-win81-<%- item %>-<%- lang %>-t30.webp 3x">
+                <img src="/i/ic-win81-<%- item %>-<%- lang %>-t10.png" srcset="/i/ic-win81-<%- item %>-<%- lang %>-t15.png 1.5x, /i/ic-win81-<%- item %>-<%- lang %>-t20.png 2x, /i/ic-win81-<%- item %>-<%- lang %>-t30.png 3x" alt="IkaConnect for Windows 8.1 Thumb">
+            </picture>
+        </a>
     <% }) %>
     </div>
 
     <h5><%- ikaconnect %> for Windows Phone 8.1</h5>
     <div class="image-list">
     <% ["friends", "profile", "regular", "ranked", "tile1", "tile2"].forEach(function (item) { %>
-        <a href="/i/ic-wpa81-<%- item %>.png" target="_blank">
-            <img
-                 src="/i/ic-wpa81-<%- item %>-thumb.s-100.png"
-                 srcset="/i/ic-wpa81-<%- item %>-thumb.s-100.png 1x, /i/ic-wpa81-<%- item %>-thumb.s-150.png 1.5x, /i/ic-wpa81-<%- item %>-thumb.s-200.png 2x, /i/ic-wpa81-<%- item %>-thumb.s-300.png 3x">
+        <a href="/i/ic-wpa81-<%- item %>-<%- lang %>.png" target="_blank">
+            <picture>
+                <source type="image/webp" srcset="/i/ic-wpa81-<%- item %>-<%- lang %>-t10.webp, /i/ic-wpa81-<%- item %>-<%- lang %>-t15.webp 1.5x, /i/ic-wpa81-<%- item %>-<%- lang %>-t20.webp 2x, /i/ic-wpa81-<%- item %>-<%- lang %>-t30.webp 3x">
+                <img src="/i/ic-wpa81-<%- item %>-<%- lang %>-t10.png"  srcset="/i/ic-wpa81-<%- item %>-<%- lang %>-t15.png 1.5x, /i/ic-wpa81-<%- item %>-<%- lang %>-t20.png 2x, /i/ic-wpa81-<%- item %>-<%- lang %>-t30.png 3x" alt="IkaConnect for Windows 8.1 Thumb">
+            </picture>
         </a>
     <% }) %>
     </div>
@@ -576,26 +581,26 @@
     <h5><%- ikaconnect %> for UWP</h5>
     <h6>Desktop</h6>
     <div class="image-list">
-        <a href="/i/ikaconnect.100.png" target="_blank">
-            <img src="/i/ikaconnect.100-thumb.s-100.png"
-                 srcset="/i/ikaconnect.100-thumb.s-100.png 1x, /i/ikaconnect.100-thumb.s-150.png 1.5x, /i/ikaconnect.100-thumb.s-200.png 2x, /i/ikaconnect.100-thumb.s-300.png 3x">
-        </a>
-        <% ["regular", "ranked"].forEach(function (item) { %>
-            <a href="/i/ic-uap10.0d-<%- item %>.png" target="_blank">
-                <img src="/i/ic-uap10.0d-<%- item %>-thumb.s-100.png"
-                     srcset="/i/ic-uap10.0d-<%- item %>-thumb.s-100.png 1x, /i/ic-uap10.0d-<%- item %>-thumb.s-150.png 1.5x, /i/ic-uap10.0d-<%- item %>-thumb.s-200.png 2x, /i/ic-uap10.0d-<%- item %>-thumb.s-300.png 3x">
+        <% ["main", "regular", "ranked"].forEach(function (item) { %>
+            <a href="/i/ic-uap10.0d-<%- item %>-<%- lang %>.png" target="_blank">
+                <picture>
+                    <source type="image/webp" srcset="/i/ic-uap10.0d-<%- item %>-<%- lang %>-t10.webp, /i/ic-uap10.0d-<%- item %>-<%- lang %>-t15.webp 1.5x, /i/ic-uap10.0d-<%- item %>-<%- lang %>-t20.webp 2x, /i/ic-uap10.0d-<%- item %>-<%- lang %>-t30.webp 3x">
+                    <img src="/i/ic-uap10.0d-<%- item %>-<%- lang %>-t10.png"  srcset="/i/ic-uap10.0d-<%- item %>-<%- lang %>-t15.png 1.5x, /i/ic-uap10.0d-<%- item %>-<%- lang %>-t20.png 2x, /i/ic-uap10.0d-<%- item %>-<%- lang %>-t30.png 3x" alt="IkaConnect for Windows 8.1 Thumb">
+                </picture>
             </a>
         <% }) %>
     </div>
     <h6>Mobile</h6>
     <div class="image-list">
     <% ["friends", "profile", "profile2", "regular", "ranked"].forEach(function (item) { %>
-        <a href="/i/ic-uap10.0m-<%- item %>.png" target="_blank">
-            <img src="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png"
-                 srcset="/i/ic-uap10.0m-<%- item %>-thumb.s-100.png 1x, /i/ic-uap10.0m-<%- item %>-thumb.s-150.png 1.5x, /i/ic-uap10.0m-<%- item %>-thumb.s-200.png 2x, /i/ic-uap10.0m-<%- item %>-thumb.s-300.png 3x">
+        <a href="/i/ic-uap10.0m-<%- item %>-<%- lang %>.png" target="_blank">
+            <picture>
+                <source type="image/webp" srcset="/i/ic-uap10.0m-<%- item %>-<%- lang %>-t10.webp, /i/ic-uap10.0m-<%- item %>-<%- lang %>-t15.webp 1.5x, /i/ic-uap10.0m-<%- item %>-<%- lang %>-t20.webp 2x, /i/ic-uap10.0m-<%- item %>-<%- lang %>-t30.webp 3x">
+                <img src="/i/ic-uap10.0m-<%- item %>-<%- lang %>-t10.png"  srcset="/i/ic-uap10.0m-<%- item %>-<%- lang %>-t15.png 1.5x, /i/ic-uap10.0m-<%- item %>-<%- lang %>-t20.png 2x, /i/ic-uap10.0m-<%- item %>-<%- lang %>-t30.png 3x" alt="IkaConnect for Windows 8.1 Thumb">
+            </picture>
         </a>
     <% }) %>
     </div>
 </div>
 
-<% include ../base/foot %>
+<% include ../common/_footer %>

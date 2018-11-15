@@ -1,4 +1,4 @@
-﻿<% include ../base/head %>
+﻿<% include ../common/_header %>
 
 <article itemscope itemtype="http://schema.org/Article">
     <h1 itemprop="headline"><%- twittervideouploader %></h1>
@@ -188,8 +188,11 @@
 <div class="screenshot">
     <h2 itemprop="headline"><%- screenshots %></h2>
     <div itemprop="articleBody">
-        <img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" class="top" style="max-width: 500px" alt="ss1">
+        <picture>
+            <source type="image/webp" srcset="/i/tvupl.10.webp, /i/tvupl.15.webp 1.5x">
+            <img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" class="top" style="max-width: 512px" alt="ss1">
+        </picture>
     </div>
 </div>
 
-<% include ../base/foot %>
+<% include ../common/_footer %>
