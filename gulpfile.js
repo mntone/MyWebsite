@@ -194,7 +194,7 @@ gulp.task('htaccess', () =>
 /* Build */
 gulp.task('build', () => runSequence(
 	['ejs', 'typescript', 'less', 'svg', 'favicon', 'htaccess'],
-	['ejs-compress', 'typescript-compress', 'less-compress', 'svg-compress']
+	['ejs-compress', 'typescript-compress', 'less-compress', 'svg-compress', 'favicon-compress']
 ));
 gulp.task('rebuild', () => runSequence('clean', 'build'));
 
