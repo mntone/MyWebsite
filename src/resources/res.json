@@ -21,6 +21,7 @@
       "agree_privacy_policy": "If you agree <a href=\"{0}\">Privacy Policy</a>, you can use",
       "download": "Donwload",
       "download_by_windows_store": "Download by Windows store",
+      "no_download": "No Download currently",
       "version": "Version",
       "bio": "Bio",
 
@@ -51,6 +52,7 @@
       "agree_privacy_policy": "<a href=\"{0}\">プライバシー ポリシー</a>に同意する場合のみご利用ください",
       "download": "ダウンロード",
       "download_by_windows_store": "Windows ストアでダウンロード",
+      "no_download": "現在はダウンロードできません",
       "version": "バージョン",
       "bio": "プロフィール",
 

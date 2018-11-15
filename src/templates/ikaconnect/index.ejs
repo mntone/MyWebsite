@@ -8,10 +8,12 @@
         <p>IkaConnectはスプラトゥーンのサービス「イカリング」を用いたフレンドのステータスやステージの予定を見ることができるアプリです。</p>
         <p class="mark">※ 当アプリは、スプラトゥーンの非公式アプリであり、任天堂株式会社とは一切の関係がございません。アプリに関するお問い合わせはサポートの連絡先のほうへお願いします。</p>
         <p class="mark">※ イカリングの仕様変更によりアプリが予期せぬ動作が発生することがあります。</p>
+        <p class="mark">※ イカリングはサービス終了しているため、このアプリは現在使用できません。(このページはアーカイブ目的です。)</p>
         <% } else { %>
         <p>SplatConnect is the app that get friends’ status and schedule from Nintend Official Service “SplatNet.”</p>
         <p class="mark">* The app is Splatoon unofficial app, so it is not related to Nintendo. Please send contact if you have any questions.</p>
         <p class="mark">* The app happens buggy behavior because of changing SplatNet spec.</p>
+        <p class="mark">* Service "SplatNet" is the end. You cannot use this app. (This page is only for archive.)</p>
         <% } %>
     </div>
 
@@ -41,7 +43,8 @@
     <h2 itemprop="headline"><%- downloads %></h2>
     <div itemprop="articleBody">
         <p><%- agree_privacy_policy.replace("{0}", "privacy.html") %></p>
-        <p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6" target="blank"><%- download_by_windows_store %></a></p>
+        <p><b><%- no_download %></b></p>
+        <!--<p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6" target="blank"><%- download_by_windows_store %></a></p>-->
     </div>
 
     <% if (lang == "ja") { %>
