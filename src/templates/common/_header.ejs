@@ -9,39 +9,42 @@
 	<script src="/j/p.js"></script>
 </head>
 <body>
-	<header itemscope itemtype="http://schema.org/WPHeader"><div id="header-inner">
-		<div id="headline" itemprop="headline"><a href="/"><span><%- title %></span></a></div>
-						
-		<nav>
-			<ul id="nav-list" itemscope itemtype="http://schema.org/SiteNavigationElement">
-				<li class="wide">
-					<a href="javascript:void(0)" touch-action="pan-y"><%- app_lib %></a>
-					<ul>
-						<li><a href="/ikaconnect/" itemprop="url" touch-action="pan-y"><%- ikaconnect %></a></li>
-						<li><a href="/tvupl/" itemprop="url" touch-action="pan-y"><%- twittervideouploader %></a></li>
-						<li><a href="https://github.com/mntone/RtmpClient" target="_blank" touch-action="pan-y">RtmpClient for Windows Runtime</a></li>
-						<li><a href="https://github.com/mntone/SvgForXaml" target="_blank" touch-action="pan-y">Svg for xaml</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:void(0)" touch-action="pan-y"><%- external_site %></a>
-					<ul>
-						<li><a href="https://twitter.com/mntone" itemprop="url" touch-action="pan-y">Twitter</a></li>
-						<li><a href="https://mstdn.jp/@mntone" itemprop="url" touch-action="pan-y">Mastodon</a></li>
-						<li><a href="https://www.youtube.com/channel/UCjUcm2VgZKQqWAtKJhUW8fw" itemprop="url" touch-action="pan-y">YouTube</a></li>
-						<li><a href="https://www.twitch.tv/mntone" itemprop="url" touch-action="pan-y">Twitch</a></li>
-						<li><a href="https://github.com/mntone" itemprop="url" touch-action="pan-y">GitHub</a></li>
-						<li><a href="http://mntone.hateblo.jp/" itemprop="url" touch-action="pan-y"><%- hatena_blog %></a></li>
-						<li><a href="http://ikazok.net/users/39379" itemprop="url" touch-action="pan-y">イカナカマ</a></li>
-						<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38" itemprop="url" touch-action="pan-y"><%- wish_list %></a></li>
-					</ul>
-				</li>
-			</ul>
-			<div id="menu-button" touch-action="none"><a href="javascript:void(0)">
-				<img id="menu-button-menu" src="/i/icon_menu.svg" alt="menu">
-				<img id="menu-button-close" src="/i/icon_close.svg" alt="close">
-			</a></div>
-		</nav>
-	</div></header>
-		
+	<header itemscope itemtype="http://schema.org/WPHeader">
+		<div id="header-background"></div>
+		<div id="header-inner">
+			<div id="headline" itemprop="headline"><a href="/"><span><%- title %></span></a></div>
+
+			<nav>
+				<ul id="nav-list" itemscope itemtype="http://schema.org/SiteNavigationElement">
+					<li class="wide">
+						<a href="javascript:void(0)" touch-action="pan-y"><%- app_lib %></a>
+						<ul>
+							<li><a href="/ikaconnect/" itemprop="url" touch-action="pan-y"><%- ikaconnect %></a></li>
+							<li><a href="/tvupl/" itemprop="url" touch-action="pan-y"><%- twittervideouploader %></a></li>
+							<li><a href="https://github.com/mntone/RtmpClient" target="_blank" touch-action="pan-y">RtmpClient for Windows Runtime</a></li>
+							<li><a href="https://github.com/mntone/SvgForXaml" target="_blank" touch-action="pan-y">Svg for xaml</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:void(0)" touch-action="pan-y"><%- external_site %></a>
+						<ul>
+							<li><a href="https://twitter.com/mntone" itemprop="url" touch-action="pan-y">Twitter</a></li>
+							<li><a href="https://mstdn.jp/@mntone" itemprop="url" touch-action="pan-y">Mastodon</a></li>
+							<li><a href="https://www.youtube.com/channel/UCjUcm2VgZKQqWAtKJhUW8fw" itemprop="url" touch-action="pan-y">YouTube</a></li>
+							<li><a href="https://www.twitch.tv/mntone" itemprop="url" touch-action="pan-y">Twitch</a></li>
+							<li><a href="https://github.com/mntone" itemprop="url" touch-action="pan-y">GitHub</a></li>
+							<li><a href="http://mntone.hateblo.jp/" itemprop="url" touch-action="pan-y"><%- hatena_blog %></a></li>
+							<li><a href="http://ikazok.net/users/39379" itemprop="url" touch-action="pan-y">イカナカマ</a></li>
+							<li><a href="http://www.amazon.co.jp/registry/wishlist/1NY96A3CYBC7E/ref=cm_sw_r_tw_ws_GhLpvb1BD1Z38" itemprop="url" touch-action="pan-y"><%- wish_list %></a></li>
+						</ul>
+					</li>
+				</ul>
+				<div id="menu-button" touch-action="none"><a href="javascript:void(0)">
+					<img id="menu-button-menu" src="/i/icon_menu.svg" alt="menu">
+					<img id="menu-button-close" src="/i/icon_close.svg" alt="close">
+				</a></div>
+			</nav>
+		</div>
+	</header>
+
 	<div id="content">
