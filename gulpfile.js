@@ -40,7 +40,7 @@ gulp.task('ejs', () => {
 	const res = JSON.parse(fs.readFileSync('./src/resources/res.json'));
 	const tasks = lang.map(targetLang =>
 		gulp.src(['./src/templates/**/*.ejs', '!src/templates/**/_*.ejs'])
-			.pipe(ejs(res.res[targetLang], {}, {ext: '.html.' + targetLang}))
+			.pipe(ejs(Object.assign(res.res[targetLang], {rev: Math.floor(Date.now() / 1000)}), {}, {ext: '.html.' + targetLang}))
 			.pipe(mode.production(htmlmin({
 				collapseWhitespace: true,
 				removeComments: true,
