@@ -101,6 +101,10 @@ th, td {
     padding: 4px;
 }
 
+html.no-scroll {
+    overflow: hidden;
+}
+
 // grid system
 .grid-container {
     margin: 0 0 12px -12px;
@@ -429,6 +433,7 @@ nav {
         height: 0;
         color: rgba(255, 255, 255, .8);
         background-color: rgba(0, 0, 0, .8);
+        backdrop-filter: blur(10px);
         -webkit-overflow-scrolling: touch;
         opacity: 0;
         .transition(opacity cubic-bezier(0.1, 0.9, 0.2, 1) 220ms);

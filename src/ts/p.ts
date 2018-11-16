@@ -27,7 +27,7 @@ function setMode(value: number) {
     }
 }
 function setModeFromType(type: string) {
-    setMode(type == "touch" ? modeType.touch : modeType.mouse);
+    setMode(type === "touch" ? modeType.touch : modeType.mouse);
 }
 
 function getFilteredItems(nodes: NodeList, nodeName: string): any[] {
@@ -394,6 +394,7 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
 }
 
 class FirstLevelUlCodeBehind extends UlCodeBehindBase<FirstLevelLiCodeBehind> {
+    private _html: HTMLHtmlElement;
     private _isshown: boolean;
 
     constructor(ul: HTMLUListElement) {
@@ -402,6 +403,9 @@ class FirstLevelUlCodeBehind extends UlCodeBehindBase<FirstLevelLiCodeBehind> {
 
     init(): void {
         super.init(li => new FirstLevelLiCodeBehind(this, li));
+
+        this._html = <HTMLHtmlElement>document.documentElement;
+
         this._isshown = false;
         if (style === styleType.full && this._isshown) {
             this.hide();
@@ -419,16 +423,20 @@ class FirstLevelUlCodeBehind extends UlCodeBehindBase<FirstLevelLiCodeBehind> {
     }
 
     show(): void {
+        if (this._isshown) return;
         this._isshown = true;
         if (mode === modeType.touch) {
             this.ul.classList.add("visible", "visible-touch");
         } else {
             this.ul.classList.add("visible");
         }
+        this._html.classList.add("no-scroll");
     }
 
     hide(): void {
+        if (!this._isshown) return;
         this.ul.classList.remove("visible", "visible-touch");
+        this._html.classList.remove("no-scroll");
         this._isshown = false;
     }
 
