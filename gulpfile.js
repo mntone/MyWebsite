@@ -11,6 +11,7 @@ const fs           = require('fs'),
 	  gzip         = require('gulp-gzip'),
 	  brotli       = require('gulp-brotli'),
 	  ejs          = require('gulp-ejs'),
+	  minifyinline = require('gulp-minify-inline'),
 	  htmlmin      = require('gulp-htmlmin'),
 	  typescript   = require('gulp-tsc'),
 	  uglify       = require('gulp-uglify'),
@@ -41,6 +42,7 @@ gulp.task('ejs', () => {
 	const tasks = lang.map(targetLang =>
 		gulp.src(['./src/templates/**/*.ejs', '!src/templates/**/_*.ejs'])
 			.pipe(ejs(Object.assign(res.res[targetLang], {rev: Math.floor(Date.now() / 1000)}), {}, {ext: '.html.' + targetLang}))
+			.pipe(mode.production(minifyinline()))
 			.pipe(mode.production(htmlmin({
 				collapseWhitespace: true,
 				removeComments: true,

@@ -50,14 +50,14 @@
 	<script>
 		var gc = document.getElementById("gc");
 		var items = gc.childNodes;
-		for (var i = 0; i != items.length; ++i)
+		for (var i = 0; i !== items.length; ++i)
 		{
 			var item = items[i];
-			if (item.nodeName != "DIV") continue;
+			if (item.nodeName !== "DIV") continue;
 
 			var a = item.getElementsByTagName("a")[0];
 			a.addEventListener("keydown", function (e) {
-				if (e.keyCode == 13) e.currentTarget.parentElement.classList.add("keydown");
+				if (e.keyCode === 13) e.currentTarget.parentElement.classList.add("keydown");
 			});
 		}
 	</script>

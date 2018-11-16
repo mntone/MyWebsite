@@ -21,6 +21,7 @@
     "gulp-image-resize": "^0.13.0",
     "gulp-imagemin": "^5.0.3",
     "gulp-less": "^4.0.1",
+    "gulp-minify-inline": "^1.0.0",
     "gulp-mode": "^1.0.2",
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
