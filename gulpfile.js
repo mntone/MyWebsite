@@ -7,6 +7,7 @@ const fs           = require('fs'),
 	  }),
 	  runSequence  = require('run-sequence'),
 	  merge        = require('merge-stream'),
+	  changed      = require('gulp-changed'),
 	  clean        = require('gulp-clean'),
 	  gzip         = require('gulp-gzip'),
 	  brotli       = require('gulp-brotli'),
@@ -40,7 +41,7 @@ gulp.task('clean', () =>
 gulp.task('ejs', () => {
 	const res = JSON.parse(fs.readFileSync('./src/resources/res.json'));
 	const tasks = lang.map(targetLang =>
-		gulp.src(['./src/templates/**/*.ejs', '!src/templates/**/_*.ejs'])
+		gulp.src(['./src/templates/**/*.ejs', '!./src/templates/**/_*.ejs'])
 			.pipe(ejs(Object.assign(res.res[targetLang], {rev: Math.floor(Date.now() / 1000)}), {}, {ext: '.html.' + targetLang}))
 			.pipe(mode.production(minifyinline()))
 			.pipe(mode.production(htmlmin({
@@ -120,15 +121,18 @@ gulp.task('less-compress', () => {
 /* Image */
 gulp.task('svg', () =>
 	gulp.src('./src/images/**/*.svg')
+		.pipe(changed(basedir + '/i'))
 		.pipe(mode.production(imagemin([imagemin.svgo()])))
 		.pipe(gulp.dest(basedir + '/i'))
 );
 gulp.task('svg-compress', () => {
 	if (mode.production()) {
 		const gzipTask = gulp.src(basedir + '/i/**/*.svg')
+			.pipe(changed(basedir + '/i'))
 			.pipe(gzip({gzipOptions: {level: gzipLevel}}))
 			.pipe(gulp.dest(basedir + '/i'));
 		const brotliTask = gulp.src(basedir + '/i/**/*.svg')
+			.pipe(changed(basedir + '/i'))
 			.pipe(brotli.compress({quality: brotliLevel}))
 			.pipe(gulp.dest(basedir + '/i'));
 		return merge(gzipTask, brotliTask);
@@ -136,6 +140,7 @@ gulp.task('svg-compress', () => {
 });
 gulp.task('png', () =>
 	gulp.src('./src/images/**/*.png')
+		.pipe(changed(basedir + '/i'))
 		.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 		.pipe(gulp.dest(basedir + '/i'))
 		.pipe(webp({lossless: true}))
@@ -144,10 +149,10 @@ gulp.task('png', () =>
 gulp.task('thumb-width', () => {
 	const tasks = thumbScale.map(scale =>
 		gulp.src(['./src/images/ic-win81-*.png', './src/images/ic-uap10.0d-*.png'])
+			.pipe(rename({suffix: '-t' + (10 * scale)}))
 			.pipe(imageresize({
 				width: 200 * scale,
 			}))
-			.pipe(rename({suffix: '-t' + (10 * scale)}))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 			.pipe(gulp.dest(basedir + '/i'))
 			.pipe(webp({lossless: true}))
@@ -158,10 +163,10 @@ gulp.task('thumb-width', () => {
 gulp.task('thumb-height', () => {
 	const tasks = thumbScale.map(scale =>
 		gulp.src(['./src/images/ic-wpa81-*.png', './src/images/ic-uap10.0m-*.png', './src/images/ca-ios-*.png'])
+			.pipe(rename({suffix: '-t' + (10 * scale)}))
 			.pipe(imageresize({
 				height: 200 * scale,
 			}))
-			.pipe(rename({suffix: '-t' + (10 * scale)}))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 			.pipe(gulp.dest(basedir + '/i'))
 			.pipe(webp({lossless: true}))
@@ -173,14 +178,17 @@ gulp.task('thumb-height', () => {
 /* Favicon */
 gulp.task('favicon', () =>
 	gulp.src('./src/favicon.ico')
+		.pipe(changed(basedir, {hasChanged: changed.compareSha1Digest}))
 		.pipe(gulp.dest(basedir))
 );
 gulp.task('favicon-compress', () => {
 	if (mode.production()) {
 		const gzipTask = gulp.src('./src/favicon.ico')
+			.pipe(changed(basedir))
 			.pipe(gzip({gzipOptions: {level: gzipLevel}}))
 			.pipe(gulp.dest(basedir));
 		const brotliTask = gulp.src('./src/favicon.ico')
+			.pipe(changed(basedir))
 			.pipe(brotli.compress({quality: brotliLevel}))
 			.pipe(gulp.dest(basedir));
 		return merge(gzipTask, brotliTask);
@@ -190,6 +198,7 @@ gulp.task('favicon-compress', () => {
 /* .htaccess */
 gulp.task('htaccess', () =>
 	gulp.src('./src/.htaccess')
+		.pipe(changed(basedir, {hasChanged: changed.compareSha1Digest}))
 		.pipe(gulp.dest(basedir))
 );
 
