@@ -1,4 +1,4 @@
-﻿@import "mixins.less";
+@import "mixins.less";
 
 @phoneVerticalWidth: 548px;
 @phoneHorizontalWidth: 720px;
@@ -34,10 +34,11 @@ body, div, p, span {
 
 h1, h2, h3, h4, h5, h6 {
     margin: 16px 0;
+    font-feature-settings: "pwid";
 }
 
 body {
-    font-family: "Segoe UI", "San Francisco", "Yu Gothic UI", "Hiragino Sans", "Meiryo UI", sans-serif;
+    font-family: "Segoe UI", "San Francisco", "Hiragino Sans", "Yu Gothic UI", "Meiryo UI", sans-serif;
     font-size: 0.9375rem;
     line-height: 1.25rem;
 }
@@ -50,18 +51,19 @@ h1 {
     font-size: 2.875rem;
     line-height: 3.5rem;
     font-weight: 300;
+    letter-spacing: -.01em;
 }
 
 h2 {
     font-size: 2.125rem;
     line-height: 2.5rem;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 h3 {
     font-size: 1.5rem;
     line-height: 1.75rem;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 h4 {
@@ -496,7 +498,7 @@ article {
     max-width: 32em;
 
     & > div {
-        font-family: "Segoe UI", "San Francisco", "Yu Gothic", "Hiragino Sans", Meiryo, sans-serif;
+        font-family: "Segoe UI", "San Francisco", "Hiragino Sans", Meiryo, sans-serif;
 
         & > p {
             margin: .5em 0;
