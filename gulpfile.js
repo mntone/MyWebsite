@@ -21,6 +21,7 @@ const fs           = require('fs'),
 	  cleancss     = require('gulp-clean-css'),
 	  sourcemaps   = require('gulp-sourcemaps'),
 	  imagemin     = require('gulp-imagemin'),
+	  pngquant     = require('imagemin-pngquant'),
 	  webp         = require('gulp-webp'),
 	  imageresize  = require('gulp-image-resize'),
 	  rename       = require('gulp-rename');
@@ -153,6 +154,7 @@ gulp.task('thumb-width', () => {
 			.pipe(imageresize({
 				width: 200 * scale,
 			}))
+			.pipe(mode.production(imagemin([pngquant({quality: '40-60', speed: 1})])))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 			.pipe(gulp.dest(basedir + '/i'))
 			.pipe(webp({lossless: true}))
@@ -167,6 +169,7 @@ gulp.task('thumb-height', () => {
 			.pipe(imageresize({
 				height: 200 * scale,
 			}))
+			.pipe(mode.production(imagemin([pngquant({quality: '40-60', speed: 1})])))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 			.pipe(gulp.dest(basedir + '/i'))
 			.pipe(webp({lossless: true}))
