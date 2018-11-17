@@ -183,11 +183,11 @@ gulp.task('favicon', () =>
 );
 gulp.task('favicon-compress', () => {
 	if (mode.production()) {
-		const gzipTask = gulp.src('./src/favicon.ico')
+		const gzipTask = gulp.src(basedir + '/favicon.ico')
 			.pipe(changed(basedir))
 			.pipe(gzip({gzipOptions: {level: gzipLevel}}))
 			.pipe(gulp.dest(basedir));
-		const brotliTask = gulp.src('./src/favicon.ico')
+		const brotliTask = gulp.src(basedir + '/favicon.ico')
 			.pipe(changed(basedir))
 			.pipe(brotli.compress({quality: brotliLevel}))
 			.pipe(gulp.dest(basedir));
