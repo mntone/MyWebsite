@@ -4,13 +4,23 @@ $tabletWidth: 1024px;
 $wideWidth: 1280px;
 $accent: #298fcc;
 
-@mixin clearfix {
-    &::after {
-        content: " ";
-        display: block;
-        height: 0;
-        clear: both;
-        visibility: hidden;
+@mixin clearfix($postion: after) {
+    @if $postion == before {
+        &::before {
+            content: " ";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    } @else {
+        &::after {
+            content: " ";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
     }
 }
 
@@ -570,6 +580,10 @@ input[type=checkbox]:checked + .more {
             margin-top: 32px;
         }
     }
+}
+
+footer {
+    @include clearfix(before);
 }
 
 #copyright {
