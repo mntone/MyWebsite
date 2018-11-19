@@ -99,7 +99,7 @@ gulp.task('less', () =>
 		.pipe(mode.development(sourcemaps.init()))
 		.pipe(less())
 		.pipe(autoprefixer({
-			browsers: ['last 3 version', 'iOS >= 8.1', 'Android >= 4.4'],
+			browsers: ['last 3 version', 'last 4 iOS major versions', 'Android >= 4.4'],
 			cascade: false,
 		}))
 		.pipe(rename('a.css'))
