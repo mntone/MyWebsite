@@ -1,17 +1,17 @@
-﻿@import "mixins.less";
+﻿$phoneVerticalWidth: 548px;
+$phoneHorizontalWidth: 720px;
+$tabletWidth: 1024px;
+$wideWidth: 1280px;
+$accent: #298fcc;
 
-@phoneVerticalWidth: 548px;
-@phoneHorizontalWidth: 720px;
-@tabletWidth: 1024px;
-@wideWidth: 1280px;
-@accent: #298fcc;
-
-.clearfix() {
-    content: " ";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+@mixin clearfix {
+    &::after {
+        content: " ";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
 }
 
 // reset
@@ -44,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: @accent;
+    color: $accent;
 }
 
 h1 {
@@ -110,10 +110,7 @@ html.no-scroll {
 // grid system
 .grid-container {
     margin: 0 0 12px -12px;
-
-    &:after {
-        .clearfix();
-    }
+    @include clearfix();
 
     & > div > a {
         display: table;
@@ -135,31 +132,31 @@ html.no-scroll {
     }
 }
 
-.grid-item() {
+@mixin grid-item {
     float: left;
     margin: 12px 0 0 12px;
 }
 
 .grid3-item {
-    .grid-item();
-    .calc(width; ~'100% / 3 - 12px');
+    @include grid-item;
+    width: calc(100% / 3 - 12px);
     height: 150px;
 
-    @media (max-width: @tabletWidth) {
-        .calc(width; ~'50% - 12px');
+    @media (max-width: $tabletWidth) {
+        width: calc(50% - 12px);
     }
 
-    @media (max-width: @phoneHorizontalWidth) {
-        .calc(width; ~'100% - 12px');
+    @media (max-width: $phoneHorizontalWidth) {
+        width: calc(100% - 12px);
     }
 }
 
 .grid3-item-cols2 {
-    .grid-item();
-    .calc(width; ~'100% * 2 / 3 - 12px');
+    @include grid-item();
+    width: calc(100% * 2 / 3 - 12px);
 
-    @media (max-width: @tabletWidth) {
-        .calc(width; ~'100% - 12px');
+    @media (max-width: $tabletWidth) {
+        width: calc(100% - 12px);
     }
 }
 
@@ -168,17 +165,14 @@ html.no-scroll {
 }
 
 // page-size
-.page-base() {
+@mixin page-base {
     padding: 12px;
     max-width: 1280px;
 }
 
 #content {
-    .page-base();
+    @include page-base();
     margin: 48px auto 16px;
-}
-
-.my-grid-container > div > a {
 }
 
 .my-grid-item {
@@ -290,7 +284,7 @@ header {
             user-select: none;
         }
 
-        @media (max-width: @phoneHorizontalWidth) {
+        @media (max-width: $phoneHorizontalWidth) {
             padding-left: 44px;
 
             & > span {
@@ -342,7 +336,7 @@ nav {
         }
     }
 
-    @media (max-width: @phoneHorizontalWidth) {
+    @media (max-width: $phoneHorizontalWidth) {
         display: block;
     }
 }
@@ -361,6 +355,8 @@ nav {
 }
 
 #nav-list {
+    @include clearfix();
+
     & > li {
         float: left;
         display: block;
@@ -394,6 +390,7 @@ nav {
                 float: left;
                 width: 100%;
                 line-height: 20px;
+                @include clearfix();
 
                 & > a {
                     white-space: nowrap;
@@ -402,10 +399,6 @@ nav {
                     &:hover {
                         background-color: #000;
                     }
-                }
-
-                &:after {
-                    .clearfix();
                 }
             }
 
@@ -420,11 +413,7 @@ nav {
         }
     }
 
-    &:after {
-        .clearfix();
-    }
-
-    @media (max-width: @phoneHorizontalWidth) {
+    @media (max-width: $phoneHorizontalWidth) {
         visibility: hidden;
         overflow: hidden;
         overflow-y: auto;
@@ -471,7 +460,7 @@ nav {
 
         &.visible {
             visibility: visible;
-            .calc(height; ~'100% - 48px');
+            height: calc(100% - 48px);
             opacity: 1;
 
             & + #menu-button #menu-button-menu {
@@ -523,7 +512,7 @@ article {
 
 .more-button {
     cursor: pointer;
-    color: @accent;
+    color: $accent;
     text-decoration: underline;
 }
 
@@ -541,7 +530,7 @@ input[type=checkbox]:checked + .more {
 
 .screenshot {
     float: right;
-    .calc(width, ~"100% - 36em");
+    width: calc(100% - 36em);
 
     & > h2 {
         display: none;
@@ -581,10 +570,6 @@ input[type=checkbox]:checked + .more {
             margin-top: 32px;
         }
     }
-}
-
-footer:before {
-    .clearfix();
 }
 
 #copyright {

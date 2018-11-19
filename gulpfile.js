@@ -16,9 +16,6 @@ const fs           = require('fs'),
 	  htmlmin      = require('gulp-htmlmin'),
 	  typescript   = require('gulp-tsc'),
 	  uglify       = require('gulp-uglify'),
-	  less         = require('gulp-less'),
-	  autoprefixer = require('gulp-autoprefixer'),
-	  cleancss     = require('gulp-clean-css'),
 	  sourcemaps   = require('gulp-sourcemaps'),
 	  imagemin     = require('gulp-imagemin'),
 	  pngquant     = require('imagemin-pngquant'),
@@ -93,21 +90,34 @@ gulp.task('typescript-compress', () => {
 	}
 });
 
-/* LESS */
-gulp.task('less', () =>
-	gulp.src('./src/less/app.less')
-		.pipe(mode.development(sourcemaps.init()))
-		.pipe(less())
-		.pipe(autoprefixer({
-			browsers: ['last 3 version', 'last 4 iOS major versions', 'Android >= 4.4'],
+/* Styles */
+gulp.task('style', () => {
+	const sass         = require('gulp-sass'),
+		  postcss      = require('gulp-postcss'),
+		  autoprefixer = require('autoprefixer'),
+		  mqpacker     = require("css-mqpacker"),
+		  cssnano      = require('cssnano');
+	let plugins = [
+		autoprefixer({
+			browsers: ['last 3 version', 'IE 9', 'last 4 iOS major versions', 'Android >= 4.4'],
 			cascade: false,
-		}))
+		}),
+	];
+	if (mode.production()) {
+		plugins = plugins.concat([
+			mqpacker(),
+			cssnano({ precision: 4, autoprefixer: false }),
+		]);
+	}
+	return gulp.src('./src/styles/app.scss')
+		.pipe(sourcemaps.init())
+		.pipe(sass())
+		.pipe(postcss(plugins))
+		.pipe(sourcemaps.write('./'))
 		.pipe(rename('a.css'))
-		.pipe(mode.production(cleancss({level: 2})))
-		.pipe(mode.development(sourcemaps.write('./')))
-		.pipe(gulp.dest(basedir + '/c'))
-);
-gulp.task('less-compress', () => {
+		.pipe(gulp.dest(basedir + '/c'));
+});
+gulp.task('style-compress', () => {
 	if (mode.production()) {
 		const gzipTask = gulp.src(basedir + '/c/**/*.css')
 			.pipe(gzip({gzipOptions: {level: gzipLevel}}))
@@ -207,16 +217,16 @@ gulp.task('htaccess', () =>
 
 /* Build */
 gulp.task('build', () => runSequence(
-	['ejs', 'typescript', 'less', 'svg', 'favicon', 'htaccess'],
-	['ejs-compress', 'typescript-compress', 'less-compress', 'svg-compress', 'favicon-compress']
+	['ejs', 'typescript', 'style', 'svg', 'favicon', 'htaccess'],
+	['ejs-compress', 'typescript-compress', 'style-compress', 'svg-compress', 'favicon-compress']
 ));
 gulp.task('rebuild', () => runSequence('clean', 'build'));
 
 /* Watch */
-gulp.task('watch', ['ejs', 'typescript', 'less', 'svg', 'favicon', 'htaccess'], () => {
+gulp.task('watch', ['ejs', 'typescript', 'style', 'svg', 'favicon', 'htaccess'], () => {
 	gulp.watch('./src/templates/**/*.ejs', ['ejs']);
 	gulp.watch('./src/ts/**/*.ts', ['typescript']);
-	gulp.watch('./src/less/app.less', ['less']);
+	gulp.watch('./src/styles/app.scss', ['style']);
 	gulp.watch('./src/images/**/*.svg', ['svg']);
 	gulp.watch('./src/favicon.ico', ['favicon']);
 	gulp.watch('./src/.htaccess', ['htaccess']);
