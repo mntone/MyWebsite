@@ -1,27 +1,21 @@
-const fs           = require('fs'),
-	  gulp         = require('gulp'),
-	  mode         = require('gulp-mode')({
+const fs          = require('fs'),
+	  gulp        = require('gulp'),
+	  mode        = require('gulp-mode')({
 		modes: ["production", "development"],
 		default: "development",
 		verbose: false,
 	  }),
-	  runSequence  = require('run-sequence'),
-	  merge        = require('merge-stream'),
-	  changed      = require('gulp-changed'),
-	  clean        = require('gulp-clean'),
-	  gzip         = require('gulp-gzip'),
-	  brotli       = require('gulp-brotli'),
-	  ejs          = require('gulp-ejs'),
-	  minifyinline = require('gulp-minify-inline'),
-	  htmlmin      = require('gulp-htmlmin'),
-	  typescript   = require('gulp-tsc'),
-	  uglify       = require('gulp-uglify'),
-	  sourcemaps   = require('gulp-sourcemaps'),
-	  imagemin     = require('gulp-imagemin'),
-	  pngquant     = require('imagemin-pngquant'),
-	  webp         = require('gulp-webp'),
-	  imageresize  = require('gulp-image-resize'),
-	  rename       = require('gulp-rename');
+	  runSequence = require('run-sequence'),
+	  merge       = require('merge-stream'),
+	  changed     = require('gulp-changed'),
+	  gzip        = require('gulp-gzip'),
+	  brotli      = require('gulp-brotli'),
+	  sourcemaps  = require('gulp-sourcemaps'),
+	  imagemin    = require('gulp-imagemin'),
+	  pngquant    = require('imagemin-pngquant'),
+	  webp        = require('gulp-webp'),
+	  imageresize = require('gulp-image-resize'),
+	  rename      = require('gulp-rename');
 
 const basedir = mode.production() ? './prod' : './dst';
 const lang = ['ja', 'en'];
@@ -30,13 +24,17 @@ const brotliLevel = 11;
 const thumbScale = [1, 1.5, 2, 3];
 
 /* Clean */
-gulp.task('clean', () =>
-	gulp.src(basedir)
+gulp.task('clean', () => {
+	const clean = require('gulp-clean');
+	return gulp.src(basedir)
 		.pipe(clean())
-);
+});
 
 /* EJS */
 gulp.task('ejs', () => {
+	const ejs          = require('gulp-ejs'),
+		  minifyinline = require('gulp-minify-inline'),
+		  htmlmin      = require('gulp-htmlmin');
 	const res = JSON.parse(fs.readFileSync('./src/resources/res.json'));
 	const tasks = lang.map(targetLang =>
 		gulp.src(['./src/templates/**/*.ejs', '!./src/templates/**/_*.ejs'])
@@ -51,7 +49,7 @@ gulp.task('ejs', () => {
 	);
 	return merge(tasks);
 });
-gulp.task('ejs-compress', () => {
+gulp.task('ejs:compress', () => {
 	if (mode.production()) {
 		for (const target of lang) {
 			gulp.src(basedir + '/**/*.html.' + target)
@@ -65,20 +63,20 @@ gulp.task('ejs-compress', () => {
 });
 
 /* TypeScript */
-gulp.task('typescript', () =>
-	gulp.src('./src/ts/**/*.ts')
-		.pipe(mode.development(sourcemaps.init()))
-		.pipe(typescript({
-			target: "es5",
-		}))
+gulp.task('typescript', () => {
+	const typescript = require('gulp-tsc'),
+		  uglify     = require('gulp-uglify');
+	return gulp.src('./src/ts/**/*.ts')
+		.pipe(sourcemaps.init())
+		.pipe(typescript({target: "es5"}))
 		.pipe(mode.production(uglify({
 			compress: true,
 			sourceMap: true,
 		})))
-		.pipe(mode.development(sourcemaps.write('./')))
+		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest(basedir + '/j'))
-);
-gulp.task('typescript-compress', () => {
+});
+gulp.task('typescript:compress', () => {
 	if (mode.production()) {
 		const gzipTask = gulp.src(basedir + '/j/**/*.js')
 			.pipe(gzip({gzipOptions: {level: gzipLevel}}))
@@ -117,7 +115,7 @@ gulp.task('style', () => {
 		.pipe(rename('a.css'))
 		.pipe(gulp.dest(basedir + '/c'));
 });
-gulp.task('style-compress', () => {
+gulp.task('style:compress', () => {
 	if (mode.production()) {
 		const gzipTask = gulp.src(basedir + '/c/**/*.css')
 			.pipe(gzip({gzipOptions: {level: gzipLevel}}))
@@ -136,7 +134,7 @@ gulp.task('svg', () =>
 		.pipe(mode.production(imagemin([imagemin.svgo()])))
 		.pipe(gulp.dest(basedir + '/i'))
 );
-gulp.task('svg-compress', () => {
+gulp.task('svg:compress', () => {
 	if (mode.production()) {
 		const gzipTask = gulp.src(basedir + '/i/**/*.svg')
 			.pipe(changed(basedir + '/i'))
@@ -194,7 +192,7 @@ gulp.task('favicon', () =>
 		.pipe(changed(basedir, {hasChanged: changed.compareSha1Digest}))
 		.pipe(gulp.dest(basedir))
 );
-gulp.task('favicon-compress', () => {
+gulp.task('favicon:compress', () => {
 	if (mode.production()) {
 		const gzipTask = gulp.src(basedir + '/favicon.ico')
 			.pipe(changed(basedir))
@@ -218,7 +216,7 @@ gulp.task('htaccess', () =>
 /* Build */
 gulp.task('build', () => runSequence(
 	['ejs', 'typescript', 'style', 'svg', 'favicon', 'htaccess'],
-	['ejs-compress', 'typescript-compress', 'style-compress', 'svg-compress', 'favicon-compress']
+	['ejs:compress', 'typescript:compress', 'style:compress', 'svg:compress', 'favicon:compress']
 ));
 gulp.task('rebuild', () => runSequence('clean', 'build'));
 
