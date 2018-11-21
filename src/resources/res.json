@@ -31,7 +31,8 @@
       "deliveredikaconnect": "Being delivered&nbsp;<wbr>in the Windows store&nbsp;<wbr>at $5.99",
       "twitterhighquality": "Wish to upload HQ-video&nbsp;<wbr>to Twitter for you",
       "usertmp": "Wish to use rtmp streaming&nbsp;<wbr>in Windows Store apps",
-      "usesvg": "Wish to use svg&nbsp;<wbr>in Windows Store apps or UWP apps"
+      "usesvg": "Wish to use svg&nbsp;<wbr>in Windows Store apps or UWP apps",
+      "useug": "Merge Graphics API for C# level"
     },
     "ja": {
       "lang": "ja",
@@ -64,7 +65,8 @@
       "deliveredikaconnect": "￥600 で&nbsp;<wbr>Windows ストアにて&nbsp;<wbr>配信中",
       "twitterhighquality": "Twitter に高画質で動画を上げたいあなたに",
       "usertmp": "Windows ストア アプリ で&nbsp;<wbr>rtmp ストリーミングを使う",
-      "usesvg": "Windows ストア アプリ、UWP で&nbsp;<wbr>SVG を使う"
+      "usesvg": "Windows ストア アプリ、UWP で&nbsp;<wbr>SVG を使う",
+      "useug": "C#レベルによるグラフィックスAPIの統合"
     }
   }
 }
