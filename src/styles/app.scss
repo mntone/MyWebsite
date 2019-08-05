@@ -45,6 +45,11 @@ body {
     font-size: 0.9375rem;
     line-height: 1.25rem;
     line-break: strict;
+
+    @media (prefers-color-scheme: dark) {
+        color: #fff;
+        background-color: #000;
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -244,6 +249,10 @@ header {
     width: 100%;
     height: 48px;
     z-index: 4;
+
+    @media (prefers-color-scheme: dark) {
+        color: #000
+    }
 }
 
 #header-background {
@@ -253,6 +262,10 @@ header {
     backdrop-filter: blur(10px);
     width: 100%;
     height: 48px;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: rgba(255, 255, 255, .8);
+    }
 }
 
 #header-inner {
@@ -284,6 +297,10 @@ header {
 
         &:hover {
             background-color: #000;
+
+            @media (prefers-color-scheme: dark) {
+                background-color: #fff;
+            }
         }
 
         & > span {
@@ -339,6 +356,10 @@ nav {
 
         &:hover {
             background-color: #000;
+
+            @media (prefers-color-scheme: dark) {
+                background-color: #fff;
+            }
         }
     }
 
@@ -380,6 +401,10 @@ nav {
 
             &:hover {
                 background-color: #000;
+
+                @media (prefers-color-scheme: dark) {
+                    background-color: #fff;
+                }
             }
         }
 
@@ -402,8 +427,16 @@ nav {
                     white-space: nowrap;
                     background-color: rgba(0, 0, 0, .8);
 
+                    @media (prefers-color-scheme: dark) {
+                        background-color: rgba(255, 255, 255, .8);
+                    }
+
                     &:hover {
                         background-color: #000;
+
+                        @media (prefers-color-scheme: dark) {
+                            background-color: #fff;
+                        }
                     }
                 }
             }
@@ -435,6 +468,11 @@ nav {
         opacity: 0;
         transition: opacity cubic-bezier(0.1, 0.9, 0.2, 1) 220ms;
 
+        @media (prefers-color-scheme: dark) {
+            color: rgba(0, 0, 0, .8);
+            background-color: rgba(255, 255, 255, .8);
+        }
+
         & > li {
             float: none;
             padding: 16px 0 12px;
@@ -451,6 +489,10 @@ nav {
                 visibility: visible;
                 transform: initial;
                 color: #fff;
+
+                @media (prefers-color-scheme: dark) {
+                    color: #000;
+                }
 
                 & > li {
                     display: block;
