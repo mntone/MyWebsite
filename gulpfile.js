@@ -6,6 +6,7 @@ const fs          = require('fs'),
 		verbose: false,
 	  }),
 	  merge       = require('merge-stream'),
+	  browserSync = require('browser-sync').create(),
 	  changed     = require('gulp-changed'),
 	  sourcemaps  = require('gulp-sourcemaps'),
 	  imagemin    = require('gulp-imagemin'),
@@ -164,11 +165,37 @@ gulp.task('build', defaultTasks);
 gulp.task('rebuild', gulp.series(clean, defaultTasks));
 
 /* Watch files */
-function watchFiles() {
-	gulp.watch('./src/templates/**/*.ejs', ejs)
-	gulp.watch('./src/ts/**/*.ts', typescript)
-	gulp.watch('./src/styles/app.scss', style)
-	gulp.watch('./src/favicon.ico', favicon)
-	gulp.watch('./src/.htaccess', htaccess)
+const browserSyncOption = {
+	port: 8080,
+	server: {
+		baseDir: basedir,
+		index: 'index.html.ja',
+		middleware(req, res, next) {
+			const url = req.url;
+			if (url.indexOf('.ja') > -1) {
+				res.setHeader('Content-Type', 'text/html');
+			} else if (url.indexOf('.en') > -1) {
+				res.setHeader('Content-Type', 'text/html');
+			}
+
+			next();
+		}
+	},
+	reloadOnRestart: true,
+};
+function browsersync(done) {
+	browserSync.init(browserSyncOption);
+	done();
 }
-gulp.task('watch', watchFiles);
+function watchFiles() {
+	const browserReload = () => {
+		browserSync.reload();
+		done();
+	};
+	gulp.watch('./src/templates/**/*.ejs', gulp.series(ejs, browserReload))
+	gulp.watch('./src/ts/**/*.ts', gulp.series(typescript, browserReload))
+	gulp.watch('./src/styles/app.scss', gulp.series(style, browserReload))
+	gulp.watch('./src/favicon.ico', gulp.series(favicon, browserReload))
+	gulp.watch('./src/.htaccess', gulp.series(htaccess, browserReload))
+}
+gulp.task('watch', gulp.series(browsersync, watchFiles));
