@@ -127,6 +127,10 @@ html.no-scroll {
 // page-size
 @mixin page-base {
     padding: 12px;
+    padding-left: calc(12px + constant(safe-area-inset-left));
+    padding-left: calc(12px + env(safe-area-inset-left));
+    padding-right: calc(12px + constant(safe-area-inset-right));
+    padding-right: calc(12px + env(safe-area-inset-right));
     max-width: 1280px;
 }
 
@@ -276,6 +280,10 @@ header {
     top: -48px;
     margin: 0 auto;
     padding: 0 12px;
+    padding-left: calc(12px + constant(safe-area-inset-left));
+    padding-left: calc(12px + env(safe-area-inset-left));
+    padding-right: calc(12px + constant(safe-area-inset-right));
+    padding-right: calc(12px + env(safe-area-inset-right));
     max-width: 1280px;
 }
 
