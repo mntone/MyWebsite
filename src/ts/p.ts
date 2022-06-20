@@ -3,7 +3,7 @@
 var style: number = 1;
 const styleType = { "narrow": 0, "full": 1 };
 function setStyle(value: number): boolean {
-    if (style != value) {
+    if (style !== value) {
         style = value;
         return true;
     }
@@ -97,8 +97,8 @@ abstract class KeyboardArrowSupport implements IKeyboardArrowListener {
     onkeydown(e: KeyboardEvent): void {
         setMode(modeType.keyboard);
 
-        var c = e.keyCode;
-        var ret = false;
+        const c = e.keyCode;
+        let ret = false;
         switch (c) {
             case 37: ret = this.onleftarrowdown(e); break;
             case 38: ret = this.onuparrowdown(e); break;
@@ -130,7 +130,7 @@ class SecondLevelLiCodeBehind extends KeyboardArrowSupport {
         this._disposables.dispose();
         this._disposables = new DisposableCollection();
 
-        if (style == styleType.full) {
+        if (style === styleType.full) {
             this._disposables.push(new EventDisposable(this.li, "pointerover", this.onpointerover.bind(this)));
         }
     }
@@ -169,27 +169,27 @@ class SecondLevelLiCodeBehind extends KeyboardArrowSupport {
 
 abstract class UlCodeBehindBase<TChild> {
     protected _items: Array<TChild>;
-    protected _selectedItem: TChild;
+    protected _selectedItem: TChild | null;
 
     constructor(protected ul: HTMLUListElement) { }
 
     init(func: (li: HTMLLIElement) => TChild): void {
         this._selectedItem = null;
 
-        var liItems = <HTMLLIElement[]>getFilteredItems(this.ul.childNodes, "LI");
+        const liItems = <HTMLLIElement[]>getFilteredItems(this.ul.childNodes, "LI");
         this._items = liItems.map(li => func(li));
     }
 
-    getPrevItem(current: TChild): TChild {
-        var newIndex = this._items.indexOf(current) - 1;
+    getPrevItem(current: TChild): TChild | null {
+        const newIndex = this._items.indexOf(current) - 1;
         if (newIndex >= 0 && newIndex < this._items.length) {
             return this._items[newIndex];
         }
         return null;
     }
 
-    getNextItem(current: TChild): TChild {
-        var newIndex = this._items.indexOf(current) + 1;
+    getNextItem(current: TChild): TChild | null {
+        const newIndex = this._items.indexOf(current) + 1;
         if (newIndex < this._items.length) {
             return this._items[newIndex];
         }
@@ -254,20 +254,20 @@ class SecondLevelUlCodeBehind extends UlCodeBehindBase<SecondLevelLiCodeBehind> 
             this.parent.focus();
         } else {
             var nextItem = this.parent.parent.getNextItem(this.parent);
-            if (nextItem != null) {
+            if (nextItem !== null) {
                 nextItem.getChild().next();
             }
         }
     }
 
-    getSelectedItem(): SecondLevelLiCodeBehind {
+    getSelectedItem(): SecondLevelLiCodeBehind | null {
         return this._selectedItem;
     }
-    setSelectedItem(value: SecondLevelLiCodeBehind): boolean {
+    setSelectedItem(value: SecondLevelLiCodeBehind | null): boolean {
         if (this._selectedItem === value) return false;
 
         this._selectedItem = value;
-        if (this._selectedItem != null) {
+        if (this._selectedItem !== null) {
             this._selectedItem.focus();
         }
         return true;
@@ -373,7 +373,7 @@ class FirstLevelLiCodeBehind extends KeyboardArrowSupport {
     }
 
     onleftarrowdown(e: KeyboardEvent): boolean {
-        if (style == styleType.full) {
+        if (style === styleType.full) {
             this.parent.prev();
             return true;
         }
@@ -460,11 +460,11 @@ class FirstLevelUlCodeBehind extends UlCodeBehindBase<FirstLevelLiCodeBehind> {
         }
     }
 
-    getSelectedItem(): FirstLevelLiCodeBehind {
+    getSelectedItem(): FirstLevelLiCodeBehind | null {
         if (style === styleType.narrow) throw new Error();
         return this._selectedItem;
     }
-    setSelectedItem(value: FirstLevelLiCodeBehind): boolean {
+    setSelectedItem(value: FirstLevelLiCodeBehind | null): boolean {
         if (style === styleType.narrow) throw new Error();
         if (this._selectedItem === value) return false;
 
