@@ -3,6 +3,13 @@ AddType image/svg+xml svg
 AddType image/webp webp
 #####end:mime#####
 
+#####ipcheck#####
+order deny,allow
+deny from .cn
+deny from .ru
+deny from .kp
+#####end:ipcheck#####
+
 Options +MultiViews
 AddLanguage en-nz .en-gb
 AddLanguage en-au .en-gb
