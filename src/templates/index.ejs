@@ -1,9 +1,9 @@
-﻿<% include common/_header %>
+﻿<%- include('common/_header') %>
 
 <div>
 	<h2 itemprop="headline"><%- bio %></h2>
 	<div itemprop="articleBody">
-		<% if (lang == "ja") { %>
+		<% if (lang === "ja") { %>
 		私のプロフィールは<a href="/bio.html">ここ</a>。
 		<% } else { %>
 		My bio is <a href="/bio.html">here</a>.
@@ -61,4 +61,4 @@
 	</script>
 </div>
 
-<% include common/_footer %>
+<%- include('common/_footer') %>

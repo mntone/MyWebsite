@@ -68,7 +68,7 @@ exports.typescript = typescript
 
 /* Styles */
 function style() {
-	const sass         = require('gulp-sass'),
+	const sass         = require('gulp-sass')(require('sass')),
 		  postcss      = require('gulp-postcss'),
 		  autoprefixer = require('autoprefixer'),
 		  mqpacker     = require("css-mqpacker"),
@@ -84,7 +84,7 @@ function style() {
 	}
 	return gulp
 		.src('./src/styles/app.scss', { sourcemaps: true })
-		.pipe(sass())
+		.pipe(sass.sync())
 		.pipe(postcss(plugins))
 		.pipe(rename('a.css'))
 		.pipe(gulp.dest(basedir + '/c'), { sourcemaps: './sourcemaps' });

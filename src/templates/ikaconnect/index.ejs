@@ -1,10 +1,10 @@
-﻿<% include ../common/_header %>
+﻿<%- include('../common/_header') %>
 
 <article itemscope itemtype="http://schema.org/Article">
     <h1 itemprop="headline"><%- ikaconnect %></h1>
 
     <div itemprop="articleBody">
-        <% if (lang == "ja") { %>
+        <% if (lang === "ja") { %>
         <p>IkaConnectはスプラトゥーンのサービス「イカリング」を用いたフレンドのステータスやステージの予定を見ることができるアプリです。</p>
         <p class="mark">※ 当アプリは、スプラトゥーンの非公式アプリであり、任天堂株式会社とは一切の関係がございません。アプリに関するお問い合わせはサポートの連絡先のほうへお願いします。</p>
         <p class="mark">※ イカリングの仕様変更によりアプリが予期せぬ動作が発生することがあります。</p>
@@ -47,7 +47,7 @@
         <!--<p><a href="https://www.microsoft.com/store/apps/ikaconnect/9nblggh6c6m6" target="blank"><%- download_by_windows_store %></a></p>-->
     </div>
 
-    <% if (lang == "ja") { %>
+    <% if (lang === "ja") { %>
     <h2 itemprop="headline"><%- update_history %> (UWP 版)</h2>
     <h5>v2.4.5</h5>
     <div itemprop="articleBody">
@@ -578,4 +578,4 @@
     </div>
 </div>
 
-<% include ../common/_footer %>
+<%- include('../common/_footer') %>

@@ -1,8 +1,8 @@
-﻿<% include common/_header %>
+﻿<%- include('common/_header') -%>
 
 <article itemscope itemtype="http://schema.org/Article">
 
-	<% if (lang == "ja") { %>
+	<% if (lang === "ja") { %>
 	<h2 itemprop="headline">プロフィール</h2>
 	<div itemprop="articleBody">
 		<p>
@@ -91,4 +91,4 @@
 	</div>
 </article>
 
-<% include common/_footer %>
+<%- include('common/_footer') -%>

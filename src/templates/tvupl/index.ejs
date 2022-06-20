@@ -1,8 +1,8 @@
-﻿<% include ../common/_header %>
+﻿<%- include('../common/_header') %>
 
 <article itemscope itemtype="http://schema.org/Article">
     <h1 itemprop="headline"><%- twittervideouploader %></h1>
-    <% if (lang == "ja") { %>
+    <% if (lang === "ja") { %>
     <div itemprop="articleBody">
         <p>Twitterに動画をうｐするマンとは、Twitterに動画をアップロードするツールです。動画を高画質であげたい! って方には便利なツールです。制約がかなりでかいので注意してください。</p>
     </div>
@@ -195,4 +195,4 @@
     </div>
 </div>
 
-<% include ../common/_footer %>
+<%- include('../common/_footer') %>
