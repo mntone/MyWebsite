@@ -12,10 +12,6 @@ deny from .kp
 #####end:ipcheck#####
 
 Options +MultiViews
-AddLanguage en-nz .en-gb
-AddLanguage en-au .en-gb
-AddLanguage en-gb .en-gb
-
 AddLanguage en .en
 AddLanguage en-us .en
 
@@ -23,30 +19,11 @@ AddLanguage ja .ja
 AddLanguage ja-jp-mac .ja
 AddLanguage ja-jp .ja
 
-AddLanguage es-419 .es-419
-
-AddLanguage es .es
-AddLanguage es-es .es
-
-AddLanguage fr-ca .fr-ca
-
-AddLanguage fr .fr
-AddLanguage fr-fr .fr
-
-AddLanguage de .de
-AddLanguage de-de .de
-
-AddLanguage it .it
-AddLanguage it-it .it
-
-AddEncoding x-gzip .gz
-
-LanguagePriority en en-gb ja-jp es-419 es-es fr-fr fr-ca it-it de-de
+LanguagePriority en ja-jp ja
 ForceLanguagePriority Prefer Fallback
 DefaultLanguage en
 
 RewriteEngine On
-RewriteBase /
 
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} mntone.minibird.jp
