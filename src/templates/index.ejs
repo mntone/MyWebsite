@@ -19,14 +19,22 @@
 			</div></a>
 		</div>
 		<div class="grid-item grid-item-image grid3-item" touch-action="pan-y">
-			<p style="background-image: url('/i/ic-uap10.0d-main-<%- lang %>@20.png')"></p>
+			<picture>
+				<source type="image/avif" srcset="/i/ic-uap10.0d-main-<%- lang %>@20.avif">
+				<source type="image/webp" srcset="/i/ic-uap10.0d-main-<%- lang %>@20.webp">
+				<img src="/i/ic-uap10.0d-main-<%- lang %>@20.png" alt="<%- ikaconnect %>">
+			</picture>
 			<a href="/ikaconnect/"><div>
 				<small><%- enjoysplatoon %></small>
 				<h3><%- ikaconnect %></h3>
 			</div></a>
 		</div>
 		<div class="grid-item grid-item-image grid3-item" touch-action="pan-y">
-			<p style="background-image: url('/i/tvupl.15.png')"></p>
+			<picture>
+				<source type="image/avif" srcset="/i/tvupl.10.avif, /i/tvupl.15.avif 1.5x">
+				<source type="image/webp" srcset="/i/tvupl.10.webp, /i/tvupl.15.webp 1.5x">
+				<img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" alt="<%- twittervideouploader %>">
+			</picture>
 			<a href="/tvupl/"><div>
 				<small><%- twitterhighquality %></small>
 				<h3><%- twittervideouploader %></h3>
