@@ -559,10 +559,15 @@ class PageCodeBehind {
 }
 
 var codeBehind: PageCodeBehind;
-window.onload = function () {
+function _main() {
     var anyDocument = <any>document;
     if (typeof anyDocument.msCSSOMElementFloatMetrics !== "undefined") {
         anyDocument.msCSSOMElementFloatMetrics = !0;
     }
     codeBehind = new PageCodeBehind(<HTMLBodyElement>document.body);
+}
+if (document.readyState === "loading") {
+    document.addEventListener('DOMContentLoaded', _main, false);
+} else {
+    _main();
 }
