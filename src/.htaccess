@@ -1,6 +1,7 @@
 #####mime#########mime#####
 AddType image/svg+xml svg
 AddType image/webp webp
+AddType image/avif avif
 #####end:mime#####
 
 #####ipcheck#####

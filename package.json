@@ -17,6 +17,7 @@
     "cssnano": "^5.0.5",
     "fs": "0.0.1-security",
     "gulp": "^4.0.2",
+    "gulp-avif": "^1.1.1",
     "gulp-changed": "^3.2.0",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.2.0",

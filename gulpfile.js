@@ -11,7 +11,6 @@ const fs          = require('fs'),
 	  sourcemaps  = require('gulp-sourcemaps'),
 	  imagemin    = require('gulp-imagemin'),
 	  pngquant    = require('imagemin-pngquant'),
-	  webp        = require('gulp-webp'),
 	  imageresize = require('gulp-image-resize'),
 	  rename      = require('gulp-rename');
 
@@ -95,7 +94,7 @@ exports.style = style
 function svg() {
 	return gulp
 		.src('./src/images/**/*.svg')
-		.pipe(changed(basedir + '/i'))
+		.pipe(changed(basedir + '/i', {hasChanged: changed.compareContents}))
 		.pipe(mode.production(imagemin([imagemin.svgo()])))
 		.pipe(gulp.dest(basedir + '/i'))
 }
@@ -103,24 +102,20 @@ exports.svg = svg
 function png() {
 	return gulp
 		.src('./src/images/**/*.png')
-		.pipe(changed(basedir + '/i'))
+		.pipe(changed(basedir + '/i', {hasChanged: changed.compareContents}))
 		.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
-		.pipe(gulp.dest(basedir + '/i'))
-		.pipe(webp({lossless: true}))
 		.pipe(gulp.dest(basedir + '/i'))
 }
 exports.png = png
 function thumbWidth() {
 	const tasks = thumbScale.map(scale =>
 		gulp.src(['./src/images/ic-win81-*.png', './src/images/ic-uap10.0d-*.png'])
-			.pipe(rename({suffix: '-t' + (10 * scale)}))
+			.pipe(rename({suffix: '@' + (10 * scale)}))
 			.pipe(imageresize({
 				width: 200 * scale,
 			}))
 			.pipe(mode.production(imagemin([pngquant({quality: '40-60', speed: 1})])))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
-			.pipe(gulp.dest(basedir + '/i'))
-			.pipe(webp({lossless: true}))
 			.pipe(gulp.dest(basedir + '/i'))
 	);
 	return merge(tasks);
@@ -129,19 +124,57 @@ exports.thumbWidth = thumbWidth
 function thumbHeight() {
 	const tasks = thumbScale.map(scale =>
 		gulp.src(['./src/images/ic-wpa81-*.png', './src/images/ic-uap10.0m-*.png', './src/images/ca-ios-*.png'])
-			.pipe(rename({suffix: '-t' + (10 * scale)}))
+			.pipe(rename({suffix: '@' + (10 * scale)}))
 			.pipe(imageresize({
 				height: 200 * scale,
 			}))
 			.pipe(mode.production(imagemin([pngquant({quality: '40-60', speed: 1})])))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 			.pipe(gulp.dest(basedir + '/i'))
-			.pipe(webp({lossless: true}))
-			.pipe(gulp.dest(basedir + '/i'))
 	);
 	return merge(tasks);
 }
 exports.thumbHeight = thumbHeight
+
+function webp() {
+	const webp = require('gulp-webp')
+	return gulp
+		.src([`${basedir}/i/**/*.png`, `!${basedir}/i/**/*@*.png`])
+		.pipe(changed(basedir + '/i', {extension: '.webp', hasChanged: changed.compareContents}))
+		.pipe(webp({lossless: true}))
+		.pipe(gulp.dest(basedir + '/i'))
+}
+exports.webp = webp
+
+function webpthumb() {
+	const webp = require('gulp-webp')
+	return gulp
+		.src(`${basedir}/i/**/*@*.png`)
+		.pipe(changed(basedir + '/i', {extension: '.webp', hasChanged: changed.compareContents}))
+		.pipe(webp())
+		.pipe(gulp.dest(basedir + '/i'))
+}
+exports.webpthumb = webpthumb
+
+function avif() {
+	const avif  = require('gulp-avif')
+	return gulp
+		.src([`${basedir}/i/**/*.png`, `!${basedir}/i/**/*@*.png`])
+		.pipe(changed(basedir + '/i', {extension: '.avif', hasChanged: changed.compareContents}))
+		.pipe(avif({lossless: true, quality: 70, speed: 1}))
+		.pipe(gulp.dest(basedir + '/i'))
+}
+exports.avif = avif
+
+function avifthumb() {
+	const avif  = require('gulp-avif')
+	return gulp
+		.src(`${basedir}/i/**/*@*.png`)
+		.pipe(changed(basedir + '/i', {extension: '.avif', hasChanged: changed.compareContents}))
+		.pipe(avif({speed: 2, quality: 40}))
+		.pipe(gulp.dest(basedir + '/i'))
+}
+exports.avifthumb = avifthumb
 
 /* Favicon */
 function favicon() {
@@ -161,6 +194,7 @@ exports.htaccess = htaccess
 
 /* Build */
 const defaultTasks = gulp.parallel(ejs, typescript, style, favicon, htaccess)
+gulp.task('image', gulp.series(gulp.parallel(svg, png, thumbWidth, thumbHeight), gulp.parallel(webp, webpthumb, avif, avifthumb)));
 gulp.task('build', defaultTasks);
 gulp.task('rebuild', gulp.series(clean, defaultTasks));
 
