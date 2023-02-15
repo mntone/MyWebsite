@@ -11,6 +11,12 @@ deny from .ru
 deny from .kp
 #####end:ipcheck#####
 
+<IfModule mod_headers.c>
+	Header set Content-Security-Policy " \
+	default-src https://mntone.minibird.jp; \
+	"
+</IfModule>
+
 Options +MultiViews
 AddLanguage en .en
 AddLanguage en-us .en
