@@ -1,0 +1,49 @@
+<%- include('../common/_header') %>
+
+<article itemscope itemtype="http://schema.org/Article">
+	<% if( lang === "ja" ) { %>
+	<h2 itemprop="headline">プライバシー ポリシー (個人情報保護方針)</h2>
+	<div itemprop="articleBody">
+		<p>モンハク (以下、「本アプリ」という) は、以下のとおりプライバシー ポリシー (以下、「本ポリシー」という) を定めます。本アプリを利用した場合には、本ポリシーに同意したものとみなされます。</p>
+
+		<ol>
+            <li><strong>個人情報</strong>: 本アプリは個人情報 (設定や履歴も含む) の一切を収集しません。</li>
+			<li><strong>ネットワーク通信</strong>: 本アプリにおけるインターネットを用いた通信は、データをダウンロードするために使われます。</li>
+			<li><strong>セキュリティー</strong>: 本アプリは、データをダウンロードする際に SSL (Secure Socket Layer) を使用します。</li>
+			<li><strong>本ポリシーの変更</strong>: 本ポリシーの内容は、ユーザーに通知することなく、変更することができるものとします。</li>
+			<li><strong>お問い合わせ</strong>: 本ポリシーに関するお問い合わせは、下記までお願いいたします。
+                <ul>
+                    <li>mntone[at]outlook.jp ([at] は @ に変更してください)</li>
+                    <li>Misskey <a href="https://misskey.io/@mntone">@mntone@misskey.io</a> (日本語専用)</li>
+                    <li>Mastodon <a href="https://mastodon.social/@mntone">@mntone@mastodon.social</a> (English only)</li>
+                </ul>
+            </li>
+		</ol>
+
+		<p>制定: 2024年2月7日</p>
+	</div>
+	<% } else { %>
+	<h2 itemprop="headline">Privacy Policy</h2>
+	<div itemprop="articleBody">
+		<p>The Privacy Policy sets forth our privacy information handling principles. You or users are deemed to have agreed with the Privacy Policy if you use Prof. Monster (the “App”).</p>
+
+		<p>Last updated: Febrary 7, 2024</p>
+
+		<ol>
+			<li><strong>Your Information.</strong> The App does NOT collect any your information (including settings and history).</li>
+			<li><strong>Internet Connection.</strong> The App use the Internet connection to download the data.</li>
+			<li><strong>Security.</strong> The App use SSL (Secure Socket Layer) to download the data.</li>
+			<li><strong>Change of Privacy Policy.</strong> The Privacy Policy is subject to changes without notice to users.</li>
+			<li><strong>Inquiry Contact.</strong> If you have any question about the policy, please contact me below.
+                <ul>
+                    <li>mntone[at]outlook.jp (change [at] to @)</li>
+                    <li>Mastodon <a href="https://mastodon.social/@mntone">@mntone@mastodon.social</a> (English only)</li>
+                    <li>Misskey <a href="https://misskey.io/@mntone">@mntone@misskey.io</a> (日本語専用)</li>
+                </ul>
+            </li>
+		</ol>
+	</div>
+	<% } %>
+</article>
+
+<%- include('../common/_footer') %>
