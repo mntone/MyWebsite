@@ -7,13 +7,15 @@ AddType image/avif avif
 #####ipcheck#####
 order deny,allow
 deny from .cn
-deny from .ru
+deny from .il
 deny from .kp
+deny from .ua
 #####end:ipcheck#####
 
 <IfModule mod_headers.c>
 	Header set Content-Security-Policy " \
 	default-src https://mntone.minibird.jp; \
+	style-src-attr 'unsafe-inline'; \
 	"
 </IfModule>
 
