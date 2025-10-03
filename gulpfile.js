@@ -8,7 +8,6 @@ const fs          = require('fs'),
 	  merge       = require('merge-stream'),
 	  browserSync = require('browser-sync').create(),
 	  changed     = require('gulp-changed'),
-	  sourcemaps  = require('gulp-sourcemaps'),
 	  imagemin    = require('gulp-imagemin'),
 	  pngquant    = require('imagemin-pngquant'),
 	  imageresize = require('gulp-image-resize'),
@@ -53,15 +52,16 @@ function typescript() {
 	const typescript = require('gulp-typescript'),
 		  uglify     = require('gulp-uglify');
 	return gulp
-		.src('./src/ts/**/*.ts')
-		.pipe(sourcemaps.init())
+		.src('./src/ts/**/*.ts', {
+			sourcemaps: true,
+		})
 		.pipe(typescript({target: "es5"}))
 		.pipe(mode.production(uglify({
 			compress: true,
-			sourceMap: true,
-		})))
-		.pipe(sourcemaps.write('./'))
-		.pipe(gulp.dest(basedir + '/j'))
+					})))
+				.pipe(gulp.dest(basedir + '/j', {
+			sourcemaps: '.',
+		}))
 }
 exports.typescript = typescript
 
