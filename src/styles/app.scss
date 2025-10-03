@@ -103,6 +103,50 @@ small {
     line-height: .875rem;
 }
 
+.list-dot {
+    list-style: none;
+    padding-left: 1em;
+    text-indent: -1em;
+
+    & > li {
+        margin-bottom: .125rem;
+
+        &:before {
+            content: "・";
+        }
+    }
+}
+
+.list-kome {
+    list-style: none;
+    padding-left: 1.3em;
+    text-indent: -1.3em;
+
+    & > li {
+        margin-bottom: .125rem;
+
+        &:before {
+            content: "※ ";
+        }
+    }
+}
+
+.list-asterisk, .list-hyphen {
+    list-style: none;
+    padding-left: .7em;
+    text-indent: -.7em;
+
+    & > li {
+        margin-bottom: .125rem;
+    }
+}
+.list-asterisk > li:before {
+    content: "* ";
+}
+.list-hyphen > li:before {
+    content: "- ";
+}
+
 ol li {
     margin-bottom: .5rem;
 }
@@ -581,11 +625,6 @@ article {
     & > div {
         & > p {
             margin: .5em 0;
-
-            &.mark {
-                padding-left: 1.3em;
-                text-indent: -1.3em;
-            }
         }
     }
 
