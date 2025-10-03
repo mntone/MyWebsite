@@ -35,12 +35,17 @@ RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} mntone.minibird.jp
 RewriteRule ^.*$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
-RewriteCond %{REQUEST_URI} ^/splw/
+RewriteCond %{REQUEST_URI} =/index.html
+RewriteRule ^.*$ / [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/splw
 RewriteRule ^/?splw(/.*)?$ /splatwiki/close.html [R=301,L]
 
-RewriteRule ^/?sw(/.*)?$ %{DOCUMENT_ROOT}/s/index.php [L]
+RewriteCond %{REQUEST_URI} ^/sw
+RewriteRule ^/?sw(/.*)?$ /s/index.php [L]
 
-RewriteRule ^/?aw(/.*)?$ %{DOCUMENT_ROOT}/apexwiki/index.php [L]
+RewriteCond %{REQUEST_URI} ^/aw
+RewriteRule ^/?aw(/.*)?$ /apexwiki/index.php [L]
 
-#RewriteCond %{REQUEST_URI} ^/aw/
-#RewriteRule ^/?aw(/.*)?$ /apexwiki/maintenance.html [R=301,L]
+#RewriteCond %{REQUEST_URI} ^/aw
+#RewriteRule ^/?aw(/.*)?$ /apexwiki/maintenance.html [R=302,L]
