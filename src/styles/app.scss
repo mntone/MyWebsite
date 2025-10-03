@@ -264,6 +264,46 @@ html.no-scroll {
     }
 }
 
+.g-taglist {
+    display: flex;
+    list-style-type: none;;
+    position: absolute;
+    bottom: calc(-6px - 1em);
+    margin: 0;
+    padding: 0;
+
+    color: rgba(255, 255, 255, .9);
+    transition: bottom 123ms ease;
+
+    & > li {
+        margin-right: .25em;
+        padding: 0 .75em;
+        font-size: .666rem;
+        white-space: nowrap;
+    
+        background-color: rgba(0, 0, 0, .06);
+        border-radius: 999px;
+
+        .grid-item-image & {
+            background-color: rgba(0, 0, 0, .2);
+        }
+    }
+
+    .g > a:hover & {
+        bottom: 6px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        bottom: 6px;
+        opacity: 0;
+        transition: opacity 300ms ease;
+
+        .g > a:hover & {
+            opacity: 1;
+        }
+    }
+}
+
 .grid-item-image {
     & img {
         display: block;
