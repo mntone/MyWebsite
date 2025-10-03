@@ -157,7 +157,7 @@ html.no-scroll {
 
     & > a {
         display: table;
-        border: 2px solid rgb(41, 143, 204);
+        border: 2px solid #298fcc;
         height: inherit;
         width: 100%;
         outline: 0 none;
@@ -255,6 +255,30 @@ html.no-scroll {
 
 .grid3-squeeze-item {
     height: 75px;
+}
+
+.grid-brand-github {
+    background-color: #0e0c0d;
+
+    & > a {
+        border-color: #0e0c0d;
+    }
+}
+
+.grid-brand-mastodon {
+    background-color: #563acc;
+
+    & > a {
+        border-color: #563acc;
+    }
+}
+
+.grid-brand-x {
+    background-color: #23162b;
+
+    & > a {
+        border-color: #23162b;
+    }
 }
 
 // header
