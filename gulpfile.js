@@ -179,7 +179,7 @@ exports.avifthumb = avifthumb
 /* Favicon */
 function favicon() {
 	return gulp.src('./src/favicon.ico')
-		.pipe(changed(basedir, {hasChanged: changed.compareSha1Digest}))
+		.pipe(changed(basedir, {hasChanged: changed.compareContents}))
 		.pipe(gulp.dest(basedir))
 }
 exports.favicon = favicon
@@ -187,7 +187,7 @@ exports.favicon = favicon
 /* .htaccess */
 function htaccess() {
 	return gulp.src('./src/.htaccess')
-		.pipe(changed(basedir, {hasChanged: changed.compareSha1Digest}))
+		.pipe(changed(basedir, {hasChanged: changed.compareContents}))
 		.pipe(gulp.dest(basedir))
 }
 exports.htaccess = htaccess
