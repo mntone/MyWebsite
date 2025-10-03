@@ -55,7 +55,7 @@ function typescript() {
 		.src('./src/ts/**/*.ts', {
 			sourcemaps: true,
 		})
-		.pipe(typescript({target: "es5"}))
+		.pipe(typescript({target: "es6"}))
 		.pipe(mode.production(uglify({
 			compress: true,
 					})))
