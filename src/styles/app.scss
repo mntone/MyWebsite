@@ -193,11 +193,28 @@ html.no-scroll {
     @include clearfix();
 }
 
-.grid-item {
+.g {
+    contain: strict;
+    overflow: hidden;
+    overflow: clip;
+    position: relative;
+
+    float: left;
+    margin: 12px 0 0 12px;
+    width: calc(100% / 3 - 12px);
+    height: 150px;
     color: #fff;
     background-color: #298fcc;
     user-select: none;
     transition: transform cubic-bezier(0.1, 0.9, 0.2, 1) 220ms;
+
+    @media (max-width: $tabletWidth) {
+        width: calc(50% - 12px);
+    }
+
+    @media (max-width: $phoneHorizontalWidth) {
+        width: calc(100% - 12px);
+    }
 
     & > a {
         display: table;
@@ -232,13 +249,22 @@ html.no-scroll {
         border: 2px dotted #fff;
     }
 }
+.g-h69 { height: 69px; }
+.g-h75 { height: 75px; }
+.g-h312 { height: 312px; }
+@media (max-width: $phoneHorizontalWidth) {
+    .g-h60-mobile { height: 60px; }
+    .g-h210-mobile { height: 210px; }
+}
+.g-cols2 {
+    width: calc(200% / 3 - 12px);
+
+    @media (max-width: $tabletWidth) {
+        width: calc(100% - 12px);
+    }
+}
 
 .grid-item-image {
-    contain: strict;
-    overflow: hidden;
-    overflow: clip;
-    position: relative;
-
     & img {
         display: block;
         position: absolute;
@@ -263,42 +289,6 @@ html.no-scroll {
     .key & > a:focus {
         border: 2px dotted #fff;
     }
-}
-
-@mixin grid-item {
-    float: left;
-    margin: 12px 0 0 12px;
-}
-
-.grid3-item {
-    @include grid-item;
-    width: calc(100% / 3 - 12px);
-    height: 150px;
-
-    @media (max-width: $tabletWidth) {
-        width: calc(50% - 12px);
-    }
-
-    @media (max-width: $phoneHorizontalWidth) {
-        width: calc(100% - 12px);
-    }
-}
-
-.grid3-item-cols2 {
-    @include grid-item();
-    width: calc(100% * 2 / 3 - 12px);
-
-    @media (max-width: $tabletWidth) {
-        width: calc(100% - 12px);
-    }
-}
-
-.grid3-item-rows2 {
-    height: 312px;
-}
-
-.grid3-squeeze-item {
-    height: 75px;
 }
 
 .grid-brand-github {
