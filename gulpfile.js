@@ -114,7 +114,7 @@ function thumbWidth() {
 			.pipe(imageresize({
 				width: 200 * scale,
 			}))
-			.pipe(mode.production(imagemin([pngquant({quality: '40-60', speed: 1})])))
+			.pipe(mode.production(imagemin([pngquant({quality: [0.4, 0.6], speed: 1})])))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 			.pipe(gulp.dest(basedir + '/i'))
 	);
@@ -128,7 +128,7 @@ function thumbHeight() {
 			.pipe(imageresize({
 				height: 200 * scale,
 			}))
-			.pipe(mode.production(imagemin([pngquant({quality: '40-60', speed: 1})])))
+			.pipe(mode.production(imagemin([pngquant({quality: [0.4, 0.6], speed: 1})])))
 			.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
 			.pipe(gulp.dest(basedir + '/i'))
 	);
