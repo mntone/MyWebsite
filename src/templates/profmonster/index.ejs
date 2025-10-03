@@ -1,0 +1,101 @@
+<%- include('../common/_header') %>
+
+<article itemscope itemtype="http://schema.org/Article">
+    <h1 itemprop="headline"><%- profmons_title %></h1>
+
+    <div itemprop="articleBody">
+        <% if (lang === "ja") { %>
+        <p>モンハクはモンスターデータ表示アプリです。狩りのお供につかってください。</p>
+        <p><strong>特徴</strong></p>
+        <p><ul class="list-dot">
+            <li>弱点や肉質の確認</li>
+            <li>モンスターをお気に入りに登録</li>
+            <li>メモ機能</li>
+            <li>お気に入りやメモの同期（iPhone、iPad、Apple Watch、Macに対応）</li>
+            <li>名前や大きさ、弱点による表示順番の変更</li>
+            <li>データソースの変更</li>
+            <li>複数ウィンドウで開く</li>
+        </ul></p>
+        <% } else { %>
+        <p>Prof. Monster is monster data viewer app. You can be professor monster with this app!</p>
+        <p><strong>Features</strong></p>
+        <p><ul class="list-hyphen">
+            <li>Check weaknesses and physiologies</li>
+            <li>Add monsters to favorites</li>
+            <li>Write your notes</li>
+            <li>Sync your favorites and notes across your iPhone, iPad, Apple Watch and Mac</li>
+            <li>Sort monsters by name, size and weakness</li>
+            <li>Change data source</li>
+            <li>Open multiple windows</li>
+        </ul></p>
+        <% } %>
+    </div>
+
+    <h2 itemprop="headline"><%- recommended_environment %></h2>
+    <div itemprop="articleBody">
+        <ul>
+            <li>OS: iOS/iPadOS 15+, macOS 12+, watchOS 8+</li>
+        </ul>
+    </div>
+
+    <h2 itemprop="headline"><%- downloads %></h2>
+    <div itemprop="articleBody">
+        <p><%- agree_privacy_policy.replace("{0}", "privacy.html") %></p>
+        <p><a href="https://apps.apple.com/jp/app/id6474962481" target="blank"><%- download_by_app_store %></a></p>
+    </div>
+
+    <h2 itemprop="headline"><%- relnotes_title %></h2>
+    <div itemprop="articleBody">
+        <p><%- relnotes_github.replace("{0}", "https://github.com/mntone/ProfMonster/releases") %></p>
+    </div>
+</article>
+
+<div class="screenshot">
+    <h2 itemprop="headline"><%- screenshots %></h2>
+    <div>
+        <picture>
+            <source type="image/webp" srcset="/i/pf-ipados-<%- lang %>.webp">
+            <img src="/i/pf-ipados-<%- lang %>.png" class="top" style="max-width: 384px" alt="ss1">
+        </picture>
+    </div>
+
+    <h5><%- profmons_title %> for iPhone</h5>
+    <div class="image-list">
+    <% ["list", "detail"].forEach(function (item) { %>
+        <a href="/i/pf-ios-<%- item %>-<%- lang %>.png" target="_blank">
+            <%- include('../common/_image', {name: 'pf-ios-' + item + '-' + lang, alt: 'Prof. Monster for iPhone' + item + ' Thumb'}) %>
+        </a>
+    <% }) %>
+    </div>
+
+    <h5><%- profmons_title %> for iPad</h5>
+    <div class="image-list">
+    <a href="/i/pf-ipados-<%- lang %>.png" target="_blank">
+        <%- include('../common/_image', {name: 'pf-ipados-' + lang, alt: 'Prof. Monster for iPad' + ' Thumb'}) %>
+    </a>
+    </div>
+
+    <h5><%- profmons_title %> for Apple Watch</h5>
+    <div class="image-list">
+    <% ["list", "detail"].forEach(function (item) { %>
+        <a href="/i/pf-watchos-<%- item %>-<%- lang %>.png" target="_blank">
+            <%- include('../common/_image2', {
+                filename: 'pf-watchos-' + item + '-' + lang,
+                alt: 'Prof. Monster for Apple Watch' + item + ' Thumb',
+                srcext: 'png',
+                format: ['png', 'webp'],
+                scale: [1, 1.5, 2]
+            }) %>
+        </a>
+    <% }) %>
+    </div>
+
+    <h5><%- profmons_title %> for Mac</h5>
+    <div class="image-list">
+    <a href="/i/pf-macos-<%- lang %>.png" target="_blank">
+        <%- include('../common/_image', {name: 'pf-macos-' + lang, alt: 'Prof. Monster for macOS' + ' Thumb'}) %>
+    </a>
+    </div>
+</div>
+
+<%- include('../common/_footer') %>

@@ -1,61 +1,76 @@
 ﻿<%- include('common/_header') %>
 
-<div>
-	<h2 itemprop="headline"><%- bio %></h2>
-	<div itemprop="articleBody">
+	<div>
+		<h2 itemprop="headline"><%- bio %></h2>
+		<div itemprop="articleBody">
 		<% if (lang === "ja") { %>
-		私のプロフィールは<a href="/bio.html">ここ</a>。
-		<% } else { %>
-		My bio is <a href="/bio.html">here</a>.
-		<% } %>
-	</div>
+				私のプロフィールは<a href="/bio.html">ここ</a>。
+				<% } else { %>
+					My bio is <a href="/bio.html">here</a>.
+					<% } %>
+		</div>
 
-	<h2 itemprop="headline"><%- app_lib %></h2>
-	<div id="gc" class="grid-container">
-		<div class="grid-item grid3-item" touch-action="pan-y">
+		<h2 itemprop="headline"><%- app_lib %></h2>
+		<div id="gc" class="grid-container">
+			<div class="grid-item grid3-item" touch-action="pan-y">
 				<a href="https://github.com/mntone/inknit" target="_blank" rel="noreferrer noopener"><div>
 					<small><%- inknit_description %></small>
 					<h3><%- inknit_title %></h3>
-			</div></a>
-		</div>
-		<div class="grid-item grid-item-image grid3-item" touch-action="pan-y">
-			<picture>
-				<source type="image/avif" srcset="/i/ic-uap10.0d-main-<%- lang %>@20.avif">
-				<source type="image/webp" srcset="/i/ic-uap10.0d-main-<%- lang %>@20.webp">
-				<img src="/i/ic-uap10.0d-main-<%- lang %>@20.png" alt="<%- ikaconnect %>">
-			</picture>
-			<a href="/ikaconnect/"><div>
-				<small><%- enjoysplatoon %></small>
-				<h3><%- ikaconnect %></h3>
-			</div></a>
-		</div>
-		<div class="grid-item grid-item-image grid3-item" touch-action="pan-y">
-			<picture>
-				<source type="image/avif" srcset="/i/tvupl.10.avif, /i/tvupl.15.avif 1.5x">
-				<source type="image/webp" srcset="/i/tvupl.10.webp, /i/tvupl.15.webp 1.5x">
-				<img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" alt="<%- twittervideouploader %>">
-			</picture>
-			<a href="/tvupl/"><div>
-				<small><%- twitterhighquality %></small>
-				<h3><%- twittervideouploader %></h3>
-			</div></a>
-		</div>
-		<div class="grid-item grid3-item" touch-action="pan-y">
+				</div></a>
+			</div>
+			<div class="grid-item grid-item-image grid3-item" touch-action="pan-y">
+				<%- include('common/_image2', {
+					filename: 'pf-ios-detail-' + lang,
+					alt: profmons_title,
+					srcext: 'png',
+					format: ['png', 'webp'],
+					scale: [1, 1.5]
+				}) %>
+				<a href="/profmonster/"><div>
+					<small><%- profmons_description %></small>
+					<h3><%- profmons_title %></h3>
+				</div></a>
+			</div>
+			<div class="grid-item grid-item-image grid3-item" touch-action="pan-y">
+				<%- include('common/_image2', {
+					filename: 'ic-uap10.0d-main-' + lang,
+					alt: ikaconnect,
+					srcext: 'png',
+					format: ['png', 'webp'],
+					scale: [1, 1.5]
+				}) %>
+				<a href="/ikaconnect/"><div>
+					<small><%- enjoysplatoon %></small>
+					<h3><%- ikaconnect %></h3>
+				</div></a>
+			</div>
+			<div class="grid-item grid-item-image grid3-item" touch-action="pan-y">
+				<picture>
+					<source type="image/avif" srcset="/i/tvupl.10.avif, /i/tvupl.15.avif 1.5x">
+					<source type="image/webp" srcset="/i/tvupl.10.webp, /i/tvupl.15.webp 1.5x">
+					<img src="/i/tvupl.10.png" srcset="/i/tvupl.15.png 1.5x" alt="<%- twittervideouploader %>">
+				</picture>
+				<a href="/tvupl/"><div>
+					<small><%- twitterhighquality %></small>
+					<h3><%- twittervideouploader %></h3>
+				</div></a>
+			</div>
+			<div class="grid-item grid3-item" touch-action="pan-y">
 				<a href="/aw/"><div>
 					<small><%- studyapexlegends %></small>
 					<h3><%- apexdata %></h3>
-			</div></a>
-		</div>
-		<div class="grid-item grid3-item" touch-action="pan-y">
+				</div></a>
+			</div>
+			<div class="grid-item grid3-item" touch-action="pan-y">
 				<a href="https://github.com/mntone/RWinRT" target="_blank" rel="noreferrer noopener"><div>
 					<small><%- rwinrt_description %></small>
 					<h3><%- rwinrt_title %></h3>
-			</div></a>
+				</div></a>
+			</div>
 		</div>
-	</div>
 
-	<h2 itemprop="headline"><%- social_media %></h2>
-	<div id="gc" class="grid-container">
+		<h2 itemprop="headline"><%- social_media %></h2>
+		<div id="gc" class="grid-container">
 			<div class="grid-item grid3-item grid3-squeeze-item grid-brand-mastodon" touch-action="pan-y">
 				<a href="https://mstdn.jp/@mntone" target="_blank" rel="noreferrer noopener"><div>
 					<h3>Mastodon</h3>

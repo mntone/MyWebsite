@@ -103,13 +103,13 @@ function png() {
 	return gulp
 		.src('./src/images/**/*.png')
 		.pipe(changed(basedir + '/i', {hasChanged: changed.compareContents}))
-		.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 6})])))
+		.pipe(mode.production(imagemin([imagemin.optipng({optimizationLevel: 7})])))
 		.pipe(gulp.dest(basedir + '/i'))
 }
 exports.png = png
 function thumbWidth() {
 	const tasks = thumbScale.map(scale =>
-		gulp.src(['./src/images/ic-win81-*.png', './src/images/ic-uap10.0d-*.png'])
+		gulp.src(['./src/images/ic-win81-*.png', './src/images/ic-uap10.0d-*.png', './src/images/pf-ipados-*.png', './src/images/pf-macos-*.png'])
 			.pipe(rename({suffix: '@' + (10 * scale)}))
 			.pipe(imageresize({
 				width: 200 * scale,
@@ -123,7 +123,7 @@ function thumbWidth() {
 exports.thumbWidth = thumbWidth
 function thumbHeight() {
 	const tasks = thumbScale.map(scale =>
-		gulp.src(['./src/images/ic-wpa81-*.png', './src/images/ic-uap10.0m-*.png', './src/images/ca-ios-*.png'])
+		gulp.src(['./src/images/ic-wpa81-*.png', './src/images/ic-uap10.0m-*.png', './src/images/ca-ios-*.png', './src/images/pf-ios-*.png', './src/images/pf-watchos-*.png'])
 			.pipe(rename({suffix: '@' + (10 * scale)}))
 			.pipe(imageresize({
 				height: 200 * scale,

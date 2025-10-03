@@ -19,6 +19,8 @@
       "downloads": "Donwloads",
       "screenshots": "Screenshots",
       "update_history": "Update History",
+      "relnotes_title": "Release Notes",
+      "relnotes_github": "For a detailed history of changes, please see our <a href=\"{0}\" target=\"blank\">Releases on GitHub</a>.",
       "agree_privacy_policy": "If you agree <a href=\"{0}\">Privacy Policy</a>, you can use",
       "download": "Donwload",
       "download_by_windows_store": "Download by Windows store",
@@ -37,6 +39,8 @@
 
       "inknit_title": "inknit",
       "inknit_description": "A minimal graphics library for embedded systems",
+      "profmons_title": "Prof. Monster",
+      "profmons_description": "monster data viewer app",
       "rwinrt_title": "R/WinRT",
       "rwinrt_description": "ease-to-access resource from MRTCore",
       "x_title": "X (formerly Twitter)"
@@ -60,6 +64,8 @@
       "downloads": "ダウンロード",
       "screenshots": "スクリーンショット",
       "update_history": "更新履歴",
+      "relnotes_title": "更新履歴",
+      "relnotes_github": "詳しい更新内容は、<a href=\"{0}\" target=\"blank\">GitHubのリリースノート</a>でご確認いただけます。",
       "agree_privacy_policy": "<a href=\"{0}\">プライバシー ポリシー</a>に同意する場合のみご利用ください",
       "download": "ダウンロード",
       "download_by_windows_store": "Windows ストアでダウンロード",
@@ -78,6 +84,8 @@
 
       "inknit_title": "inknit",
       "inknit_description": "組み込みシステム向けの小さな描画ライブラリー",
+      "profmons_title": "モンハク",
+      "profmons_description": "モンスターデータ表示アプリ",
       "rwinrt_title": "R/WinRT",
       "rwinrt_description": "MRTCoreリソースへのアクセス簡略化",
       "x_title": "X (旧 Twitter)"

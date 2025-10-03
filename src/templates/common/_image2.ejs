@@ -1,0 +1,27 @@
+<%
+    const _filename = typeof filename !== 'undefined' ? filename : '';
+    const _alt      = typeof alt !== 'undefined' ? alt : '';
+    const _srcext   = typeof srcext !== 'undefined' ? srcext : 'png';
+    const _formats  = typeof format !== 'undefined' ? format : ['png'];
+    const _scales   = typeof scale !== 'undefined' ? scale : [1];
+
+    function buildSrcset(base, ext) {
+        return _scales.map(scale => {
+            const suffix = `@${10 * scale}`;
+            return `/i/${base}${suffix}.${ext} ${scale}x`;
+        });
+    }
+%>
+
+<picture>
+    <% _formats.forEach((format, i) => { %>
+        <% if (format !== 'png') { %>
+            <source type="image/<%= format %>"
+                    srcset="<%= buildSrcset(_filename, format) %>">
+        <% } %>
+    <% }) %>
+    <img src="/i/<%= _filename %>.<%= _srcext %>"
+         srcset="<%= buildSrcset(_filename, _srcext) %>"
+         alt="<%= _alt %>"
+         decoding="async">
+</picture>
